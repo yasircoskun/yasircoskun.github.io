@@ -1,0 +1,193 @@
+body {
+    padding: 0.5rem;
+    background: url(https://yasircoskun.github.io/assets/images/wallpapers/desktop/background_desktop.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.mobile {
+    background: url(https://yasircoskun.github.io/assets/images/wallpapers/mobile/2434.jpg) no-repeat center center fixed;
+    background-size: contain;
+}
+
+.file,
+.folder {
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin: 3px;
+    float: left;
+    text-align: center;
+}
+
+.file:hover,
+.folder:hover {
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.3);
+    margin: 2px;
+}
+
+.hidden-content {
+    display: none;
+}
+
+.content {
+    display: block;
+    overflow-x: auto;
+    background: #303030;
+    color: #c5c8c6;
+    padding: 0.5em;
+}
+
+.fileWin {
+    position: fixed;
+    left: 15%;
+    top: 100px;
+    border: 1px solid white;
+    z-index: 9999;
+    padding: 2px;
+    background: #fff;
+    border-radius: 15px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #292b2c;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    float: left;
+    margin: 0px;
+    display: none;
+}
+
+.content {
+    overflow: auto;
+    resize: both;
+}
+
+.winTitle {
+    border-radius: 15px 15px 0px 0px;
+    text-align: center;
+    background-color: brown;
+    padding: 2px 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.winTitle h4 {
+    font-weight: bolder;
+    font-size: larger;
+    margin: 8px 0;
+}
+
+.winTitle h4 i {
+    display: inline-block;
+    float: right;
+}
+
+.file>img {
+    width: 100%;
+}
+
+pre {
+    line-height: 1.5;
+    max-height: 80vh;
+    margin: 0;
+    padding: 0;
+    height: 0;
+}
+
+pre iframe {
+    width: 100%;
+    height: 100%;
+}
+
+label {
+    margin-top: -4;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gradienText {
+    background: linear-gradient(to bottom, #f1f3f7, #0b6421);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.dock {
+    position: absolute;
+    left: 20%;
+    bottom: 0;
+    min-height: 4rem;
+    width: 60%;
+    padding: 0.5rem;
+    background: #2e323b;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.content {
+    border-radius: 0 0 15px 15px;
+    background: #2e323b;
+    padding: 15px 10px;
+    box-sizing: inherit;
+    width: 37vw;
+}
+
+.mobile .file,
+.mobile .folder {
+    width: 19vw;
+}
+
+.mobile .content .file,
+.mobile .content .folder {
+    width: 22vw;
+}
+
+.mobile label {
+    font-size: 0.8rem;
+}
+
+.mobile .fileWin {
+    left: 1vw;
+    right: 1vw;
+    top: 1vh;
+    bottom: 1vh;
+    width: none;
+    height: none;
+}
+
+.mobile pre {
+    font-size: 0.8rem;
+    width: unset;
+    height: unset;
+    max-height: 80vh;
+}
+
+.mobile .content {
+    font-size: 0.8rem;
+    width: unset;
+    height: unset;
+    /*max-height: 86vh;
+    max-width: 92vw;*/
+}
+
+.mobile iframe {
+    height: 80vh;
+}
+
+.mobile .fiv-cla {
+    width: 90% !important;
+}
+
+.fiv-cla {
+    font-size: 7rem;
+    margin: 0.3rem;
+}
