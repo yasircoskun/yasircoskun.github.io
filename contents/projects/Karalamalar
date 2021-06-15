@@ -1,0 +1,156 @@
++----------------------------------------------------------------------------------+
+| Php Proxy Scripti                                                                |
++----------------------------------------------------------------------------------+
+| https://sourceforge.net/projects/phpr0xi/                                        |
+| Demo:                                                                            |
+| https://itmyt.com/b.php?q=Mfv0Kfa6bO9ALgBSMO5FKghDMgsSL3dZb3lRJ2rOnqvEIu5YJg1U   |
++----------------------------------------------------------------------------------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+| Github Commit Explorer                                                                                                                     |
++--------------------------------------------------------------------------------------------------------------------------------------------+
+var commits = document.querySelectorAll('a.message.js-navigation-open');
+
+var pageNum = 1;
+var depth = 5;
+
+function httpGet(theUrl) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", theUrl, false);
+  xmlHttp.send(null);
+  return xmlHttp.responseText;
+}
+
+function getLoadDiff(html) {
+  regex = /<include-fragment data-fragment-url="([A-Za-z0-9\/\-\?\&\=\;]+)" class="js-diff-entry-loader px-3 py-4 position-relative">/gm;
+  while ((m = regex.exec(html)) !== null) {
+    if (m.index === regex.lastIndex) {
+      regex.lastIndex++;
+    }
+    return httpGet("https://github.com" + m[1]);
+  }
+}
+
+function clearStr(x) {
+  return x.replace(/^\s+|\s+$/gm, '');
+}
+
+function nextPage() {
+  if (location.href.indexOf('?p=') == -1) {
+    pageNum += 1;
+    let html = httpGet(location.href + "&p=" + pageNum);
+    let temp = document.createElement('div');
+    temp.style.display = 'none';
+    temp.className = 'searchPageSource';
+    temp.innerHTML = html;
+    document.body.appendChild(temp);
+    commits = document.body.lastElementChild.querySelectorAll('a.message.js-navigation-open');
+    getCommits();
+  }
+}
+
+function getCommits() {
+  for (var i = 0; i < commits.length; i++) {
+    let html = httpGet(commits[i].href);
+    let Diff = getLoadDiff(html);
+    let temp = document.createElement('div');
+    temp.style.display = 'none';
+    temp.className = 'commitPageSource';
+    temp.innerHTML = Diff;
+    document.body.appendChild(temp);
+    console.log(clearStr(document.body.lastElementChild.innerText.trim()));
+  }
+  if (depth != pageNum) nextPage();
+}
+
+getCommits();
++--------------------------------------------------------------------------------------------------------------------------------------------+
+| Github Commit Explorer (END)                                                                                                               |
++--------------------------------------------------------------------------------------------------------------------------------------------+
+
++--------------------------------------------------------------------------------------------------------------------------------------------+
+| Replying to hidden file scan with an .htaccess file                                                                                        |
++--------------------------------------------------------------------------------------------------------------------------------------------+
+# Replying to hidden file scan with an .htaccess file
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks -MultiViews
+
+	RewriteEngine on
+	RewriteBase /
+	RewriteRule ^.[0-9A-Za-z\ \-\.\?\=\&]+\/?$ WTF.txt [NC]
+	RewriteRule ^[0-9A-Za-z\ \-\.\?\=\&\/]+\/.[0-9A-Za-z\ \-\.\?\=\&]+\/?$ WTF.txt [NC]
+</IfModule>
++--------------------------------------------------------------------------------------------------------------------------------------------+
+| Replying to hidden file scan with an .htaccess file                                                                                        |
++--------------------------------------------------------------------------------------------------------------------------------------------+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Google Web Site List /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var cites = [];
+
+function httpGet(theUrl) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.open("GET", theUrl, false);
+  xmlHttp.send(null);
+  return xmlHttp.responseText;
+}
+
+function getCite(html) {
+  let m;
+  var list = [];
+  regex = /<cite class="[A-Z0-9a-z\ ]+">([0-9A-Za-z\.]+)/gm;
+
+  while ((m = regex.exec(html)) !== null) {
+    // This is necessary to avoid infinite loops with zero-width matches
+    if (m.index === regex.lastIndex) {
+        regex.lastIndex++;
+    }
+    
+    // The result can be accessed through the `m`-variable.
+    list.push(m[1]);
+  }
+  
+  return list;
+}
+
+
+for(var i = 0; i < 10; i++){
+  cites = cites.concat(getCite(httpGet(location.href + '&start=' + i * 10)));
+  cites = [...new Set(cites)];
+}
+
+text = "";
+for(var i = 0 ; i< cites.length ; i++){
+  text += "http://" + cites[i]+"/\n";
+}
+text
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Google Web Site List /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Atak Yüzeyini Genişlet :) ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
+
+var target = ""; //domain.com
+
+openInNewTab("https://crt.sh/?q=%."+target);
+openInNewTab("https://google.com/?q=site:*."+target);
+openInNewTab("https://www.virustotal.com/gui/domain/"+target+"/details");
+openInNewTab("https://dorks.faisalahmed.me/");
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Atak Yüzeyini Genişlet :) ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
