@@ -72,9 +72,11 @@ function openWin(element) {
     if (!winExist(name.replace('.', ''))) {
         winElement = generateWin(name);
         winElement.getElementsByTagName('pre')[0].className = name.substring(name.indexOf('.') + 1, name.length);
-
+console.log(name.substring(name.indexOf('.') + 1, name.length));
         if (name.substring(name.indexOf('.') + 1, name.length) == 'pdf') {
             winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name + "'></iframe>";
+		} else if (name.substring(name.indexOf('.') + 1, name.length) == 'jpg') {console.log(name.substring(name.indexOf('.') + 1, name.length));
+            winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
         } else if (name.substring(0, 7) == '1337://') {
             winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name.replace('1337://', '/') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {

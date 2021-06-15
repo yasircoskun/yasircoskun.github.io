@@ -1,0 +1,5 @@
+# bir süre için gizli kalmalı
+access.log
+attackers.log
+filter.py
+firat.xss

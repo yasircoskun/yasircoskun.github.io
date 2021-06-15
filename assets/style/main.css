@@ -105,6 +105,11 @@ pre iframe {
     height: 100%;
 }
 
+.content img {
+    width: 100%;
+    height: auto;
+}
+
 label {
     margin-top: -4;
     font-size: 0.8rem;
