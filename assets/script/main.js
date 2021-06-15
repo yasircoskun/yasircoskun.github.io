@@ -82,7 +82,7 @@ console.log(name.substring(name.indexOf('.') + 1, name.length));
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
             winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
         } else {
-            winElement.getElementsByTagName('pre')[0].innerText = (name != 'New') ? httpGet(name) : "\n\n\n";
+            winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? httpGet(name) : "\n\n\n";
         }
         document.body.appendChild(winElement);
     }
