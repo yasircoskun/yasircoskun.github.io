@@ -99,7 +99,7 @@ function openWin(element) {
 }
 
 function generateWin(name) {
-    let html = "<div class='fileWin' id='{name.id}'><div class='winTitle'><h4>{name}<i onclick='closeWin(this);'>x</i></h4></div><div class='content'><pre contenteditable='True'></pre></div></div>";
+    let html = "<div class='fileWin' id='{name.id}'><div class='winTitle'><h4>{name}</h4><div class='closeIcon' onclick='closeWin(this);'>x</div></div><div class='content'><pre contenteditable='True'></pre></div></div>";
     html = html.replace('{name}', name);
     html = html.replace('{name.id}', name.replace('.', ''));
     let temp = document.createElement('template');
@@ -127,7 +127,7 @@ function windowFix() {
 }
 
 function closeWin(x) {
-    x.parentElement.parentElement.parentElement.style.display = 'none';
+    x.parentElement.parentElement.style.display = 'none';
 }
 
 //getContent(getRepos()[0])
