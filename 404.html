@@ -33,9 +33,7 @@
 </body>
 <script>
     var fileLoadEndFunction = null;
-</script>
-<script src='/assets/script/main.js'></script>
-<script>
+
     function urlReWriteInit() {
         document.querySelectorAll('.file, .folder').forEach((elem) => {
             var currentPage = "contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
@@ -50,6 +48,9 @@
         })
     }
     fileLoadEndFunction = urlReWriteInit;
+</script>
+<script src='/assets/script/main.js'></script>
+<script>
 </script>
 
 
