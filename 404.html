@@ -35,6 +35,7 @@
     var fileLoadEndFunction = null;
 
     function urlReWriteInit() {
+        console.log('urlReWriteInit')
         document.querySelectorAll('.file, .folder').forEach((elem) => {
             var currentPage = "/contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
             console.log('debug : ' + currentPage.indexOf(elem.dataset.name) == 0);
