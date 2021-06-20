@@ -40,6 +40,7 @@
             var currentPage = "/contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
             console.log('debug : ' + currentPage.indexOf(elem.dataset.name) == 0);
             if (currentPage.indexOf(elem.dataset.name) == 0) {
+                if (elem.dataset.name == currentPage) fileLoadEndFunction = null
                 if (elem.className == 'file') openWin(elem);
                 else if (elem.className == 'folder') {
                     if (elem.dataset.opened != "true")
