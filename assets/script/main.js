@@ -147,7 +147,7 @@ repos.forEach((repo) => {
 
 */
 
-function ls(path = "contents") {
+function ls(path = "/contents") {
     let request = new XMLHttpRequest();
     request.open('get', path + "/ls", false)
     request.send(null)
