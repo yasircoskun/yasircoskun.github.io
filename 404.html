@@ -38,11 +38,11 @@
         document.querySelectorAll('.file, .folder').forEach((elem) => {
             var currentPage = "contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
 
-            if (elem.dataset.name == currentPage) {
+            if (currentPage.indexOf(elem.dataset.name) == 0) {
                 if (elem.className == 'file') openWin(elem);
                 else if (elem.className == 'folder') {
                     openFolder(elem);
-                    //urlReWriteInit();
+                    urlReWriteInit();
                 }
             }
         })
