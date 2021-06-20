@@ -187,7 +187,7 @@ files.forEach((file) => {
     }
 })
 
-fileLoadEndFunction = null;
+var fileLoadEndFunction = null;
 
 function fileLoadEndEvent() {
     fileLoadEndFunction();
