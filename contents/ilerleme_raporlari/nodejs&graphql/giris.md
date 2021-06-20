@@ -12,7 +12,7 @@ Bende projemdeki ihtiyacı ve sektördeki insan ihtiyacını göz önünde bulun
 Bu süreçte bazı kodları ve bazı yapıları bu dizinde dosyalar şeklinde kısa ve öz açıklamalar ile not alacağım.
 Belki benden sonra bu yolu gidecek arkadaşlar için türkçe bir kaynak oluşturabilirim diye düşünüyorum.
 Ancak temel amacım kendim için notlar almak ve bilgimin görünürlüğünü arttırmak yönünde.
-Bunu inkar etmeyi gerekli göörmüyorum.
+Bunu inkar etmeyi gerekli görmüyorum.
 
 Artık işe koyulalım.
 
