@@ -1,5 +1,7 @@
 owner = 'yasircoskun'
 
+var fileLoadEndFunction = null;
+
 function endpointResolve(params) {
     const regex = /{[\w\d]+}/gm;
     while ((m = regex.exec(params['endpoint'])) !== null) {
@@ -187,7 +189,7 @@ files.forEach((file) => {
     }
 })
 
-var fileLoadEndFunction = null;
+
 
 function fileLoadEndEvent() {
     fileLoadEndFunction();
