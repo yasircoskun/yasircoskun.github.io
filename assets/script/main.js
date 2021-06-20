@@ -255,6 +255,7 @@ function openFolder(element) {
         folderElement.getElementsByClassName('content')[0].style.height = folderElement.clientHeight - 35 - folderElement.firstChild.clientHeight + "px";
         console.log(folderElement.clientHeight - 35 - folderElement.firstChild.clientHeight + "px")
     }
+    if (fileLoadEndFunction != null) fileLoadEndFunction();
 }
 
 function winExist(id) {
