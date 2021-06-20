@@ -42,7 +42,8 @@
             if (currentPage.indexOf(elem.dataset.name) == 0) {
                 if (elem.className == 'file') openWin(elem);
                 else if (elem.className == 'folder') {
-                    openFolder(elem);
+                    if (elem.dataset.opened != "true")
+                        openFolder(elem);
                     //urlReWriteInit();
                 }
             }
