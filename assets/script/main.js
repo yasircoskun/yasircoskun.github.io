@@ -227,6 +227,7 @@ function generateFolderIcon(name, path) {
 
 function openFolder(element) {
     let name = element.dataset.name;
+    element.dataset.name = "-opened";
     let path = element.parentElement.parentElement.id;
     if (!winExist(name.replace('.', ''))) {
         folderElement = generateWin(name);
