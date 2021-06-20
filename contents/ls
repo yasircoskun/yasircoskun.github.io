@@ -1,6 +1,6 @@
-dir blogs
-dir vulns
-dir projects
-dir tips
-dir sözler
-file whoami.md
+dir ilerleme_raporlari
+dir guvenlik_aciklari
+dir projeler
+dir ipuclari
+dir ekran_alintilari
+file benKimim.md

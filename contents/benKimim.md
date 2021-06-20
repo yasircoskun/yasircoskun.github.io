@@ -9,5 +9,3 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
     - Gördüğüm kod yazım tarzını anında kopyalayabilirim.
     - Siber savaşta düşmanlarımı Genjutsu'ya hapsederim. Kazandıklarını sanırlar.
     - Bir siber savaş taktiğini kopyalayabilirim.
-
-- Birinin yalan söylediğini anında sezerim. (Bu bazen can sıkıcı olabiliyor)
