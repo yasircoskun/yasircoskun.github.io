@@ -1,7 +1,5 @@
 owner = 'yasircoskun'
 
-var fileLoadEndFunction = null;
-
 function endpointResolve(params) {
     const regex = /{[\w\d]+}/gm;
     while ((m = regex.exec(params['endpoint'])) !== null) {
