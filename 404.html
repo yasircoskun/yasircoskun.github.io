@@ -31,6 +31,7 @@
         }
     </script>
 </body>
+<script src='/assets/script/main.js'></script>
 <script>
     function urlReWriteInit() {
         document.querySelectorAll('.file, .folder').forEach((elem) => {
@@ -45,7 +46,8 @@
             }
         })
     }
+    fileLoadEndFunction = urlReWriteInit;
 </script>
-<script src='/assets/script/main.js'></script>
+
 
 </html>
