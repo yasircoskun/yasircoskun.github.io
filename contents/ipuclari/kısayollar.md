@@ -1,0 +1,3 @@
+- ### [VS Code Kısayol Tuşları](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf)
+- ### [Windows Sanal Masaüstü Kısayol Tuşları](https://www.howtogeek.com/688608/keyboard-shortcuts-for-using-virtual-desktops-on-windows-10/)
+- ### [Wİndows 10 Kısayol Tuşları](https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec)
