@@ -51,7 +51,7 @@ npm install apollo-server graphql
 
 Şimdi `index.js` dosyamızı açıp sunucumuzu yapılandıralım.
 
-```
+```javascript
 const { ApolloServer } = require('apollo-server');
 
 // GraphQL Sorgu(Query -> Read -> Select) ve Mutasyonların(Mutation -> Create, Update, Delete) bildirildiği keyfi 
