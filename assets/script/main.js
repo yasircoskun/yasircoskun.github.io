@@ -78,8 +78,8 @@ function openWin(element) {
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'jpg') {
             console.log(name.substring(name.indexOf('.') + 1, name.length));
             winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
-        } else if (name.substring(0, 7) == '1337://') {
-            winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name.replace('1337://', '/') + "'></iframe>";
+        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'app') {
+            winElement.getElementsByClassName('content')[0].innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
             winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
         } else {

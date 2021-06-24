@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<!--
+404.html sayfası github pages için var olmayan sayfalar için tanımlanmıştır.
+Bu sayfada JS kullanarak onu bir UrlReWrite kuralına dönüştürdüm.
+Eğer olmayan bir sayfayı ziyaret etmeye çalışırsanız.
+Bu sayfa content içerisinde o sayfanın konumunda bulunan dosyayı pencere içerisinde görüntüler.
+-->
 
 <head>
     <meta charset='utf-8'>
@@ -40,16 +46,17 @@
             var currentPage = "/contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
             console.log('debug : ' + currentPage.indexOf(elem.dataset.name) == 0);
             if (currentPage.indexOf(elem.dataset.name) == 0) {
-                if (elem.dataset.name == currentPage) fileLoadEndFunction = null
+                if (elem.dataset.name == currentPage) fileLoadEndFunction = null // Eğer son folder açıldı ise fileLoadEndFunction fonksiyonuna null atanır.
                 if (elem.className == 'file') openWin(elem);
                 else if (elem.className == 'folder') {
                     if (elem.dataset.opened != "true")
                         openFolder(elem);
-                    //urlReWriteInit();
                 }
             }
         })
     }
+
+    //eğer bir openFolder fonksiyonu çalıştığında fileLoadEndFunction != null ise çağrılır.
     fileLoadEndFunction = urlReWriteInit;
 </script>
 <script src='/assets/script/main.js'></script>
