@@ -4,7 +4,7 @@ Komut satırında proje oluşturmak istediğiniz dizine ilerleyin ve aşağıdak
 Komut satırı ve klavye bir geliştiricinin en yakın arkadaşı olmalıdır.
 Bunları hata mesajları izleyecektir.
 
-```
+```bash
 mkdir fluflix-api
 cd fluflix-api
 npm init -y
@@ -41,7 +41,7 @@ Graphql sunucumuzu oluşturmak için ihtiyacımız olan iki paket var;
 
 Bu paketleri komutsatırında `fluflix-api` dizininde aşağıdaki komutu çalıştırarak indirmemiz gerekli.
 
-```
+```bash
 npm install apollo-server graphql
 ```
 
@@ -51,7 +51,7 @@ npm install apollo-server graphql
 
 Şimdi `index.js` dosyamızı açıp sunucumuzu yapılandıralım.
 
-```
+```javascript
 const { ApolloServer } = require('apollo-server');
 
 // GraphQL Sorgu(Query -> Read -> Select) ve Mutasyonların(Mutation -> Create, Update, Delete) bildirildiği keyfi 
@@ -101,3 +101,98 @@ Aşağıdaki görselde örnek sorgunun nasıl gönderileceği görünmektedir.
 ![Oyun Alanı](contents/ilerleme_raporlari/notlar/nodejs&graphql/resim/OyunAlanı.PNG)
 
 Arkası Yarın...
+
+### `schema.graphql` Dosyası oluşturmak
+
+`typeDefs` değişkeninin graphql için veritabanında saklanacak varlıkların özelliklerini modelleyen bir yapıda olduğunu söylemiş olduğumuzu varsayıyorum.
+Bu değişkenin içeriğini bir `string` olarak tanımlamak ilerleyen aşamalarda `index.js` içeriğindeki karmaşayı arttıracaktır.
+Bu nedenle şimdi bu değişkenin değerini bir dosyadan okuyacağız.
+
+`index.js` ile aynı dizinde `schema.graphql` isimli bir dosya oluşturalım.
+içine aşağıdaki şema tanımını yazalım. Bu aşamaları daha önce gerçekleştirdiğim için direct olarak kodun sonra halini aşağıya yapıştıracağım.
+
+```graphql
+type Query {
+  series: [Series!]!
+  category(id: Int!): [CategorySeries!]!
+}
+
+type Mutation {
+  createSeries(name: String!, description: String!): Series!
+  createCategory(name: String!): Category!
+  relateCategorySeries(seriesId: ID!, categoryId: ID!): CategorySeries!
+}
+
+type Series {
+  id: ID!
+  name: String!
+  description: String!
+}
+
+type Category {
+    id: ID!
+    name: String!
+}
+
+type CategorySeries {
+    id: ID!
+    series: Series
+    category: Category
+}
+
+type Season {
+    id: ID!
+    order: Int!
+    series: Series!
+}
+
+type Episode {
+    id: ID!
+    name: String!
+    streamLink: String!
+    resource: String!
+    season: Season!
+}
+```
+
+Şimdi bu kod üzerinde gerekli açıklamaları yapmaya çalışalım.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

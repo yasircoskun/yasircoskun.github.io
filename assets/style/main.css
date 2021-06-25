@@ -106,9 +106,20 @@ body {
     width: 100%;
 }
 
+video {
+    width: 100%;
+}
+
 pre {
     line-height: 1.5;
     max-height: 80vh;
+    margin: 0;
+    padding: 0;
+}
+
+.markdown pre {
+    line-height: normal;
+    max-height: auto;
     margin: 0;
     padding: 0;
 }
