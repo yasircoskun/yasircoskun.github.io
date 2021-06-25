@@ -155,44 +155,28 @@ type Episode {
 }
 ```
 
+### GraphQL şeması yazmak
+
 Şimdi bu kod üzerinde gerekli açıklamaları yapmaya çalışalım.
+Burada type kelimesi ile aslında modellerimizi tanımlıyoruz.
+Kotlin gibi dillerde olduğu gibi yazım kuralı `degisken_adi: veri_turu!` şeklinde ünlem `not null` yani zorunlu alan anlamında.
 
+iki adet olmazsa olmaz tür var graphql şemasında bunlar Query ve Mutation türleri.
+Query > select sorgularının adını, parametrelerini ve geri dönüş türünü belirliyor.
+Mutation > create, updade, delete gibi sorguların adını, parametrelerini ve geri dönüş türünü belirliyor.
 
+Yukarda iki adet query ve üç adet mutation (mutasyon) için kurallar belirlendi.
+series sorgusu Series türünde bir dizi geri dönderiyor.
+category ise CategorySeries türünde bir dizi dönderir.
 
+Bu Series ve CategorySeries türleri bizim kendi tanımladığımız türler.
+Nesne tabanlı dillerde bir bir nesnenin veri türü -yapısı- olarak kullanılması gibi düşünülebilir.
 
+Bir veri türünün (modelin) özellikleri süslü parantezler içerisinde yukarıda belirtilen kurala göre belirlenir.
+veri türü olarak ID String gibi temel tipler gibi temel tiplerin bir koleksiyonu olan özel(kendi belirlediğimiz) tiplerde kullanılabilir.
 
+kategoriler(category) ve diziler(series) arasındaki many-to-many (çok-a-çok) ilişkiyi sağlamak amacıyla CategorySeries adında bir ara tip oluşturdum.
+Bunu veritabanı normalizasyonu mantığı ile düşündüğüm için bu şekilde yaptım ilerleyen aşamada hatalı olduğumu fark edecek olursam burayı düzenlerim.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+many-to-many nedir? diyecek olursanız kısaca açıklayalım. Bir dizinin birden çok kategoriye sahip olabildiği gibi bir kategori de birden çok diziye sahip olabilir.
+Bu tür ilişkiler için veritabanı jargonun da kalıplaşmış bir ifade. many-to-many
