@@ -171,10 +171,14 @@ function ls(path = "/contents") {
 }
 
 function cat(path) {
+    if (path.substring(path.indexOf('.') + 1, name.length) == 'mp4') {
+        return 'video: ' + path;
+    }
     let request = new XMLHttpRequest();
     request.open('get', path + "?nocache=" + Math.random(), false)
     request.send(null)
     return request.responseText;
+
 }
 
 files = ls()
