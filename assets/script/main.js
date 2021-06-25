@@ -171,7 +171,8 @@ function ls(path = "/contents") {
 }
 
 function cat(path) {
-    if (path.substring(path.indexOf('.') + 1, name.length) == 'mp4') {
+    console.log(path);
+    if (path.substring(path.indexOf('.') + 1, path.length) == 'mp4') {
         return 'video: ' + path;
     }
     let request = new XMLHttpRequest();
