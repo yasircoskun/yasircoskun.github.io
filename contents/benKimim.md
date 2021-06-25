@@ -43,7 +43,7 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
 - [ ] Blog
   - [x] GraphQL NodeJS başlangıç yazısı
   - [x] Query ve Mutationları açıkla
-  - [ ] ORM paketini açıkla
+  - [ ] ORM paketini ve migrationları açıkla
   - [ ] Resolver açıkla
   - [ ] api token authentication araştır
   - [ ] ...?
