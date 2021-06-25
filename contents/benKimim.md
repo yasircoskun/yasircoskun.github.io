@@ -8,7 +8,6 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
     - Kod hatalarını anında bulabilirim.
     - Gördüğüm kod yazım tarzını anında kopyalayabilirim.
     - Siber savaşta düşmanlarımı Genjutsu'ya hapsederim. Kazandıklarını sanırlar.
-    - Bir siber savaş taktiğini kopyalayabilirim.
 
 #### Yapılacaklar
 
@@ -30,11 +29,11 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
   - [ ] offline için bölüm kaydetme (flutter-dart)
   - [ ] ...?
 - [ ] Fluflix-api
-  - [x] NodeJS server hazırlama
-  - [x] GraphQL schema oluşturma
-  - [x] ORM paketi kurma
-  - [x] Modelleri (tabloları) oluşturma migration
-  - [ ] resolver fonksiyonları hazırlama
+  - [x] NodeJS server hazırla
+  - [x] GraphQL schema oluştur
+  - [x] ORM paketi kur
+  - [x] Modelleri (tabloları) oluştur - migration
+  - [ ] resolver fonksiyonları hazırla
   - [ ] proje dosyalarını ayrıştır düzenle
   - [ ] Query ve Mutationları tamamla full crud
   - [ ] ...?
