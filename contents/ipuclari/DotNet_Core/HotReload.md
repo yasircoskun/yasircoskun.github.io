@@ -10,7 +10,7 @@ Biraz zaman geçdikten sonra başka frameworkleri deneyimledikten sonra yani onl
 Neyse bugün bu kaydı oluşturuyorum çünkü uzun zamandır vicdan azabı içindeyim kendime karşı bir sorumluluk olarak bu blog'u tutuyorum.
 Bugün denetleyicilerde(controllers) hata ayıklarken([Debugging](https://duckduckgo.com/?q=Debugging)) yaparken yani hatayı geri izlerken([backtracking](https://duckduckgo.com/?q=backtracking)) veri yapılarını incelemenin oldukça maliyetli olduğunu fark ettim. DotNet Core ortamında görünümlerde yapılan değişiklikler gerçek zamanlı olarak uygulamada gözlemlenebiliyor. Ancak deneyleyiciler de değişiklik yaptığınızda projenin tekrar derlenmesi gerekiyor. Yani uygulamayı kapatıp tekrar başlatmanız gerekiyor. Android Studio'da uygulama geliştirirken Java ile benzer bir sorun yaşıyorsunuz. Emulator kullanıyorsanız yandınız. Uygulama tekrar derlenir apk Emulatore aktarılır, kurulur ve siz değişimi görebilirsiniz. Yani Runtime hata ayıklamak oldukça maliyetlidir. Flutter'ı sevmemin bir nedenide bu. DotNet Core varsayılan ayarlarla Android Studio'nun geliştirme ortamına yakın bir deneyim sunuyor ancak araştırırsanız göreceksiniz. Flutter gibi aslında Hot Reload (Sıcak Yeniden Yükleme) destekliyor. Bu ayarı yapmak için `Properties/launchSettings.json` içerisinde bazı değişiklikler yapmanız gerekiyor.
 
-```
+```json
 {
   "iisSettings": {
     "windowsAuthentication": false,
