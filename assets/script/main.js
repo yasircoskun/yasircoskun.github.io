@@ -100,7 +100,10 @@ function openWin(element) {
         //winElement.getElementsByClassName('content')[0].style.width = winElement.clientWidth + "px";
     }
 
-    hljs.highlightBlock(winElement.getElementsByTagName('pre')[0]);
+    winElement.querySelectorAll('pre code').forEach((el) => {
+        hljs.highlightElement(el);
+    });
+    //hljs.highlightElement(winElement.getElementsByTagName('pre')[0]);
 }
 
 function generateWin(name) {
