@@ -46,4 +46,6 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
   - [ ] ORM paketini ve migrationları açıkla
   - [ ] Resolver açıkla
   - [ ] api token authentication araştır
+  - [ ] Dotnet Core dynamic veri yapılarını açıkla
+  - [x] Dotnet Core Hot Reload Özelliğini açıkla (ipucu)
   - [ ] ...?
