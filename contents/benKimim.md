@@ -47,4 +47,5 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
   - [ ] api token authentication araştır
   - [ ] Dotnet Core dynamic veri yapılarını açıkla
   - [x] Dotnet Core Hot Reload Özelliğini açıkla (ipucu)
+  - [ ] Dotnet Core JWT Authentication açıkla
   - [ ] ...?
