@@ -48,4 +48,5 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
   - [ ] Dotnet Core dynamic veri yapılarını açıkla
   - [x] Dotnet Core Hot Reload Özelliğini açıkla (ipucu)
   - [ ] Dotnet Core JWT Authentication açıkla
+  - [ ] Ekran alıntılarında yana kaydırarak gezinme özelliği
   - [ ] ...?
