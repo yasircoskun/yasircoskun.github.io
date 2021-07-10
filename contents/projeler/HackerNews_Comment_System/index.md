@@ -1,4 +1,4 @@
-### HackerNews Comment
+### HackerNews Comment System
 
 Bu proje şuan yayınlamakta olduğum gibi statik sayfalara HackerNews Comment sistemi entegre etmek hakkında. Blogumu arama motorlarında aradığımda hiçbir arama motorunda görüntülenmediğini fark ettim. Bunun sebebi nedir bilmiyorum ancak eğer bir şeyler yazıyorsam birileri okusa fena olmazdı.
 
