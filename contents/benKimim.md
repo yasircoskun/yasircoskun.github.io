@@ -50,3 +50,4 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
   - [ ] Dotnet Core JWT Authentication açıkla
   - [ ] Ekran alıntılarında yana kaydırarak gezinme özelliği
   - [ ] ...?
+- [ ] [HackerNews Comment System](https://yasircoskun.github.io/projeler/HackerNews_Comment_System/index.md)
