@@ -47,3 +47,8 @@ Bugün denetleyicilerde(controllers) hata ayıklarken([Debugging](https://duckdu
 Yukarıda işaretlediğim satırı ekleyin ve uygulamanızı komut satırından `dotnet watch run` komutu ile başlatın. Bu sayede denetleyicilerde yaptığınız değişiklikleri gerçek zamanlı olarak gözlemleyebilirsiniz.
 
 herkese iyi çalışmalar.
+
+Düzeltme:
+ilerleyen zamanlarda hot reload özelliğinin düşündüğüm kadar performanslı çalışmadığını fark ettim. `Dotnet watch` programı dosyalarda yapılan değişikliği takip ediyor. Bir çeşit listener yada hook mekanizması olabilir. Her neyse siz dosyada değişiklik yaptığınız zaman projeyi tekrar build ediyor bu projenizin boyutuna göre zaman alabiliyor ve hot reload aslında çokta sıcak değil.
+
+Ancak iyi haberlerimde var hot reload yerine breakpoint kullanımına alışmak iyi bir seçenek olabilir. Breakpoint kullandığınız durumda bir nesnenin tüm referans degerlerini görüntüleye biliyorunuz. Bu runtime (çalışma zamanı) hatalarını ayıklamak için oldukça yararlı.
