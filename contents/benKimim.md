@@ -49,5 +49,6 @@ insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacıs
   - [x] Dotnet Core Hot Reload Özelliğini açıkla (ipucu)
   - [ ] Dotnet Core JWT Authentication açıkla
   - [ ] Ekran alıntılarında yana kaydırarak gezinme özelliği
+  - [ ] [Todo için checkbox color değiştir](http://jsfiddle.net/5g3w32ug/)
   - [ ] ...?
 - [ ] [HackerNews Comment System](https://yasircoskun.github.io/projeler/HackerNews_Comment_System/index.md)
