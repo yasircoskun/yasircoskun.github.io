@@ -48,6 +48,8 @@ Yukarıda işaretlediğim satırı ekleyin ve uygulamanızı komut satırından 
 
 herkese iyi çalışmalar.
 
+---
+
 Düzeltme:
 ilerleyen zamanlarda hot reload özelliğinin düşündüğüm kadar performanslı çalışmadığını fark ettim. `Dotnet watch` programı dosyalarda yapılan değişikliği takip ediyor. Bir çeşit listener yada hook mekanizması olabilir. Her neyse siz dosyada değişiklik yaptığınız zaman projeyi tekrar build ediyor bu projenizin boyutuna göre zaman alabiliyor ve hot reload aslında çokta sıcak değil.
 
