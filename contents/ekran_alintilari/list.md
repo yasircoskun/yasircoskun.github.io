@@ -1,5 +1,3 @@
-## Replikler
+## Ters Düşün
 
-## Breaking Bad
-
-- just because you shot jesse james doesn't make you jesse james
+- Masumiyeti ispat edilene kadar herkes suçludur.
