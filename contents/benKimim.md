@@ -2,6 +2,10 @@
 
 insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacısı, okur, yazar, ... 
 
+Beş saatte buraya dört paragraf yazdım. Kim olduğum, nereden geldiğim ve nereye gittiğim hakkında.
+Sonra onları okudum ve kendisi ile çelişen ifadeler olduğunu gördüm.
+Kim olduğum beş saat içinde değişti ve başka şeyler yazdım sen bunu okuken kim bilebilir ben kimim?
+
 #### Özel Yeteneklerim:
 
 - [Sharingan](https://duckduckgo.com/?q=sharingan)'ım var.
