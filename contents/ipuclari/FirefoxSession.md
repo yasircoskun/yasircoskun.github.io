@@ -4,3 +4,7 @@ Bu eklenti sayesinde [SwitchFocus](https://yasircoskun.github.io/projeler/Switch
 İşler arasında odak değiştirirken tarayıcı da açık olan pencereleri tekrar açmak falan uğraştırmayacaktır.
 
 Tek dezavantaj onu kullanmak için tarayıcıyı geçmişi hatırlayacak şekilde yapılandırmak gerekiyor.
+
+Eklentiyi Japon bir kardeşimiz geliştirmiş. Sanırım ona güvenebiliriz.
+
+[Buradan kacmamız lazım..](https://www.youtube.com/watch?v=f-pMylyHibU)
