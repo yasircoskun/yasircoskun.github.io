@@ -3,5 +3,6 @@ dir guvenlik_aciklari
 dir projeler
 dir ipuclari
 dir ekran_alintilari
-file benKimim.md
+file CHANGELOG.md
 file MusicBox.app
+file ToDo.md

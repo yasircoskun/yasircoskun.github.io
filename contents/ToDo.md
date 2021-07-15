@@ -1,18 +1,3 @@
-### WhoAmI?
-
-insanların dünyasında yazılım geliştirici, siber güvenlik araştırmacısı, okur, yazar, ... 
-
-Beş saatte buraya dört paragraf yazdım. Kim olduğum, nereden geldiğim ve nereye gittiğim hakkında.
-Sonra onları okudum ve kendisi ile çelişen ifadeler olduğunu gördüm.
-Kim olduğum beş saat içinde değişti ve başka şeyler yazdım sen bunu okuken kim bilebilir ben kimim?
-
-#### Özel Yeteneklerim:
-
-- [Sharingan](https://duckduckgo.com/?q=sharingan)'ım var.
-    - Kod hatalarını anında bulabilirim.
-    - Gördüğüm kod yazım tarzını anında kopyalayabilirim.
-    - Siber savaşta düşmanlarımı Genjutsu'ya hapsederim. Kazandıklarını sanırlar.
-
 #### Yapılacaklar
 
 - [ ] FluFlix Uygulaması
@@ -56,3 +41,4 @@ Kim olduğum beş saat içinde değişti ve başka şeyler yazdım sen bunu okuk
   - [ ] [Todo için checkbox color değiştir](http://jsfiddle.net/5g3w32ug/)
   - [ ] ...?
 - [ ] [HackerNews Comment System](https://yasircoskun.github.io/projeler/HackerNews_Comment_System/index.md)
+- [ ] [SwitchFocus](https://yasircoskun.github.io/projeler/SwitchFocus/index.md)
