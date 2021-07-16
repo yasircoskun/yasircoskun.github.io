@@ -92,9 +92,9 @@ function openWin(element) {
         }
         document.body.appendChild(winElement);
     }
+    document.getElementById(name.replace('.', '')).dataset.fileName = name;
     focusWin(document.getElementById(name.replace('.', '')));
     document.getElementById(name.replace('.', '')).style.display = 'block';
-    window.history.pushState('', '', name.replace('/contents', ''));
     dragElement(document.getElementById(name.replace('.', '')));
     if (!mobileCheck()) { windowFix(); } else {
         winElement.getElementsByClassName('content')[0].style.height = winElement.clientHeight - 35 - winElement.firstChild.clientHeight + "px";
@@ -288,8 +288,11 @@ function focusWin(elemnt) {
         elemnt = elemnt.parentElement;
     }
 
+    let name = elemnt.dataset.fileName;
+
     if (elemnt.style.zIndex != '2') {
-        console.log(elemnt)
+        //console.log(elemnt)
+        window.history.pushState('', '', name.replace('/contents', ''));
         let elemnts = document.getElementsByClassName(elemnt.className);
         for (let i = 0; i < elemnts.length; i++) {
             elemnts[i].style.zIndex = '1';
@@ -317,6 +320,7 @@ function dragElement(elmnt) {
         e.preventDefault();
 
         elemnt = e.target;
+        focusWin(elemnt);
         while (elemnt.className != 'fileWin') {
             elemnt = elemnt.parentElement;
         }
