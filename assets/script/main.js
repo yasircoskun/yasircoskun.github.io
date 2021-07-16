@@ -94,6 +94,7 @@ function openWin(element) {
     }
     focusWin(document.getElementById(name.replace('.', '')));
     document.getElementById(name.replace('.', '')).style.display = 'block';
+    window.history.pushState('', '', name.replace('/contents', ''));
     dragElement(document.getElementById(name.replace('.', '')));
     if (!mobileCheck()) { windowFix(); } else {
         winElement.getElementsByClassName('content')[0].style.height = winElement.clientHeight - 35 - winElement.firstChild.clientHeight + "px";
