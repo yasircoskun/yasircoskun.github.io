@@ -262,6 +262,7 @@ function openFolder(element) {
         })
         document.body.appendChild(folderElement);
     }
+    document.getElementById(name.replace('.', '')).dataset.fileName = name;
     focusWin(document.getElementById(name.replace('.', '')));
     document.getElementById(name.replace('.', '')).style.display = 'block';
     dragElement(document.getElementById(name.replace('.', '')));
