@@ -82,7 +82,7 @@ function openWin(element) {
             winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'mp4') {
             console.log(name.substring(name.indexOf('.') + 1, name.length));
-            winElement.getElementsByTagName('pre')[0].outerHTML = " <video autoplay><source src='" + name + "' type='video/mp4'>Video destekleyen bir tarayıcı ile görüntüle!</video>";
+            winElement.getElementsByTagName('pre')[0].outerHTML = " <video autoplay controls><source src='" + name + "' type='video/mp4'>Video destekleyen bir tarayıcı ile görüntüle!</video>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'app') {
             winElement.getElementsByClassName('content')[0].innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
