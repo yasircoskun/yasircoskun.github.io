@@ -40,11 +40,12 @@ Bu sayfa content içerisinde o sayfanın konumunda bulunan dosyayı pencere içe
 </body>
 <script>
     var fileLoadEndFunction = null;
+    var currentPage = "/contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
 
     function urlReWriteInit() {
         console.log('urlReWriteInit')
         document.querySelectorAll('.file, .folder').forEach((elem) => {
-            var currentPage = "/contents/" + location.href.substring(location.href.indexOf('/', 8) + 1, location.href.length);
+
             console.log('debug : ' + currentPage.indexOf(elem.dataset.name) == 0);
             if (currentPage.indexOf(elem.dataset.name) == 0) {
                 if (elem.dataset.name == currentPage) fileLoadEndFunction = null // Eğer son folder açıldı ise fileLoadEndFunction fonksiyonuna null atanır.
