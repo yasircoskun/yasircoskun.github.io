@@ -1,3 +1,4 @@
-## Benim uydurduğum kelimeler
+## Benim uydurduğum ifadeler
 
 - Hüzüntü
+- Developer Experience
