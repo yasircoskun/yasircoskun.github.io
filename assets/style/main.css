@@ -40,8 +40,8 @@ body {
 .content {
     display: block;
     overflow-x: auto;
-    background: #303030;
-    color: #000000d6;
+    background: #000000d6;
+    color: #c5c8c6;
     padding: 0.5em;
 }
 
@@ -170,7 +170,7 @@ label {
 
 .content {
     border-radius: 0 0 15px 15px;
-    background: #2e323b;
+    background: #000000d6;
     padding: 15px 10px;
     box-sizing: inherit;
     width: 37vw;
