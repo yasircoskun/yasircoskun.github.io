@@ -77,7 +77,7 @@ function openWin(element) {
 
         if (name.substring(name.indexOf('.') + 1, name.length) == 'pdf') {
             winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name + "'></iframe>";
-        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'jpg') {
+        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'jpg' || name.substring(name.indexOf('.') + 1, name.length) == 'gif') {
             console.log(name.substring(name.indexOf('.') + 1, name.length));
             winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'mp4') {
