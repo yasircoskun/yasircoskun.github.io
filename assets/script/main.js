@@ -86,7 +86,11 @@ function openWin(element) {
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'app') {
             winElement.getElementsByClassName('content')[0].innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
-            winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
+            if (typeof marked == "function") {
+                winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
+            } else {
+                winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked.marked(element.lastElementChild.innerText) + "</div>";
+            }
         } else {
             winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? httpGet(name) : "\n\n\n";
         }
