@@ -1,6 +1,12 @@
 #### Yapılacaklar
 
+- [ ] Blog
+  - [ ] RSS Viewer
+  - [ ] Easter Egg
 - [ ] FluFlix Uygulaması
+  - [ ] Bölüm checkpoint hatırla (sqlite local)
+  - [ ] Sonraki bölüm önbelleğe alma (flutter-dart)
+  - [ ] offline için bölüm kaydetme (flutter-dart)
   - [x] Category scarper (dart)
   - [x] Dizi ara (dart)
   - [x] Film ara (dart)
@@ -13,32 +19,16 @@
   - [x] Player sayfası (flutter better player package)
   - [x] Otomatik bölüm geçme (flutter-dart)
   - [x] Favori diziler (sqlite local)
-  - [ ] Bölüm checkpoint hatırla (sqlite local)
-  - [ ] Sonraki bölüm önbelleğe alma (flutter-dart)
-  - [ ] offline için bölüm kaydetme (flutter-dart)
-  - [ ] ...?
-- [ ] Fluflix-api
-  - [x] NodeJS server hazırla
-  - [x] GraphQL schema oluştur
-  - [x] ORM paketi kur
-  - [x] Modelleri (tabloları) oluştur - migration
-  - [ ] resolver fonksiyonları hazırla
-  - [ ] proje dosyalarını ayrıştır düzenle
-  - [ ] Query ve Mutationları tamamla full crud
-  - [ ] ...?
-- [ ] Hidden Project
-  - [ ] ...
-- [ ] Blog
-  - [x] GraphQL NodeJS başlangıç yazısı
-  - [x] Query ve Mutationları açıkla
-  - [ ] ORM paketini ve migrationları açıkla
-  - [ ] Resolver açıkla
-  - [ ] api token authentication araştır
-  - [ ] Dotnet Core dynamic veri yapılarını açıkla
-  - [x] Dotnet Core Hot Reload Özelliğini açıkla (ipucu)
-  - [ ] Dotnet Core JWT Authentication açıkla
-  - [ ] Ekran alıntılarında yana kaydırarak gezinme özelliği
-  - [ ] [Todo için checkbox color değiştir](http://jsfiddle.net/5g3w32ug/)
-  - [ ] ...?
+  - [ ] Fluflix-api
+    - [ ] resolver fonksiyonları hazırla
+    - [ ] proje dosyalarını ayrıştır düzenle
+    - [ ] Query ve Mutationları tamamla full crud
+    - [ ] ...?
+    - [x] NodeJS server hazırla
+    - [x] GraphQL schema oluştur
+    - [x] ORM paketi kur
+    - [x] Modelleri (tabloları) oluştur - migration
+- [x] Hidden Project
+  - [x] Proje sonlandırıldı. insan faktörü projeden nefret etmeme sebep oldu. 🤢 
 - [ ] [HackerNews Comment System](https://yasircoskun.github.io/projeler/HackerNews_Comment_System/index.md)
 - [ ] [SwitchFocus](https://yasircoskun.github.io/projeler/SwitchFocus/index.md)
