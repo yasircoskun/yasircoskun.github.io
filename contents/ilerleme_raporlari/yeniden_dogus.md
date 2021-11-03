@@ -1,0 +1,5 @@
+### Yeniden Doğuş
+
+Bugün yeniden doğuşumun ilk günü. Umarım burada siber uzayda işlediğim önemsiz suçlar başıma bela olmaz. Bugün chreme tarayıcıda bloğumdaki yazıların okunmasını engelleyen bir hata ile ilgili bir geri bildirim aldım ve işledim. Sorun giderildi. Ardından yazılarımı sildim. Çünkü onları organize etmeye çalışırken çok zaman harcadığımı işin olduğundan daha zor bir hal aldığını falan fark ettim. Zaten benim yazdıklarım ile kimse yazılım öğrenmeyecek o halde neden bilmeyen birine anlatıyor gibi yazayım dedim ve onları sildim. Artık öylesine yazacağım düşüncelerimi toplamak ve onları görmek için. Onları başka kimin göreceği konusunda bazı çekingelerim yok mu? var elbette ancak bunu önemsiz görmeye çalışıyorum. Ben gizli bir seri katil değilim. Utanmam gereken hiç birşey yapmadım belki yapmadığım şeylerden utanmalıyımdır. Yapamadığım yada. Her neyse ilk gün fazla derine gitmeyelim. 
+
+- 3 Kasım 2021
