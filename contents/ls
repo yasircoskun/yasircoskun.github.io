@@ -2,6 +2,6 @@ dir ilerleme_raporlari
 dir projeler
 dir ipuclari
 dir ekran_alintilari
-file CHANGELOG.md
+file OSINT.md
 file MusicBox.app
 file ToDo.md

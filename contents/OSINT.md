@@ -1,0 +1,7 @@
+- [Github](https://github.com/yasircoskun)
+- [Codepen](https://codepen.io/yasircoskun)
+- [@yasir_dev](https://twitter.com/yasir_dev)
+- [@yasir_sec](https://twitter.com/yasir_sec)
+- [LinkedIn](https://www.linkedin.com/in/yasircoskun/)
+- [HackerNews](https://news.ycombinator.com/user?id=yasir_dev)
+- [Producthunt](https://www.producthunt.com/@yasir_dev)
