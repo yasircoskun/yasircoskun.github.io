@@ -5,3 +5,5 @@
 - [LinkedIn](https://www.linkedin.com/in/yasircoskun/)
 - [HackerNews](https://news.ycombinator.com/user?id=yasir_dev)
 - [Producthunt](https://www.producthunt.com/@yasir_dev)
+- [Youtube](https://www.youtube.com/channel/UCFtCNK407EJvGLZAxtMLz_g/playlists)
+- [Odnoklassniki](https://ok.ru/profile/596680788540)
