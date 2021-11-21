@@ -178,12 +178,12 @@ label {
 
 .mobile .file,
 .mobile .folder {
-    width: 19vw;
+    width: 20%;
 }
 
 .mobile .content .file,
 .mobile .content .folder {
-    width: 22vw;
+    width: 20%;
 }
 
 .mobile label {
