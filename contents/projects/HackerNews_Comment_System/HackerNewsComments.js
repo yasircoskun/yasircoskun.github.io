@@ -188,6 +188,7 @@ let loadingAnimHN = '<svg class="spinner" viewBox="0 0 50 50"><circle class="pat
 
 class HackerNewsComment {
     constructor(selector, HN_ID = 0, api = "Algolia") {
+        this.selector = selector;
         this.commentContainer = this.getCommentContainer(selector);
         this.commentContainer.innerHTML = loadingAnimHN;
         this.api_name = api;
@@ -209,7 +210,7 @@ class HackerNewsComment {
         this.commentContainer.innerHTML = "";
         this.commentContainer.appendChild(htmlGenerator.element);
         this.commentContainer.onresize = this.drawLine;
-        new onResizeTrigger("#" + this.commentContainer.id)
+        new onResizeTrigger(this.selector)
         this.drawLine();
     }
     drawLine() {
