@@ -116,12 +116,6 @@ class Offical_HackerNews_API extends API {
     }
 }
 
-function httpGet(theUrl) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", theUrl, false); // false for synchronous request
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
-}
 
 class API_Parameters {
     constructor(HN_ID) {
@@ -133,12 +127,19 @@ class API_Parameters {
     }
 
     getStoryId() {
-        let data = JSON.parse(httpGet("https://hn.algolia.com/api/v1/search?query=" + location.href + "&tags=story"));
+        let data = JSON.parse(this.httpGet("https://hn.algolia.com/api/v1/search?query=" + location.href + "&tags=story"));
         if (data.hits.length > 0) {
             return data.hits[0].objectID;
         } else {
             return 0
         }
+    }
+
+    httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
     }
 }
 
