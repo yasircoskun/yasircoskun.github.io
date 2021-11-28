@@ -166,9 +166,12 @@ class HtmlGenerator {
     }
 }
 
+let loadingAnimHN = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>';
+
 class HackerNewsComment {
     constructor(selector, HN_ID = 0, api = "Algolia") {
         this.commentContainer = this.getCommentContainer(selector);
+        this.commentContainer.innerHTML = loadingAnimHN;
         this.api_name = api;
         this.api = new API_Factory(this.api_name);
         this.api_parameters = new API_Parameters(HN_ID);
@@ -185,8 +188,11 @@ class HackerNewsComment {
     generateHTML(json) {
         let htmlGenerator = new HtmlGenerator(this.api_name, json);
         this.commentContainer.className += " HackerNewsComments";
+        this.commentContainer.innerHTML = "";
         this.commentContainer.appendChild(htmlGenerator.element);
-
+        this.commentContainer.onresize = drawLine;
+    }
+    drawLine() {
         [...document.querySelectorAll(".line")].forEach((line) => {
             if (line.parentElement.querySelector(".replies").children.length == 0) {
                 line.style.display = "none";
