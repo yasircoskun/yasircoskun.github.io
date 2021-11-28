@@ -1,0 +1,66 @@
+.HackerNewsComments {
+    padding: 4px;
+}
+
+.HackerNewsComments .replies {
+    padding-left: 10px;
+}
+
+.HackerNewsComments .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-width: 0 0 0 0px;
+    border-radius: 0;
+    padding: 6px 12px;
+    position: relative;
+}
+
+.HackerNewsComments .card .dot {
+    position: absolute;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    background: rgba(214, 214, 214, 0.777);
+    border-radius: 3px;
+    top: 11px;
+}
+
+.HackerNewsComments .card+.card .dot2 {
+    position: absolute;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: rgba(214, 214, 214, 0.777);
+    transform: translate(-19px, 0px);
+    border-radius: 4px;
+    top: 0;
+}
+
+.HackerNewsComments .card .card .bridge {
+    position: absolute;
+    left: 0;
+    width: 19px;
+    height: 16px;
+    transform: translate(-16px, -2px);
+    top: 0;
+    border-width: 0 0 1px 1px;
+    border-bottom-left-radius: 9px;
+    border-color: rgba(214, 214, 214, 0.777);
+    border-style: solid;
+}
+
+.HackerNewsComments .line {
+    position: absolute;
+    left: 6px;
+    width: 1px;
+    background: rgba(214, 214, 214, 0.777);
+    top: 18px;
+}
+
+.HackerNewsComments .header {
+    position: relative;
+}
