@@ -166,22 +166,19 @@ class HtmlGenerator {
     }
 }
 
-class onResizeTrigger {
-    constructor(selector, listenerInterval = 500) {
-        this.element = document.querySelector(selector);
-        this.listener = setInterval(this.listenerFunc, listenerInterval)
-        this.lastWidth = 0;
-        this.lastHeight = 0;
-    }
-    listenerFunc() {
-        let width = this.element.getBoundingClientRect().width
-        let height = this.element.getBoundingClientRect().height
-        if (width != this.lastWidth || height != this.lastHeight) {
-            this.element.onresize();
-            this.lastWidth = width;
-            this.lastHeight = height;
+function onResizeTrigger(selector, callback, listenerInterval = 500) {
+    let element = document.querySelector(selector);
+    lastWidth = 0;
+    lastHeight = 0;
+    setInterval(function() {
+        let width = element.getBoundingClientRect().width
+        let height = element.getBoundingClientRect().height
+        if (width != lastWidth || height != lastHeight) {
+            callback();
+            lastWidth = width;
+            lastHeight = height;
         }
-    }
+    }, listenerInterval)
 }
 
 let loadingAnimHN = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>';
@@ -210,7 +207,7 @@ class HackerNewsComment {
         this.commentContainer.innerHTML = "";
         this.commentContainer.appendChild(htmlGenerator.element);
         this.commentContainer.onresize = this.drawLine;
-        new onResizeTrigger(this.selector)
+        new onResizeTrigger(this.selector, this.drawLine)
         this.drawLine();
     }
     drawLine() {
