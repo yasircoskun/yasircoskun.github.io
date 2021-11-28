@@ -164,7 +164,7 @@ class HackerNewsComment {
     }
     generateHTML(json) {
         let htmlGenerator = new HtmlGenerator(this.api_name, json);
-        this.commentContainer.className += "HackerNewsComments";
+        this.commentContainer.className += " HackerNewsComments";
         this.commentContainer.appendChild(htmlGenerator.element);
 
         [...document.querySelectorAll(".line")].forEach((line) => {
