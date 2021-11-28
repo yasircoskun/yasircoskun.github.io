@@ -47,9 +47,9 @@ function getContent(repo) {
     return content
 }
 
-function generateFileIcon(name, namepath, content) {
+function generateFileIcon(name, namepath, content, HN_ID) {
     let html = `
-    <div class='file' data-name='{name.path}' onclick='openWin(this)'>
+    <div class='file' data-name='{name.path}' data-hnid='{HN_ID}' onclick='openWin(this)'>
     <span class="fiv-cla fiv-icon-{ext}"></span>
     <br>
     <label class='gradienText'>{name}</label>
@@ -57,6 +57,7 @@ function generateFileIcon(name, namepath, content) {
     </div> 
     `;
     html = html.replace('{name}', name);
+    html = html.replace('{HN_ID}', HN_ID);
     html = html.replace('{ext}', name.substring(name.indexOf('.') + 1, name.length));
     if (name.substring(name.indexOf('.') + 1, name.length) != 'mp4') {
         html = html.replace('{content}', content);
@@ -70,9 +71,10 @@ function generateFileIcon(name, namepath, content) {
 
 function openWin(element) {
     let name = element.dataset.name;
+    let HN_ID = element.dataset.hnid;
     let path = element.parentElement.parentElement.id;
     if (!winExist(name.replace('.', ''))) {
-        winElement = generateWin(name);
+        winElement = generateWin(name, HN_ID);
         winElement.getElementsByTagName('pre')[0].className = name.substring(name.indexOf('.') + 1, name.length);
 
         if (name.substring(name.indexOf('.') + 1, name.length) == 'pdf') {
@@ -84,12 +86,12 @@ function openWin(element) {
             console.log(name.substring(name.indexOf('.') + 1, name.length));
             winElement.getElementsByTagName('pre')[0].outerHTML = " <video autoplay controls><source src='" + name + "' type='video/mp4'>Video destekleyen bir tarayıcı ile görüntüle!</video>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'app') {
-            winElement.getElementsByClassName('content')[0].innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
+            winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
             if (typeof marked == "function") {
-                winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
+                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked(element.lastElementChild.innerHTML)) + "</div>";
             } else {
-                winElement.getElementsByClassName('content')[0].innerHTML = "<div class='markdown'>" + marked.marked(element.lastElementChild.innerText) + "</div>";
+                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(element.lastElementChild.innerHTML)) + "</div>";
             }
         } else {
             winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? httpGet(name) : "\n\n\n";
@@ -111,9 +113,164 @@ function openWin(element) {
     //hljs.highlightElement(winElement.getElementsByTagName('pre')[0]);
 }
 
-function generateWin(name) {
-    let html = "<div class='fileWin' id='{name.id}'><div class='winTitle'><h4>{name}</h4><div class='closeIcon' onclick='closeWin(this);'>x</div></div><div class='content'><pre contenteditable='True'></pre></div></div>";
+// https://muffinman.io/blog/javascript-time-ago-function/
+
+const MONTH_NAMES = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+
+function getFormattedDate(date, prefomattedDate = false, hideYear = false) {
+    const day = date.getDate();
+    const month = MONTH_NAMES[date.getMonth()];
+    const year = date.getFullYear();
+    const hours = date.getHours();
+    let minutes = date.getMinutes();
+
+    if (minutes < 10) {
+        // Adding leading zero to minutes
+        minutes = `0${ minutes }`;
+    }
+
+    if (prefomattedDate) {
+        // Today at 10:20
+        // Yesterday at 10:20
+        return `${ prefomattedDate } at ${ hours }:${ minutes }`;
+    }
+
+    if (hideYear) {
+        // 10. January at 10:20
+        return `${ day }. ${ month } at ${ hours }:${ minutes }`;
+    }
+
+    // 10. January 2017. at 10:20
+    return `${ day }. ${ month } ${ year }. at ${ hours }:${ minutes }`;
+}
+
+
+// --- Main function
+function timeAgo(dateParam) {
+    if (!dateParam) {
+        return null;
+    }
+
+    const date = typeof dateParam === 'object' ? dateParam : new Date(dateParam);
+    const DAY_IN_MS = 86400000; // 24 * 60 * 60 * 1000
+    const today = new Date();
+    const yesterday = new Date(today - DAY_IN_MS);
+    const seconds = Math.round((today - date) / 1000);
+    const minutes = Math.round(seconds / 60);
+    const isToday = today.toDateString() === date.toDateString();
+    const isYesterday = yesterday.toDateString() === date.toDateString();
+    const isThisYear = today.getFullYear() === date.getFullYear();
+
+
+    if (seconds < 5) {
+        return 'now';
+    } else if (seconds < 60) {
+        return `${ seconds } seconds ago`;
+    } else if (seconds < 90) {
+        return 'about a minute ago';
+    } else if (minutes < 60) {
+        return `${ minutes } minutes ago`;
+    } else if (isToday) {
+        return getFormattedDate(date, 'Today'); // Today at 10:20
+    } else if (isYesterday) {
+        return getFormattedDate(date, 'Yesterday'); // Yesterday at 10:20
+    } else if (isThisYear) {
+        return getFormattedDate(date, false, true); // 10. January at 10:20
+    }
+
+    return getFormattedDate(date); // 10. January 2017. at 10:20
+}
+
+// https://muffinman.io/blog/javascript-time-ago-function/
+
+// HN Comment Start
+var HN_Icon_Html = "<hr class='HN_Icon' data-hnid='{HN_ID}'><a class='HN_Icon' data-hnid='{HN_ID}' data-state='disabled' onclick='toggleHN(this);'>[Show Comments]</a><a class='HN_Icon' data-hnid='{HN_ID}' href='https://news.ycombinator.com/item?id={HN_ID}' target='_blank'>[Write Comment]</a><div class='HN_Icon HN_Comments' data-hnid='{HN_ID}'></div>";
+
+var HN_Data = {};
+
+function getHN(id) {
+    return JSON.parse(httpGet("https://hacker-news.firebaseio.com/v0/item/" + id + ".json?print=pretty"));
+}
+
+function getHN_Comment(data) {
+    if ('kids' in data) {
+        data.chidrens = [];
+        data.kids.forEach((kid) => {
+            data.chidrens.push(getHN(kid));
+            getHN_Comment(data.chidrens[data.chidrens.length - 1])
+        })
+    }
+}
+
+function getHN_Comment2MarkDown(HN_Post_Data, data, depth) {
+    if ('chidrens' in data) {
+        data.chidrens.forEach((child) => {
+            HN_Post_Data.markdown += "\n" + "\t".repeat(depth);
+            if ('text' in child && 'time' in child && 'by' in child) {
+                if ('kids' in child) {
+                    HN_Post_Data.markdown += "<details style='padding-left:" + depth + "em'>" + "\n\t" + "\t".repeat(depth) + "<summary>" + "<a href='https://news.ycombinator.com/user?id=" + child.by + "' target='_blank'>" + child.by + " - " + timeAgo(child.time * 1000) + ":</a><p>" + child.text.replaceAll('\n', '<br>').replaceAll('<p>', '<br>') + "</p></summary>";
+                    getHN_Comment2MarkDown(HN_Post_Data, child, depth + 1);
+                    HN_Post_Data.markdown += "\n" + "\t".repeat(depth) + "</details>"
+                } else {
+                    HN_Post_Data.markdown += "<a style='padding-left:" + depth + "em' href='https://news.ycombinator.com/user?id=" + child.by + "' target='_blank'>" + child.by + " - " + timeAgo(child.time * 1000) + ":</a><p style='margin: 0; padding-left:" + depth + "em'>" + child.text.replaceAll('\n', '<br>').replaceAll('<p>', '<br>') + "</p>";
+                }
+            }
+        })
+    }
+}
+
+function toggleHN_markdown_old(elem) {
+    if (elem.dataset.state == 'disabled') {
+        elem.innerText = "[Hide Comments]";
+        let HN_ID = elem.dataset.hnid;
+        let loading = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>';
+        elem.dataset.data = elem.nextElementSibling.nextElementSibling.innerHTML;
+        elem.nextElementSibling.nextElementSibling.innerHTML = loading;
+        if (!(HN_ID in HN_Data)) {
+            HN_Data[HN_ID] = getHN(HN_ID);
+            HN_Data[HN_ID].markdown = "";
+            HN_Data[HN_ID].markdown += "---\n\n";
+            getHN_Comment(HN_Data[HN_ID]);
+            getHN_Comment2MarkDown(HN_Data[HN_ID], HN_Data[HN_ID], 0);
+        }
+        if (typeof marked == "function") {
+            elem.nextElementSibling.nextElementSibling.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked(HN_Data[HN_ID].markdown)) + "</div>";
+        } else {
+            elem.nextElementSibling.nextElementSibling.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(HN_Data[HN_ID].markdown)) + "</div>";
+        }
+        elem.dataset.state = 'enabled';
+    } else {
+        elem.innerText = "[Show Comments]";
+        elem.nextElementSibling.nextElementSibling.innerHTML = elem.dataset.data;
+        elem.dataset.state = 'disabled';
+    }
+}
+
+function toggleHN(elem) {
+    if (elem.dataset.state == 'disabled') {
+        elem.innerText = "[Hide Comments]";
+        let HN_ID = elem.dataset.hnid;
+        let loading = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>';
+        elem.dataset.data = elem.nextElementSibling.nextElementSibling.innerHTML;
+        elem.nextElementSibling.nextElementSibling.id = "CommentArea";
+        elem.nextElementSibling.nextElementSibling.innerHTML = loading;
+        new HackerNewsComment("#CommentArea", HN_ID);
+        elem.dataset.state = 'enabled';
+    } else {
+        elem.innerText = "[Show Comments]";
+        elem.nextElementSibling.nextElementSibling.innerHTML = elem.dataset.data;
+        elem.dataset.state = 'disabled';
+    }
+}
+
+function generateWin(name, HN_ID) {
+    let html = "<div class='fileWin' id='{name.id}'><div class='winTitle'><h4>{name}</h4><div class='closeIcon' onclick='closeWin(this);'>x</div></div><div class='content'><div><pre contenteditable='True'></pre></div>" + HN_Icon_Html + "</div></div>";
     html = html.replace('{name}', name);
+    html = html.replaceAll('{HN_ID}', HN_ID);
     html = html.replace('{name.id}', name.replace('.', ''));
     let temp = document.createElement('template');
     html = html.trim();
@@ -172,6 +329,7 @@ function ls(path = "/contents") {
         file = {}
         file['type'] = file_str_splited[0]
         file['name'] = file_str_splited[1]
+        if (file_str_splited.length > 2) { file['HN_ID'] = file_str_splited[2] } else { file['HN_ID'] = "0" }
         file['path'] = path + "/" + file_str_splited[1]
         files.push(file)
     });
@@ -194,10 +352,10 @@ files = ls()
 files.forEach((file) => {
     if (file['type'] == 'file') {
         file['content'] = cat(file['path'])
-        let fileIcon = generateFileIcon(file['name'], file['path'], file['content'])
+        let fileIcon = generateFileIcon(file['name'], file['path'], file['content'], file['HN_ID'])
         document.body.appendChild(fileIcon)
     } else if (file['type'] == 'dir') {
-        let fileIcon = generateFolderIcon(file['name'], file['path'])
+        let fileIcon = generateFolderIcon(file['name'], file['path'], file['HN_ID'])
         document.body.appendChild(fileIcon)
         console.log('directory')
     } else {
@@ -226,14 +384,15 @@ function httpGet(theUrl) {
     return xmlHttp.responseText;
 }
 
-function generateFolderIcon(name, path) {
+function generateFolderIcon(name, path, HN_ID) {
     let html = `
-    <div class='folder' data-name='{path}' onclick='openFolder(this)'>
+    <div class='folder' data-name='{path}' data-hnid='{HN_ID}' onclick='openFolder(this)'>
     <span class="fiv-cla fiv-icon-{ext}"></span><br>
     <label class='gradienText'>{name}</label>
     </div>
     `;
     html = html.replace('{name}', name);
+    html = html.replace('{HN_ID}', HN_ID);
     html = html.replace('{path}', path.replace('.', ''));
     html = html.replace('{ext}', 'folder');
     let temp = document.createElement('template');
@@ -245,19 +404,20 @@ function generateFolderIcon(name, path) {
 
 function openFolder(element) {
     let name = element.dataset.name;
+    let HN_ID = element.dataset.hnid;
     element.dataset.opened = "true";
     let path = element.parentElement.parentElement.id;
     if (!winExist(name.replace('.', ''))) {
-        folderElement = generateWin(name);
+        folderElement = generateWin(name, HN_ID);
 
         files = ls(name)
         files.forEach((file) => {
             if (file['type'] == 'file') {
                 file['content'] = cat(file['path'])
-                let fileIcon = generateFileIcon(file['name'], file['path'], file['content'])
+                let fileIcon = generateFileIcon(file['name'], file['path'], file['content'], file['HN_ID'])
                 folderElement.getElementsByClassName('content')[0].appendChild(fileIcon)
             } else if (file['type'] == 'dir') {
-                let fileIcon = generateFolderIcon(file['name'], file['path'])
+                let fileIcon = generateFolderIcon(file['name'], file['path'], file['HN_ID'])
                 folderElement.getElementsByClassName('content')[0].appendChild(fileIcon)
                 console.log('directory')
             } else {

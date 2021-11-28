@@ -2,6 +2,14 @@
     color: rgb(128, 255, 0);
 }
 
+a {
+    color: rgb(128, 255, 0);
+}
+
+a:visited {
+    color: rgb(128, 255, 0);
+}
+
 body {
     padding: 0.5rem;
     background: url(https://yasircoskun.github.io/assets/images/wallpapers/desktop/SteinsGate.gif) no-repeat center center fixed;
@@ -39,10 +47,104 @@ body {
 
 .content {
     display: block;
+    position: relative;
     overflow-x: auto;
     background: #000000d6;
     color: #c5c8c6;
     padding: 0.5em;
+}
+
+.HN_Icon {
+    cursor: pointer;
+    z-index: 4;
+}
+
+.HN_Icon[data-hnid="0"] {
+    display: none;
+}
+
+.HN_Comments {
+    position: relative;
+    height: 200px;
+}
+
+details {
+    margin-bottom: 1em;
+}
+
+details p,
+details+a+p {
+    margin-bottom: 1em !important;
+    cursor: pointer;
+}
+
+summary p {
+    margin: 0;
+}
+
+summary::marker {
+    color: rgb(128, 255, 0);
+}
+
+.spinner {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+}
+
+.spinner .path {
+    stroke: rgb(128, 255, 0);
+    stroke-linecap: round;
+    -webkit-animation: dash 1.5s ease-in-out infinite;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
 }
 
 .fileWin {

@@ -1,7 +1,6 @@
-dir ilerleme_raporlari
-dir projeler
-dir ipuclari
-dir ekran_alintilari
+dir projects
+dir tips
+dir screenshots
 file OSINT.md
 file MusicBox.app
-file ToDo.md
+file ToDo.md 0
