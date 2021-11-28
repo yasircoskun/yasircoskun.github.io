@@ -116,9 +116,29 @@ class Offical_HackerNews_API extends API {
     }
 }
 
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", theUrl, false); // false for synchronous request
+    xmlHttp.send(null);
+    return xmlHttp.responseText;
+}
+
 class API_Parameters {
     constructor(HN_ID) {
-        this.HN_ID = HN_ID;
+        if (HN_ID == 0) {
+            this.HN_ID = this.getStoryId();
+        } else {
+            this.HN_ID = HN_ID;
+        }
+    }
+
+    getStoryId() {
+        let data = JSON.parse(httpGet("https://hn.algolia.com/api/v1/search?query=" + location.href + "&tags=story"));
+        if (data.hits.length > 0) {
+            return data.hits[0].objectID;
+        } else {
+            return 0
+        }
     }
 }
 
@@ -147,7 +167,7 @@ class HtmlGenerator {
 }
 
 class HackerNewsComment {
-    constructor(selector, api, HN_ID) {
+    constructor(selector, api = "Algolia", HN_ID = 0) {
         this.commentContainer = this.getCommentContainer(selector);
         this.api_name = api;
         this.api = new API_Factory(this.api_name);
