@@ -69,6 +69,18 @@ function generateFileIcon(name, namepath, content, HN_ID) {
     return temp.content.firstChild;
 }
 
+function escapeHtml(text) {
+    var map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
 function openWin(element) {
     let name = element.dataset.name;
     let HN_ID = element.dataset.hnid;
@@ -94,7 +106,7 @@ function openWin(element) {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(element.lastElementChild.innerHTML)) + "</div>";
             }
         } else {
-            winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? DOMPurify.sanitize(httpGet(name)) : "\n\n\n";
+            winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? DOMPurify.sanitize(escapeHtml(httpGet(name))) : "\n\n\n";
         }
         document.body.appendChild(winElement);
     }
