@@ -167,7 +167,7 @@ class HtmlGenerator {
 }
 
 class HackerNewsComment {
-    constructor(selector, api = "Algolia", HN_ID = 0) {
+    constructor(selector, HN_ID = 0, api = "Algolia") {
         this.commentContainer = this.getCommentContainer(selector);
         this.api_name = api;
         this.api = new API_Factory(this.api_name);
