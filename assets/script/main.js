@@ -94,7 +94,7 @@ function openWin(element) {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(element.lastElementChild.innerHTML)) + "</div>";
             }
         } else {
-            winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? httpGet(name) : "\n\n\n";
+            winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? DOMPurify.sanitize(httpGet(name)) : "\n\n\n";
         }
         document.body.appendChild(winElement);
     }
