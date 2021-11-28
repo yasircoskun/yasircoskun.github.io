@@ -190,6 +190,7 @@ class HackerNewsComment {
         this.commentContainer.className += " HackerNewsComments";
         this.commentContainer.innerHTML = "";
         this.commentContainer.appendChild(htmlGenerator.element);
+        this.drawLine();
         this.commentContainer.onresize = this.drawLine;
     }
     drawLine() {
