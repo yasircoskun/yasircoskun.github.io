@@ -1,34 +1,7 @@
 #### Yapılacaklar
 
 - [ ] Blog
+  - [ ] Mermaid
   - [ ] RSS Viewer
-  - [ ] Easter Egg
-- [ ] FluFlix Uygulaması
-  - [ ] Bölüm checkpoint hatırla (sqlite local)
-  - [ ] Sonraki bölüm önbelleğe alma (flutter-dart)
-  - [ ] offline için bölüm kaydetme (flutter-dart)
-  - [x] Category scarper (dart)
-  - [x] Dizi ara (dart)
-  - [x] Film ara (dart)
-  - [x] Poster scarper (dart)
-  - [x] Bölüm scarper (dart)
-  - [x] decrypt video source (dart)
-  - [x] Anasayfa (Flutter)
-  - [x] Arama bölümü (Anasayfada)(flutter)
-  - [x] Dizi bilgi sayfası (flutter)
-  - [x] Player sayfası (flutter better player package)
-  - [x] Otomatik bölüm geçme (flutter-dart)
-  - [x] Favori diziler (sqlite local)
-  - [ ] Fluflix-api
-    - [ ] resolver fonksiyonları hazırla
-    - [ ] proje dosyalarını ayrıştır düzenle
-    - [ ] Query ve Mutationları tamamla full crud
-    - [ ] ...?
-    - [x] NodeJS server hazırla
-    - [x] GraphQL schema oluştur
-    - [x] ORM paketi kur
-    - [x] Modelleri (tabloları) oluştur - migration
-- [x] Hidden Project
-  - [x] Proje sonlandırıldı. insan faktörü projeden nefret etmeme sebep oldu. 🤢 
-- [ ] [HackerNews Comment System](https://yasircoskun.github.io/projeler/HackerNews_Comment_System/index.md)
+- [x] [HackerNews Comment System](https://yasircoskun.github.io/projeler/HackerNews_Comment_System/index.md)
 - [ ] [SwitchFocus](https://yasircoskun.github.io/projeler/SwitchFocus/index.md)
