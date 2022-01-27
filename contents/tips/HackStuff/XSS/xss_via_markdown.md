@@ -1,6 +1,6 @@
 ### XSS via Markdown
 
-Just keep in mind if you can inject a markdown you can inject it in javascript.
+Note that if you can inject a markdown, you can inject javascript as well.
 
 for example look [here](https://codebeautify.org/markdown-viewer)
 
