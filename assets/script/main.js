@@ -81,6 +81,13 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+function decrypt(message = '', key = '') {
+    var code = CryptoJS.AES.decrypt(message, key);
+    var decryptedMessage = code.toString(CryptoJS.enc.Utf8);
+
+    return decryptedMessage;
+}
+
 function openWin(element) {
     let name = element.dataset.name;
     let HN_ID = element.dataset.hnid;
@@ -101,10 +108,16 @@ function openWin(element) {
             winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
             if (typeof marked == "function") {
-                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked(element.lastElementChild.innerHTML)) + "</div>";
+                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked(element.lastElementChild.innerText)) + "</div>";
             } else {
-                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(element.lastElementChild.innerHTML)) + "</div>";
+                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(element.lastElementChild.innerText)) + "</div>";
             }
+        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'enc') {
+            let password = prompt('Parolayı biliyor musun?');
+            element.lastElementChild.innerHTML = decrypt(element.lastElementChild.innerHTML, password)
+            element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
+            openWin(element);
+            return 0;
         } else {
             winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? DOMPurify.sanitize(escapeHtml(httpGet(name))) : "\n\n\n";
         }
