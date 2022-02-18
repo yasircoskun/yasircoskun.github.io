@@ -2,3 +2,6 @@
 hidden
 yedek
 node_modules
+contents/Abulafia/*.md
+contents/Abulafia/*.zip
+package-lock.json

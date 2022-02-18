@@ -2,8 +2,13 @@ const AES = require("crypto-js/aes");
 const fs = require('fs');
 
 var file_path = process.argv[2]
+var pass = "Hayır";
+console.log(process.argv.length);
+if (process.argv.length > 3) {
+    pass = process.argv[3];
+}
 var file_content = fs.readFileSync(file_path, 'utf8')
-var file_content_encrypted = AES.encrypt(file_content, 'Hayır').toString();
+var file_content_encrypted = AES.encrypt(file_content, pass).toString();
 var file_dest = file_path.substring(0, file_path.lastIndexOf("\\"));
 var file_name = file_path.substring(0, file_path.lastIndexOf("."));
 var file_ext = file_path.substring(file_path.lastIndexOf(".") + 1, file_path.length);
