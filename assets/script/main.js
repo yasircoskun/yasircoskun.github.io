@@ -108,9 +108,9 @@ function openWin(element) {
             winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
             if (typeof marked == "function") {
-                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked(element.lastElementChild.innerText)) + "</div>";
+                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
             } else {
-                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + DOMPurify.sanitize(marked.marked(element.lastElementChild.innerText)) + "</div>";
+                winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked.marked(element.lastElementChild.innerText) + "</div>";
             }
         } else if (name.substring(name.indexOf('.') + 1, name.length) == 'enc') {
             let password = prompt('Parolayı biliyor musun?');
