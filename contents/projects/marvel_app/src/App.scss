@@ -1,0 +1,197 @@
+$marvel_red: #8a3636;
+$marvel_red_2: brown;
+$marvel_logo_white: #ffffff;
+
+.Center {
+  text-align: center;
+}
+
+.CharacterCard {
+  width: 60vw;
+  background-color: #ccc;
+  margin: 0.4rem 20vw;
+  padding: 2rem 1.25rem;
+  border-radius: 1.5rem;
+  display: flex;
+  text-align: left;
+}
+
+.CharacterCard .Image,
+.CharacterCard .TabArea {
+  display: inline-block;
+}
+
+.TabArea {
+  width: 100%;
+}
+
+$number: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+
+@each $num in $number {
+  .CharacterCard .TabArea li:nth-child(#{$num}) {
+    transform: translate($num * -0.6rem, 0px);
+  }
+}
+
+.CharacterCard .TabArea li {
+  display: inline-block;
+  position: static;
+  padding: 0.8rem 0.5rem 0.3rem 0.5rem;
+  border: 2px solid $marvel_red;
+  min-width: 4rem;
+  cursor: pointer;
+  border-radius: 1.5rem 1.5rem 0 0;
+  text-align: center;
+  background-color: $marvel_red_2;
+  color: white;
+}
+
+.CharacterCard .TabArea li.active {
+  z-index: 999;
+  position: relative;
+}
+
+.CharacterCard .TabArea .TabHeader {
+  margin: 0;
+  padding: 0 1.4rem;
+}
+
+.CharacterCard .TabArea .TabBody {
+  border: 2px solid $marvel_red;
+  margin: 0;
+  border-radius: 1rem;
+}
+
+.CharacterCard .TabArea .TabBody .Tab {
+  display: none;
+  height: 324px;
+}
+
+.CharacterCard .TabArea .TabBody .Tab:first-child {
+  display: flex;
+  height: 324px;
+}
+
+.Info {
+  width: 100%;
+  position: relative;
+  overflow: auto;
+  height: 324px;
+}
+
+.Info .label,
+.Info .data {
+  display: inline-block;
+  margin: 0.2em 1em;
+}
+
+.Info .label {
+  font-weight: bold;
+}
+
+.Image img {
+  border-radius: 1rem 0 0 1rem;
+  height: 324px;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.7rem 0.5rem 0.3rem 0.5rem;
+  border: 2px solid $marvel_red_2;
+  min-width: 4rem;
+  cursor: pointer;
+  text-align: center;
+  background-color: $marvel_red_2;
+  color: white;
+  margin: 0.5rem;
+}
+
+.button a {
+  color: inherit;
+}
+
+.Object {
+  padding: 0 0.5rem;
+}
+
+.ArrayContent,
+.ObjectContent {
+  padding: 0.5rem;
+  border: 1px solid $marvel_red_2;
+}
+
+.Thumbnail {
+  text-align: center;
+  height: 324px;
+}
+
+.Thumbnail img {
+  height: 324px;
+}
+
+.Tab {
+  overflow: hidden;
+}
+
+.ScrollList {
+  position: relative;
+  width: 100%;
+}
+
+.ScrollListElement {
+  display: flex;
+}
+
+.ScrollBtn {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .CharacterCard {
+    width: 88vw;
+    background-color: #ccc;
+    margin: 0.4rem 1vw;
+    padding: 2rem 1.25rem;
+    border-radius: 1.5rem;
+    display: flex;
+    text-align: left;
+  }
+  .CharacterCard .TabArea li {
+    padding: 0.2rem 0.8rem 0rem 0.8rem;
+    min-width: 2rem;
+    border-radius: 4rem 4rem 0 0;
+    font-size: x-small;
+  }
+  .CharacterCard .TabArea .TabBody .Tab:first-child {
+    display: flex;
+    height: 90vh;
+  }
+  .CharacterCard .TabArea .TabBody .Tab {
+    display: none;
+    height: 90vh;
+  }
+  .ScrollListElement {
+    display: block;
+    height: 90vh;
+  }
+  .Thumbnail {
+    text-align: center;
+    height: auto;
+  }
+  .CharacterCard .Image {
+    display: block;
+  }
+  .Image img {
+    border-radius: 1rem 1rem 0 0;
+    height: auto;
+    width: 100%;
+  }
+  .Info {
+    width: 100%;
+    position: relative;
+    overflow: auto;
+   //min-height: calc(~"90vh - 500px")
+  }
+}
