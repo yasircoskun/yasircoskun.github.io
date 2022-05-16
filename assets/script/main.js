@@ -58,8 +58,8 @@ function generateFileIcon(name, namepath, content, HN_ID) {
     `;
     html = html.replace('{name}', name);
     html = html.replace('{HN_ID}', HN_ID);
-    html = html.replace('{ext}', name.substring(name.indexOf('.') + 1, name.length));
-    if (name.substring(name.indexOf('.') + 1, name.length) != 'mp4') {
+    html = html.replace('{ext}', name.substring(name.lastIndexOf('.') + 1, name.length));
+    if (name.substring(name.lastIndexOf('.') + 1, name.length) != 'mp4') {
         html = html.replace('{content}', content);
     }
     html = html.replace('{name.path}', namepath);
@@ -89,30 +89,34 @@ function decrypt(message = '', key = '') {
 }
 
 function openWin(element) {
+    
     let name = element.dataset.name;
     let HN_ID = element.dataset.hnid;
     let path = element.parentElement.parentElement.id;
     if (!winExist(name.replace('.', ''))) {
+        console.log(name)
+        console.log(name.substring(name.lastIndexOf('.') + 1, name.length))
         winElement = generateWin(name, HN_ID);
-        winElement.getElementsByTagName('pre')[0].className = name.substring(name.indexOf('.') + 1, name.length);
+        winElement.getElementsByTagName('pre')[0].className = name.substring(name.lastIndexOf('.') + 1, name.length);
 
-        if (name.substring(name.indexOf('.') + 1, name.length) == 'pdf') {
+        if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'pdf') {
             winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name + "'></iframe>";
-        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'jpg' || name.substring(name.indexOf('.') + 1, name.length) == 'gif') {
-            console.log(name.substring(name.indexOf('.') + 1, name.length));
+        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'jpg' || name.substring(name.lastIndexOf('.') + 1, name.length) == 'gif') {
+            console.log(name.substring(name.lastIndexOf('.') + 1, name.length));
             winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
-        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'mp4') {
-            console.log(name.substring(name.indexOf('.') + 1, name.length));
+        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'mp4') {
+            console.log(name.substring(name.lastIndexOf('.') + 1, name.length));
             winElement.getElementsByTagName('pre')[0].outerHTML = " <video autoplay controls><source src='" + name + "' type='video/mp4'>Video destekleyen bir tarayıcı ile görüntüle!</video>";
-        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'app') {
+        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'app') {
             winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
-        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'md') {
+            winElement.isapp = 1;
+        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'md') {
             if (typeof marked == "function") {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
             } else {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked.marked(element.lastElementChild.innerText) + "</div>";
             }
-        } else if (name.substring(name.indexOf('.') + 1, name.length) == 'enc') {
+        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'enc') {
             let password = prompt('Parolayı biliyor musun?');
             element.lastElementChild.innerHTML = decrypt(element.lastElementChild.innerHTML, password)
             element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
@@ -128,10 +132,16 @@ function openWin(element) {
     document.getElementById(name.replace('.', '')).style.display = 'block';
     dragElement(document.getElementById(name.replace('.', '')));
     if (!mobileCheck()) { windowFix(); } else {
+
         winElement.getElementsByClassName('content')[0].style.height = winElement.clientHeight - 35 - winElement.firstChild.clientHeight + "px";
         //winElement.getElementsByClassName('content')[0].style.width = winElement.clientWidth + "px";
     }
-
+        if(winElement.isapp){
+            winElement.getElementsByClassName('content')[0].style.padding = '0';
+            winElement.getElementsByClassName('content')[0].firstElementChild.style.position = "relative";
+            //winElement.getElementsByClassName('content')[0].firstElementChild.firstElementChild.style.position = "absolute";
+            winElement.getElementsByClassName('content')[0].firstElementChild.firstElementChild.style.height = '100vh';
+        }
     winElement.querySelectorAll('pre code').forEach((el) => {
         hljs.highlightElement(el);
     });
