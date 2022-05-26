@@ -117,7 +117,12 @@ function openWin(element) {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked.marked(element.lastElementChild.innerText) + "</div>";
             }
         } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'enc') {
-            let password = prompt('Parolayı biliyor musun?');
+            let hint = 'Parolayı biliyor musun?'
+            if(element.lastElementChild.innerHTML.split("\n").length == 2){
+                hint = element.lastElementChild.innerHTML.split("\n")[0]
+                element.lastElementChild.innerHTML = element.lastElementChild.innerHTML.split("\n")[1]
+            }
+            let password = prompt(hint);
             element.lastElementChild.innerHTML = decrypt(element.lastElementChild.innerHTML, password)
             element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
             openWin(element);
