@@ -4,7 +4,7 @@
   - [ ] Mermaid
   - [ ] RSS Viewer
   - [ ] Matrix
-  - [ ] Abulafia parola ipucu değiştirme
+  - [x] Abulafia parola ipucu değiştirme
 - [ ] ["Mamafih" Projesi](https://twitter.com/yasir_dev/status/1460063828524343298)
   - [ ] Tanıtım yazısı oluştur
   - [ ] Kaynak kodu temize çek.
