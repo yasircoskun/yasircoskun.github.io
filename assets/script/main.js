@@ -118,12 +118,13 @@ function openWin(element) {
             }
         } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'enc') {
             let hint = 'Parolayı biliyor musun?'
-            if(element.lastElementChild.innerHTML.split("\n").length == 2){
-                hint = element.lastElementChild.innerHTML.split("\n")[0]
-                element.lastElementChild.innerHTML = element.lastElementChild.innerHTML.split("\n")[1]
+            let fileContent = element.lastElementChild.innerHTML
+            if(fileContent.split("\n").length == 2){
+                hint = fileContent.split("\n")[0]
+                fileContent = fileContent.split("\n")[1]
             }
             let password = prompt(hint);
-            element.lastElementChild.innerHTML = decrypt(element.lastElementChild.innerHTML, password)
+            element.lastElementChild.innerHTML = decrypt(fileContent, password)
             element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
             openWin(element);
             return 0;
