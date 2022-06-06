@@ -88,39 +88,6 @@ function decrypt(message = '', key = '') {
     return decryptedMessage;
 }
 
-function update_file(path, content){
-    var data = JSON.stringify({
-        "message":"Update via Web Client",
-        "content": btoa(content),
-        "committer":{
-            "name":"Yasir Web Client",
-            "email":"yasir@mail_yok.ki"
-        }
-    });
-
-    var xhr = new XMLHttpRequest();
-    xhr.withCredentials = true;
-    xhr.open("PUT", "https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents/"+path, false);
-    xhr.setRequestHeader("Authorization", "token " + JSON.parse(localStorage.getItem('github_access_token')).access_token);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.send(data);
-    console.log(xhr.responseText)
-}
-
-function editor(elem){
-    if(elem.parentElement.querySelector('.editor').style.display != "block"){
-        elem.parentElement.querySelector('.markdown').style.display = 'none';
-        elem.parentElement.querySelector('.editor').style.display = 'block';
-        elem.innerText = "[ Save ]";
-    }else{
-        elem.parentElement.querySelector('.editor').style.display = 'none';
-        elem.parentElement.querySelector('.markdown').style.display = 'block';
-        elem.innerText = "[ Edit ]";
-        update_file(elem.parentElement.parentElement.dataset.fileName, elem.parentElement.querySelector('.editor').innerText)
-    }
-}
-
 function openWin(element) {
     
     let name = element.dataset.name;
