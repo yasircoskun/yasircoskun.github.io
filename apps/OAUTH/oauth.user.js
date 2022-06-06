@@ -49,7 +49,7 @@
 
     var data = {
         client_id: secret.github_oauth.client_id,
-        client_secret: secret.github_oauth.secret_id,
+        client_secret: secret.github_oauth.secret,
         code: getJsonFromUrl().code
     }
 
@@ -69,6 +69,4 @@
             location.href = location.origin;
         }
     })
-
-
 })();
