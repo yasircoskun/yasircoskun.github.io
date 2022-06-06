@@ -83,7 +83,7 @@
             elem.parentElement.querySelector('.editor').style.display = 'none';
             elem.parentElement.querySelector('.markdown').style.display = 'block';
             elem.innerText = "[ Edit ]";
-            update_file(elem.parentElement.parentElement.dataset.fileName, elem.parentElement.querySelector('.editor').innerText)
+            update_file(elem.parentElement.parentElement.dataset.fileName, elem.parentElement.querySelector('.editor').value)
         }
     }
     document.body.editor = editor
@@ -117,6 +117,9 @@
             }
         })
     }
+
+
+
 })();
 
 
