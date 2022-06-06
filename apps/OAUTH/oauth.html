@@ -27,7 +27,7 @@ function getJsonFromUrl(url) {
 }
 
 function getSecrets() {
-  let secret = httpGet(location.origin +'/secret.env')
+  let secret = httpGet(location.origin +'/secret~env.enc')
   let password = prompt('secret');
   return JSON.parse(decrypt(secret, password))
 }
