@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://yasircoskun.github.io/apps/OAUTH/oauth.html?code=*
+// @match        https://yasircoskun.github.io/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=github.io
 // @require      https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js
 // @grant        GM.xmlHttpRequest
@@ -45,28 +45,78 @@
         return JSON.parse(decrypt(secret, password))
     }
 
-    var secret = getSecrets()
+    function update_file(path, content){
+        var data = JSON.stringify({
+            "message":"Update via Web Client",
+            "sha": JSON.parse(httpGet("https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path)).sha,
+            "content": btoa(unescape(encodeURIComponent(content))),
+            "committer":{
+                "name":"Yasir Web Client",
+                "email":"yasir@mail_yok.ki"
+            }
+        });
 
-    var data = {
-        client_id: secret.github_oauth.client_id,
-        client_secret: secret.github_oauth.secret,
-        code: getJsonFromUrl().code
+        console.log(data)
+
+        GM.xmlHttpRequest({
+            method: "PUT",
+            url: "https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path,
+            data: data,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token " + JSON.parse(localStorage.getItem('github_access_token')).access_token
+            },
+            onload: (response) => {
+                console.log(response)
+                //localStorage.setItem('github_access_token', response.responseText);
+                //location.href = location.origin;
+            }
+        })
     }
 
-    data = JSON.stringify(data);
-
-    GM.xmlHttpRequest({
-        method: "POST",
-        url: "https://github.com/login/oauth/access_token",
-        data: data,
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        onload: (response) => {
-            console.log(response)
-            localStorage.setItem('github_access_token', response.responseText);
-            location.href = location.origin;
+    const editor=function(elem){
+        if(elem.parentElement.querySelector('.editor').style.display != "block"){
+            elem.parentElement.querySelector('.markdown').style.display = 'none';
+            elem.parentElement.querySelector('.editor').style.display = 'block';
+            elem.innerText = "[ Save ]";
+        }else{
+            elem.parentElement.querySelector('.editor').style.display = 'none';
+            elem.parentElement.querySelector('.markdown').style.display = 'block';
+            elem.innerText = "[ Edit ]";
+            update_file(elem.parentElement.parentElement.dataset.fileName, elem.parentElement.querySelector('.editor').innerText)
         }
+    }
+    document.body.editor = editor
+    Array.from(document.querySelectorAll('.editor')).forEach(x => {
+        x.nextElementSibling.onclick = (e) => {editor(e.target)}
     })
+
+    if(location.href.indexOf("https://yasircoskun.github.io/apps/OAUTH/oauth.html") != -1 ){
+        var secret = getSecrets()
+
+        var data = {
+            client_id: secret.github_oauth.client_id,
+            client_secret: secret.github_oauth.secret,
+            code: getJsonFromUrl().code
+        }
+
+        data = JSON.stringify(data);
+
+        GM.xmlHttpRequest({
+            method: "POST",
+            url: "https://github.com/login/oauth/access_token",
+            data: data,
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            onload: (response) => {
+                console.log(response)
+                localStorage.setItem('github_access_token', response.responseText);
+                location.href = location.origin;
+            }
+        })
+    }
 })();
+
+
