@@ -116,7 +116,7 @@ function openWin(element) {
             } else {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked.marked(element.lastElementChild.innerText) + "</div>";
             }
-            winElement.getElementsByClassName('content')[0].innerHTML += `<div class="editor" contentEditable style="display: none; white-space: break-spaces;">`+element.lastElementChild.innerText+`</div>`;
+            winElement.getElementsByClassName('content')[0].innerHTML += `<div class="editor" contentEditable style="display: none; white-space: pre; overflow: auto;">`+element.lastElementChild.innerText+`</div>`;
             winElement.getElementsByClassName('content')[0].innerHTML += `<button style="position: absolute; right: 0; top: 0; background-color: rgba(0, 0, 0, 0.3); color: rgb(128, 255, 0);" onclick="document.body.editor(this)">[Edit]</button>`;
         } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'enc') {
             let hint = 'Parolayı biliyor musun?'
