@@ -5,6 +5,10 @@
   - [ ] RSS Viewer
   - [ ] Matrix
   - [x] Abulafia parola ipucu değiştirme
+  - [ ] Web Editor
+    - [x] update file 
+    - [ ] create file (add filename in ls file)
+    - [ ] create folder (call create file and create `ls` file in folder)
 - [ ] ["Mamafih" Projesi](https://twitter.com/yasir_dev/status/1460063828524343298)
   - [ ] Tanıtım yazısı oluştur
   - [ ] Kaynak kodu temize çek.
