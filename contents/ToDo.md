@@ -14,4 +14,4 @@
 #### Askıya Alınanalar
 
 - [ ] SwitchFocus
-- [x] [HackerNews Comment System](https://yasircoskun.github.io/projects/HackerNews_Comment_System/readme.md)
+- [x] [HackerNews Comment System](https://yasircoskun.github.io/projects/HackerNews_Comment_System/readme.md)- [ ] Hayat
