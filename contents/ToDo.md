@@ -10,7 +10,8 @@
     - [ ] create file (add filename in ls file)
     - [ ] create folder (call create file and create `ls` file in folder)
   - [ ] add encrypted app with blob iframe
-  - [ ] pdf reader with css image filter(dark) & transparent
+  - [x] pdf reader with css image filter(dark) & transparent
+    - [ ] add open with pdf reader to context menu
 - [ ] ["Mamafih" Projesi](https://twitter.com/yasir_dev/status/1460063828524343298)
   - [ ] Tanıtım yazısı oluştur
   - [ ] Kaynak kodu temize çek.
