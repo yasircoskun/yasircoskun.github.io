@@ -88,29 +88,54 @@ function decrypt(message = '', key = '') {
     return decryptedMessage;
 }
 
+/**
+ * açık pencere sayısına göre saydamlık değiştirmek için
+ */
+function changeContentBackground(){
+    let min = 0.5
+    let max = 0.85
+    let alpha = min + ((max - min) / (
+    [...document.querySelectorAll(".fileWin")].filter(x => {
+        return x.style.display == "block"
+    }).length
+    ))
+    console.log(alpha)
+    if(document.head.getElementsByClassName('content_style').length == 0){
+        document.head.innerHTML += `
+        <style class="content_style"></style>
+        `
+    }
+    document.head.getElementsByClassName('content_style')[0].innerHTML = `
+    .content {
+        background: rgba(0, 0, 0, `+alpha+`) !important;
+    }
+    `;
+
+}
+
+
 function openWin(element) {
-    
+    changeContentBackground()
     let name = element.dataset.name;
     let HN_ID = element.dataset.hnid;
     let path = element.parentElement.parentElement.id;
+    var ext = name.substring(name.lastIndexOf('.') + 1, name.length)
     if (!winExist(name.replace('.', ''))) {
         console.log(name)
-        console.log(name.substring(name.lastIndexOf('.') + 1, name.length))
+        console.log(ext)
         winElement = generateWin(name, HN_ID);
-        winElement.getElementsByTagName('pre')[0].className = name.substring(name.lastIndexOf('.') + 1, name.length);
+        winElement.getElementsByTagName('pre')[0].className = ext;
 
-        if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'pdf') {
+        if (ext == 'pdf') {
             winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name + "'></iframe>";
-        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'jpg' || name.substring(name.lastIndexOf('.') + 1, name.length) == 'gif') {
-            console.log(name.substring(name.lastIndexOf('.') + 1, name.length));
+        } else if (ext == 'jpg' || ext == 'gif') {
             winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
-        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'mp4') {
-            console.log(name.substring(name.lastIndexOf('.') + 1, name.length));
+        } else if (ext == 'mp4') {
             winElement.getElementsByTagName('pre')[0].outerHTML = " <video autoplay controls><source src='" + name + "' type='video/mp4'>Video destekleyen bir tarayıcı ile görüntüle!</video>";
-        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'app') {
+        } else if (ext == 'app') {
             winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
             winElement.isapp = 1;
-        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'md') {
+        } else if (ext == 'md') {
             if (typeof marked == "function") {
                 winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<div class='markdown'>" + marked(element.lastElementChild.innerText) + "</div>";
             } else {
@@ -118,7 +143,7 @@ function openWin(element) {
             }
             winElement.getElementsByClassName('content')[0].innerHTML += `<textarea class="editor" style="display: none; white-space: pre; overflow: auto; width: 566px; height: 441px;background: rgba(0,0,0,0);border: 0;width: 100%;color: rgb(128, 255, 0);height: 100%;">`+element.lastElementChild.innerText+`</textarea>`;
             winElement.getElementsByClassName('content')[0].innerHTML += `<button style="position: absolute; right: 0; top: 0; background-color: rgba(0, 0, 0, 0.3); color: rgb(128, 255, 0);" onclick="document.body.editor(this)">[Edit]</button>`;
-        } else if (name.substring(name.lastIndexOf('.') + 1, name.length) == 'enc') {
+        } else if (ext == 'enc') {
             let hint = 'Parolayı biliyor musun?'
             let fileContent = element.lastElementChild.innerHTML
             if(fileContent.split("\n").length == 2){
@@ -140,8 +165,13 @@ function openWin(element) {
     document.getElementById(name.replace('.', '')).style.display = 'block';
     dragElement(document.getElementById(name.replace('.', '')));
     if (!mobileCheck()) { windowFix(); } else {
-
-        winElement.getElementsByClassName('content')[0].style.height = winElement.clientHeight - 35 - winElement.firstChild.clientHeight + "px";
+        console.log(ext)
+        if(ext == "txt" || ext == "md"){
+            winElement.getElementsByClassName('content')[0].style.height = winElement.clientHeight - 35 - winElement.firstChild.clientHeight + "px";
+        }else{
+            winElement.getElementsByClassName('content')[0].style.height = winElement.clientHeight - 5 - winElement.firstChild.clientHeight + "px";
+        }
+        
         //winElement.getElementsByClassName('content')[0].style.width = winElement.clientWidth + "px";
     }
         if(winElement.isapp){
@@ -341,6 +371,7 @@ function windowFix() {
 
 function closeWin(x) {
     x.parentElement.parentElement.style.display = 'none';
+    changeContentBackground()
 }
 
 //getContent(getRepos()[0])
@@ -446,6 +477,7 @@ function generateFolderIcon(name, path, HN_ID) {
 
 
 function openFolder(element) {
+    changeContentBackground()
     let name = element.dataset.name;
     let HN_ID = element.dataset.hnid;
     element.dataset.opened = "true";
