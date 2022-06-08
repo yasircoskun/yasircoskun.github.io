@@ -1,5 +1,6 @@
 const menu = document.querySelector(".menu");
-const menuOption = document.querySelector(".menu-option");
+const menuOption = document.querySelectorAll(".menu-option");
+
 let menuVisible = false;
 
 const toggleMenu = command => {
@@ -14,19 +15,35 @@ const setPosition = ({ top, left }) => {
 };
 
 window.addEventListener("click", e => {
-    if (menuVisible) toggleMenu("hide");
+    if (menuVisible){
+        toggleMenu("hide");
+        menu.dataset.directoryContext = ""
+    }
 });
 
-menuOption.addEventListener("click", e => {
-    eval(openWin(e.target));
-});
+menuOption.forEach(x => {
+    x.addEventListener("click", e => {
+        // eval(openWin(e.target));
+        console.log(menu.dataset.directoryContext)
+        e.target.dataset.directoryContext = menu.dataset.directoryContext;
+        openWin(e.target)
+    });
+})
 
 window.addEventListener("contextmenu", e => {
     e.preventDefault();
-    const origin = {
-        left: e.pageX,
-        top: e.pageY
-    };
-    setPosition(origin);
+    let insideFolder = ["content", "desktop"]
+    if(insideFolder.indexOf(e.target.className) != -1){
+        if(e.target.className == "desktop"){
+            menu.dataset.directoryContext = "/contents";
+        }else if(e.target.className == "content"){
+            menu.dataset.directoryContext = e.target.parentElement.dataset.fileName;
+        }
+        const origin = {
+            left: e.pageX,
+            top: e.pageY
+        };
+        setPosition(origin);
+    }
     return false;
 });

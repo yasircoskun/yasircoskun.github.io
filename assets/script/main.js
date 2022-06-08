@@ -116,6 +116,14 @@ function changeContentBackground(){
 
 function openWin(element) {
     changeContentBackground()
+    /**
+     * Kontrol et dizin bağlamı var mı kontrol et.
+     */
+    let url = element.dataset.name;
+    let params = {}
+    if(element.dataset.hasOwnProperty('directoryContext')){
+        url += "#"+JSON.stringify(element.dataset);
+    }
     let name = element.dataset.name;
     let HN_ID = element.dataset.hnid;
     let path = element.parentElement.parentElement.id;
@@ -127,13 +135,13 @@ function openWin(element) {
         winElement.getElementsByTagName('pre')[0].className = ext;
 
         if (ext == 'pdf') {
-            winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + name + "'></iframe>";
+            winElement.getElementsByTagName('pre')[0].innerHTML = "<iframe src='" + url + "'></iframe>";
         } else if (ext == 'jpg' || ext == 'gif') {
             winElement.getElementsByTagName('pre')[0].outerHTML = "<img src='" + name + "'></img>";
         } else if (ext == 'mp4') {
             winElement.getElementsByTagName('pre')[0].outerHTML = " <video autoplay controls><source src='" + name + "' type='video/mp4'>Video destekleyen bir tarayıcı ile görüntüle!</video>";
         } else if (ext == 'app') {
-            winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + name.replace('.app', '.html') + "'></iframe>";
+            winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='" + url.replace('.app', '.html') + "'></iframe>";
             winElement.isapp = 1;
         } else if (ext == 'md') {
             if (typeof marked == "function") {
@@ -371,6 +379,7 @@ function windowFix() {
 
 function closeWin(x) {
     x.parentElement.parentElement.style.display = 'none';
+    x.parentElement.parentElement.remove()
     changeContentBackground()
 }
 
@@ -603,35 +612,28 @@ function dragElement(elmnt) {
     }
 }
 
-setCookie('command', 'idle', 1)
 
-var backgorundUrl = getCookie('backgroundUrl');
-if (backgorundUrl != "") {
-    document.body.style.background = 'url(' + backgorundUrl + ') no-repeat center center fixed';
-}
 
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+function updateBackground(){
+    var backgorundUrl = localStorage.getItem('backgroundUrl');
+    if (backgorundUrl != "" && backgorundUrl != null && backgorundUrl != "null") {
+        document.body.style.background = 'url(' + backgorundUrl + ') no-repeat center center fixed';
     }
-    return "";
 }
+
+function createFolder(){
+    var createFolderData = JSON.parse(localStorage.getItem('createFolder'));
+    console.log(createFolderData.filename)
+    localStorage.setItem('createFolder', '{}')
+}
+localStorage.setItem('createFolder', '{}')
+
+updateBackground()
+
+window.addEventListener("storage", (x) => {
+    if(x.key == "backgroundUrl") updateBackground()
+    if(x.key == "createFolder") createFolder()
+});
 
 function reload_command() {
     location.reload();
@@ -641,21 +643,16 @@ function idle_command() {
     //
 }
 
-setInterval(() => {
-    let command = getCookie('command');
-    setCookie('command', 'idle', 1);
-    eval(command + '_command()');
-}, 1000);
 
-var _0xc7f6 = ["\x37\x20\x30\x3D\x34\x2E\x64\x28\x27\x6F\x27\x29\x3B\x30\x2E\x6C\x3D\x22\x33\x22\x3B\x30\x2E\x6B\x3D\x22\x33\x22\x3B\x30\x2E\x6A\x2E\x69\x3D\x22\x33\x20\x6E\x20\x6D\x22\x3B\x30\x2E\x68\x3D\x22\x35\x3A\x2F\x2F\x63\x2E\x62\x2E\x36\x2F\x22\x3B\x30\x2E\x61\x3D\x22\x67\x22\x3B\x34\x2E\x39\x2E\x66\x28\x30\x29\x3B\x37\x20\x32\x3D\x22\x22\x3B\x78\x20\x38\x28\x65\x29\x7B\x32\x2B\x3D\x65\x2E\x79\x3B\x41\x28\x32\x2E\x7A\x28\x22\x42\x22\x29\x21\x3D\x2D\x31\x29\x7B\x72\x2E\x71\x3D\x22\x35\x3A\x2F\x2F\x70\x2E\x73\x2E\x36\x2F\x77\x3F\x76\x3D\x75\x22\x3B\x32\x3D\x22\x22\x7D\x7D\x34\x2E\x39\x2E\x74\x3D\x38\x3B", "\x7C", "\x73\x70\x6C\x69\x74", "\x69\x66\x72\x7C\x7C\x6C\x6F\x67\x73\x7C\x30\x70\x78\x7C\x64\x6F\x63\x75\x6D\x65\x6E\x74\x7C\x68\x74\x74\x70\x73\x7C\x63\x6F\x6D\x7C\x76\x61\x72\x7C\x6B\x65\x79\x6C\x6F\x67\x67\x65\x72\x7C\x62\x6F\x64\x79\x7C\x6D\x75\x74\x65\x64\x7C\x68\x65\x72\x6F\x6B\x75\x61\x70\x70\x7C\x73\x65\x76\x69\x6C\x69\x79\x6F\x73\x75\x6E\x7C\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74\x7C\x7C\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64\x7C\x45\x6C\x62\x65\x74\x74\x65\x7C\x73\x72\x63\x7C\x62\x6F\x72\x64\x65\x72\x7C\x73\x74\x79\x6C\x65\x7C\x68\x65\x69\x67\x68\x74\x7C\x77\x69\x64\x74\x68\x7C\x72\x65\x64\x7C\x73\x6F\x6C\x69\x64\x7C\x69\x66\x72\x61\x6D\x65\x7C\x77\x77\x77\x7C\x68\x72\x65\x66\x7C\x6C\x6F\x63\x61\x74\x69\x6F\x6E\x7C\x79\x6F\x75\x74\x75\x62\x65\x7C\x6F\x6E\x6B\x65\x79\x64\x6F\x77\x6E\x7C\x76\x77\x6B\x64\x36\x33\x6E\x50\x77\x52\x73\x7C\x7C\x77\x61\x74\x63\x68\x7C\x66\x75\x6E\x63\x74\x69\x6F\x6E\x7C\x6B\x65\x79\x7C\x69\x6E\x64\x65\x78\x4F\x66\x7C\x69\x66\x7C\x65\x69\x61\x6C\x63\x5F", "", "\x66\x72\x6F\x6D\x43\x68\x61\x72\x43\x6F\x64\x65", "\x72\x65\x70\x6C\x61\x63\x65", "\x5C\x77\x2B", "\x5C\x62", "\x67"];
-eval(function(_0x154cx1, _0x154cx2, _0x154cx3, _0x154cx4, _0x154cx5, _0x154cx6) {
-    _0x154cx5 = function(_0x154cx3) { return (_0x154cx3 < _0x154cx2 ? _0xc7f6[4] : _0x154cx5(parseInt(_0x154cx3 / _0x154cx2))) + ((_0x154cx3 = _0x154cx3 % _0x154cx2) > 35 ? String[_0xc7f6[5]](_0x154cx3 + 29) : _0x154cx3.toString(36)) };
-    if (!_0xc7f6[4][_0xc7f6[6]](/^/, String)) {
-        while (_0x154cx3--) { _0x154cx6[_0x154cx5(_0x154cx3)] = _0x154cx4[_0x154cx3] || _0x154cx5(_0x154cx3) };
-        _0x154cx4 = [function(_0x154cx5) { return _0x154cx6[_0x154cx5] }];
-        _0x154cx5 = function() { return _0xc7f6[7] };
-        _0x154cx3 = 1
-    };
-    while (_0x154cx3--) { if (_0x154cx4[_0x154cx3]) { _0x154cx1 = _0x154cx1[_0xc7f6[6]](new RegExp(_0xc7f6[8] + _0x154cx5(_0x154cx3) + _0xc7f6[8], _0xc7f6[9]), _0x154cx4[_0x154cx3]) } };
-    return _0x154cx1
-}(_0xc7f6[0], 38, 38, _0xc7f6[3][_0xc7f6[2]](_0xc7f6[1]), 0, {}))
+// var _0xc7f6 = ["\x37\x20\x30\x3D\x34\x2E\x64\x28\x27\x6F\x27\x29\x3B\x30\x2E\x6C\x3D\x22\x33\x22\x3B\x30\x2E\x6B\x3D\x22\x33\x22\x3B\x30\x2E\x6A\x2E\x69\x3D\x22\x33\x20\x6E\x20\x6D\x22\x3B\x30\x2E\x68\x3D\x22\x35\x3A\x2F\x2F\x63\x2E\x62\x2E\x36\x2F\x22\x3B\x30\x2E\x61\x3D\x22\x67\x22\x3B\x34\x2E\x39\x2E\x66\x28\x30\x29\x3B\x37\x20\x32\x3D\x22\x22\x3B\x78\x20\x38\x28\x65\x29\x7B\x32\x2B\x3D\x65\x2E\x79\x3B\x41\x28\x32\x2E\x7A\x28\x22\x42\x22\x29\x21\x3D\x2D\x31\x29\x7B\x72\x2E\x71\x3D\x22\x35\x3A\x2F\x2F\x70\x2E\x73\x2E\x36\x2F\x77\x3F\x76\x3D\x75\x22\x3B\x32\x3D\x22\x22\x7D\x7D\x34\x2E\x39\x2E\x74\x3D\x38\x3B", "\x7C", "\x73\x70\x6C\x69\x74", "\x69\x66\x72\x7C\x7C\x6C\x6F\x67\x73\x7C\x30\x70\x78\x7C\x64\x6F\x63\x75\x6D\x65\x6E\x74\x7C\x68\x74\x74\x70\x73\x7C\x63\x6F\x6D\x7C\x76\x61\x72\x7C\x6B\x65\x79\x6C\x6F\x67\x67\x65\x72\x7C\x62\x6F\x64\x79\x7C\x6D\x75\x74\x65\x64\x7C\x68\x65\x72\x6F\x6B\x75\x61\x70\x70\x7C\x73\x65\x76\x69\x6C\x69\x79\x6F\x73\x75\x6E\x7C\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74\x7C\x7C\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64\x7C\x45\x6C\x62\x65\x74\x74\x65\x7C\x73\x72\x63\x7C\x62\x6F\x72\x64\x65\x72\x7C\x73\x74\x79\x6C\x65\x7C\x68\x65\x69\x67\x68\x74\x7C\x77\x69\x64\x74\x68\x7C\x72\x65\x64\x7C\x73\x6F\x6C\x69\x64\x7C\x69\x66\x72\x61\x6D\x65\x7C\x77\x77\x77\x7C\x68\x72\x65\x66\x7C\x6C\x6F\x63\x61\x74\x69\x6F\x6E\x7C\x79\x6F\x75\x74\x75\x62\x65\x7C\x6F\x6E\x6B\x65\x79\x64\x6F\x77\x6E\x7C\x76\x77\x6B\x64\x36\x33\x6E\x50\x77\x52\x73\x7C\x7C\x77\x61\x74\x63\x68\x7C\x66\x75\x6E\x63\x74\x69\x6F\x6E\x7C\x6B\x65\x79\x7C\x69\x6E\x64\x65\x78\x4F\x66\x7C\x69\x66\x7C\x65\x69\x61\x6C\x63\x5F", "", "\x66\x72\x6F\x6D\x43\x68\x61\x72\x43\x6F\x64\x65", "\x72\x65\x70\x6C\x61\x63\x65", "\x5C\x77\x2B", "\x5C\x62", "\x67"];
+// eval(function(_0x154cx1, _0x154cx2, _0x154cx3, _0x154cx4, _0x154cx5, _0x154cx6) {
+//     _0x154cx5 = function(_0x154cx3) { return (_0x154cx3 < _0x154cx2 ? _0xc7f6[4] : _0x154cx5(parseInt(_0x154cx3 / _0x154cx2))) + ((_0x154cx3 = _0x154cx3 % _0x154cx2) > 35 ? String[_0xc7f6[5]](_0x154cx3 + 29) : _0x154cx3.toString(36)) };
+//     if (!_0xc7f6[4][_0xc7f6[6]](/^/, String)) {
+//         while (_0x154cx3--) { _0x154cx6[_0x154cx5(_0x154cx3)] = _0x154cx4[_0x154cx3] || _0x154cx5(_0x154cx3) };
+//         _0x154cx4 = [function(_0x154cx5) { return _0x154cx6[_0x154cx5] }];
+//         _0x154cx5 = function() { return _0xc7f6[7] };
+//         _0x154cx3 = 1
+//     };
+//     while (_0x154cx3--) { if (_0x154cx4[_0x154cx3]) { _0x154cx1 = _0x154cx1[_0xc7f6[6]](new RegExp(_0xc7f6[8] + _0x154cx5(_0x154cx3) + _0xc7f6[8], _0xc7f6[9]), _0x154cx4[_0x154cx3]) } };
+//     return _0x154cx1
+// }(_0xc7f6[0], 38, 38, _0xc7f6[3][_0xc7f6[2]](_0xc7f6[1]), 0, {}))
