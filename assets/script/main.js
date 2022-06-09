@@ -625,7 +625,9 @@ function createFolder(){
     var createFolderData = JSON.parse(localStorage.getItem('createFolder'));
     console.log(createFolderData.name)
     console.log(createFolderData.path)
-    document.querySelector('div.fileWin[data-file-name="'+createFolderData.path+'"] .content').appendChild(generateFolderIcon(createFolderData.name, createFolderData.path, ""))
+    document.querySelector('div.fileWin[data-file-name="'+createFolderData.path+'"] .content').appendChild(
+        generateFolderIcon(createFolderData.name, createFolderData.path + "/" + createFolderData.name, "")
+    )
     localStorage.setItem('createFolder', '{}')
 }
 localStorage.setItem('createFolder', '{}')
