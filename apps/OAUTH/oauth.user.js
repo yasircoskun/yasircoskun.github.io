@@ -45,7 +45,7 @@
         return JSON.parse(decrypt(secret, password))
     }
 
-    function update_file(path, content){
+    const updateFile = function(path, content){
         var data = JSON.stringify({
             "message":"Update via Web Client",
             "sha": JSON.parse(httpGet("https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path)).sha,
@@ -112,13 +112,18 @@
                 console.log(response)
                 alert('get old ls file')
                 let res = JSON.parse(response.responseText)
-                update_file(path.substring(0, path.lastIndexOf('/'))+"/ls", atob(res.content) + "\ndir "+path.substring(path.lastIndexOf('/')+1))
+                updateFile(path.substring(0, path.lastIndexOf('/'))+"/ls", atob(res.content) + "\ndir "+path.substring(path.lastIndexOf('/')+1))
                 alert('update ls file')
                 localStorage.setItem('createFolder', JSON.stringify({
                     selector: 'div.fileWin[data-file-name="'+path.substring(0, path.lastIndexOf('/'))+'"] .content',
                     name: path.substring(path.lastIndexOf('/')+1),
                     path: path.substring(0, path.lastIndexOf('/')),
                 }))
+                console.log(JSON.stringify({
+                    selector: 'div.fileWin[data-file-name="'+path.substring(0, path.lastIndexOf('/'))+'"] .content',
+                    name: path.substring(path.lastIndexOf('/')+1),
+                    path: path.substring(0, path.lastIndexOf('/')),
+                }));alert('folder local')
 
 
 
@@ -128,10 +133,10 @@
         })
     }
 
-   const createFile = function(path){
+   const createFile = function(path, content=""){
         var data = JSON.stringify({
             "message":"Create File via Web Client",
-            "content": btoa(unescape(encodeURIComponent(""))),
+            "content": btoa(unescape(encodeURIComponent(content))),
             "committer":{
                 "name":"Yasir Web Client",
                 "email":"yasir@mail_yok.ki"
@@ -164,7 +169,7 @@
                 console.log(response)
                 alert('get old ls file')
                 let res = JSON.parse(response.responseText)
-                update_file(path.substring(0, path.lastIndexOf('/'))+"/ls", atob(res.content) + "\nfile "+path.substring(path.lastIndexOf('/')+1))
+                updateFile(path.substring(0, path.lastIndexOf('/'))+"/ls", atob(res.content) + "\nfile "+path.substring(path.lastIndexOf('/')+1))
                 alert('update ls file')
                 localStorage.setItem('createFile', JSON.stringify({
                     selector: 'div.fileWin[data-file-name="'+path.substring(0, path.lastIndexOf('/'))+'"] .content',
@@ -179,25 +184,6 @@
             }
         })
     }
-
-    const editor=function(elem){
-        if(elem.parentElement.querySelector('.editor').style.display != "block"){
-            elem.parentElement.querySelector('.markdown').style.display = 'none';
-            elem.parentElement.querySelector('.editor').style.display = 'block';
-            elem.innerText = "[ Save ]";
-        }else{
-            elem.parentElement.querySelector('.editor').style.display = 'none';
-            elem.parentElement.querySelector('.markdown').style.display = 'block';
-            elem.innerText = "[ Edit ]";
-            update_file(elem.parentElement.parentElement.dataset.fileName, elem.parentElement.querySelector('.editor').value)
-        }
-    }
-    document.body.editor = editor
-    Array.from(document.querySelectorAll('.editor')).forEach(x => {
-        x.nextElementSibling.onclick = (e) => {editor(e.target)}
-    })
-
-
 
     if(location.href.indexOf("https://yasircoskun.github.io/apps/OAUTH/oauth.html") != -1 ){
         var secret = getSecrets()
@@ -227,11 +213,16 @@
     }
     if(location.href.indexOf("https://yasircoskun.github.io/apps/CreateFolder/index.html") != -1){
         alert('create folder opened')
-        document.body.createFolder = (x) => {createFolder(x)};
+        document.body.createFolder = createFolder
     }
     if(location.href.indexOf("https://yasircoskun.github.io/apps/CreateFile/index.html") != -1){
         alert('create file opened')
-        document.body.createFile = (x) => {createFile(x)};
+        document.body.createFile = createFile;
+    }
+    if(location.href.indexOf("https://yasircoskun.github.io/apps/Editor/") != -1){
+        document.body.updateFile = updateFile
+        document.body.createFile = createFile
+        alert('editor')
     }
 
 
