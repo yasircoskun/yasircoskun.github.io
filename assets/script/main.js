@@ -360,21 +360,21 @@ function generateWin(name, HN_ID) {
 }
 
 function windowFix() {
-    // if (!document.body.contains(document.getElementById('windowFixer'))) {
-    //     var w = window.innerWidth - 200;
-    //     var h = window.innerHeight - 200;
-    //     let html = `
-    //     <style id="windowFixer"> 
-    //         .content {
-    //             max-width: ` + w + `px;
-    //             max-height: ` + h + `px;
-    //         }
-    //     </style>`;
-    //     let temp = document.createElement('template');
-    //     html = html.trim();
-    //     temp.innerHTML = html;
-    //     document.head.appendChild(temp.content.firstChild)
-    // }
+    if (!document.body.contains(document.getElementById('windowFixer'))) {
+        var w = window.innerWidth;
+        var h = window.innerHeight - 50;
+        let html = `
+        <style id="windowFixer"> 
+            .content {
+                max-width: ` + w + `px;
+                max-height: ` + h + `px;
+            }
+        </style>`;
+        let temp = document.createElement('template');
+        html = html.trim();
+        temp.innerHTML = html;
+        document.head.appendChild(temp.content.firstChild)
+    }
 }
 
 function closeWin(x) {
