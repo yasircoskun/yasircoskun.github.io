@@ -9,6 +9,7 @@ if(new URL(location.href).hash != ""){
 var editor = monaco.editor.create(document.getElementById('container'), {
     language: 'markdown',
     theme: 'vs-dark',
+    wordWrap: "on",
 });
 
 function httpGet(theUrl) {
