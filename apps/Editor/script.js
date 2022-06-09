@@ -1,4 +1,10 @@
-var params = JSON.parse(decodeURIComponent(new URL(location.href).hash.substring(1)))
+edit_mode = true
+if(new URL(location.href).hash != ""){
+    var params = JSON.parse(decodeURIComponent(new URL(location.href).hash.substring(1)))
+}else{
+    edit_mode = false;
+}
+
 
 var editor = monaco.editor.create(document.getElementById('container'), {
     language: 'markdown',
@@ -11,11 +17,9 @@ function httpGet(theUrl) {
     xmlHttp.send(null);
     return xmlHttp.responseText;
 }
+if(edit_mode) editor.getModel().setValue(httpGet(params.filePath));
 
-editor.getModel().setValue(httpGet(params.filePath));
 
-editor.addCommand(monaco.KeyMod.WinCtrl | monaco.KeyCode.KEY_S, (e) => {e.preventDefault();e.stopPropagation();console.log("hello world")})
-//Prevent Ctrl+S (and Ctrl+W for old browsers and Edge)
 document.onkeydown = function (e) {
     e = e || window.event;//Get event
 
@@ -27,11 +31,18 @@ document.onkeydown = function (e) {
         case 83:
             e.preventDefault();//Block Ctrl+S
             e.stopPropagation();//Block Ctrl+S
-            document.body.updateFile(params.filePath, editor.getModel().getValue())
+            if(edit_mode){
+                document.body.updateFile(params.filePath, editor.getModel().getValue())
+            }else{
+                let path = prompt("File path/filename.ext", "/contents/new_file.txt");
+                document.body.createFile(path, editor.getModel().getValue())
+            }
+
             break;
             
     }
 };
+
 window.onresize = e => {
     editor.layout();
 }
