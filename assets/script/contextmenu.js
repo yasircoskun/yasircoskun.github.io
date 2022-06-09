@@ -17,7 +17,9 @@ const setPosition = ({ top, left }) => {
 window.addEventListener("click", e => {
     if (menuVisible){
         toggleMenu("hide");
-        menu.dataset.directoryContext = ""
+        delete menu.dataset.directoryContext
+        delete menu.dataset.filePath
+        menu.querySelector('#fiv-icon-md').style.display = "none";
     }
 });
 
@@ -26,18 +28,22 @@ menuOption.forEach(x => {
         // eval(openWin(e.target));
         console.log(menu.dataset.directoryContext)
         e.target.dataset.directoryContext = menu.dataset.directoryContext;
+        e.target.dataset.filePath = menu.dataset.filePath
         openWin(e.target)
     });
 })
 
 window.addEventListener("contextmenu", e => {
     e.preventDefault();
-    let insideFolder = ["content", "desktop"]
+    let insideFolder = ["content", "desktop", "fiv-cla fiv-icon-md"]
     if(insideFolder.indexOf(e.target.className) != -1){
         if(e.target.className == "desktop"){
             menu.dataset.directoryContext = "/contents";
         }else if(e.target.className == "content"){
             menu.dataset.directoryContext = e.target.parentElement.dataset.fileName;
+        }else if([...e.target.classList].indexOf('fiv-icon-md') != -1){
+            menu.dataset.filePath = e.target.parentElement.dataset.name;
+            menu.querySelector('#fiv-icon-md').style.display = "block";
         }
         const origin = {
             left: e.pageX,
