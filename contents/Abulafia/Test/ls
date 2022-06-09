@@ -3,3 +3,4 @@ dir Test_2
 dir CreateFolderTest
 file test.md
 file testFileCreate.md
+file test.text.md
