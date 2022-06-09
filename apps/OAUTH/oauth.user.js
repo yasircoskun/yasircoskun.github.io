@@ -74,6 +74,112 @@
         })
     }
 
+   const createFolder = function(path){
+        var data = JSON.stringify({
+            "message":"Create Folder via Web Client",
+            "content": btoa(unescape(encodeURIComponent(""))),
+            "committer":{
+                "name":"Yasir Web Client",
+                "email":"yasir@mail_yok.ki"
+            }
+        });
+        GM.xmlHttpRequest({
+            method: "PUT",
+            url: "https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path+"/ls",
+            data: data,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token " + JSON.parse(localStorage.getItem('github_access_token')).access_token
+            },
+            onload: (response) => {
+                console.log(response)
+                alert('response')
+                //localStorage.setItem('github_access_token', response.responseText);
+                //location.href = location.origin;
+            }
+        })
+
+       var lsData;
+
+        GM.xmlHttpRequest({
+            method: "GET",
+            url: "https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path.substring(0, path.lastIndexOf('/'))+"/ls",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token " + JSON.parse(localStorage.getItem('github_access_token')).access_token
+            },
+            onload: (response) => {
+                console.log(response)
+                alert('get old ls file')
+                let res = JSON.parse(response.responseText)
+                update_file(path.substring(0, path.lastIndexOf('/'))+"/ls", atob(res.content) + "\ndir "+path.substring(path.lastIndexOf('/')+1))
+                alert('update ls file')
+                localStorage.setItem('createFolder', JSON.stringify({
+                    selector: 'div.fileWin[data-file-name="'+path.substring(0, path.lastIndexOf('/'))+'"] .content',
+                    name: path.substring(path.lastIndexOf('/')+1),
+                    path: path.substring(0, path.lastIndexOf('/')),
+                }))
+
+
+
+                //localStorage.setItem('github_access_token', response.responseText);
+                //location.href = location.origin;
+            }
+        })
+    }
+
+   const createFile = function(path){
+        var data = JSON.stringify({
+            "message":"Create File via Web Client",
+            "content": btoa(unescape(encodeURIComponent(""))),
+            "committer":{
+                "name":"Yasir Web Client",
+                "email":"yasir@mail_yok.ki"
+            }
+        });
+        GM.xmlHttpRequest({
+            method: "PUT",
+            url: "https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path,
+            data: data,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token " + JSON.parse(localStorage.getItem('github_access_token')).access_token
+            },
+            onload: (response) => {
+                console.log(response)
+                alert('response')
+                //localStorage.setItem('github_access_token', response.responseText);
+                //location.href = location.origin;
+            }
+        })
+
+        GM.xmlHttpRequest({
+            method: "GET",
+            url: "https://api.github.com/repos/yasircoskun/yasircoskun.github.io/contents"+path.substring(0, path.lastIndexOf('/'))+"/ls",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "token " + JSON.parse(localStorage.getItem('github_access_token')).access_token
+            },
+            onload: (response) => {
+                console.log(response)
+                alert('get old ls file')
+                let res = JSON.parse(response.responseText)
+                update_file(path.substring(0, path.lastIndexOf('/'))+"/ls", atob(res.content) + "\nfile "+path.substring(path.lastIndexOf('/')+1))
+                alert('update ls file')
+                localStorage.setItem('createFile', JSON.stringify({
+                    selector: 'div.fileWin[data-file-name="'+path.substring(0, path.lastIndexOf('/'))+'"] .content',
+                    name: path.substring(path.lastIndexOf('/')+1),
+                    path: path.substring(0, path.lastIndexOf('/')),
+                }))
+
+
+
+                //localStorage.setItem('github_access_token', response.responseText);
+                //location.href = location.origin;
+            }
+        })
+    }
+
     const editor=function(elem){
         if(elem.parentElement.querySelector('.editor').style.display != "block"){
             elem.parentElement.querySelector('.markdown').style.display = 'none';
@@ -90,6 +196,8 @@
     Array.from(document.querySelectorAll('.editor')).forEach(x => {
         x.nextElementSibling.onclick = (e) => {editor(e.target)}
     })
+
+
 
     if(location.href.indexOf("https://yasircoskun.github.io/apps/OAUTH/oauth.html") != -1 ){
         var secret = getSecrets()
@@ -116,6 +224,14 @@
                 location.href = location.origin;
             }
         })
+    }
+    if(location.href.indexOf("https://yasircoskun.github.io/apps/CreateFolder/index.html") != -1){
+        alert('create folder opened')
+        document.body.createFolder = (x) => {createFolder(x)};
+    }
+    if(location.href.indexOf("https://yasircoskun.github.io/apps/CreateFile/index.html") != -1){
+        alert('create file opened')
+        document.body.createFile = (x) => {createFile(x)};
     }
 
 
