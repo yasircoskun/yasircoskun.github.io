@@ -360,21 +360,21 @@ function generateWin(name, HN_ID) {
 }
 
 function windowFix() {
-    if (!document.body.contains(document.getElementById('windowFixer'))) {
-        var w = window.innerWidth - 200;
-        var h = window.innerHeight - 200;
-        let html = `
-        <style id="windowFixer"> 
-            .content {
-                max-width: ` + w + `px;
-                max-height: ` + h + `px;
-            }
-        </style>`;
-        let temp = document.createElement('template');
-        html = html.trim();
-        temp.innerHTML = html;
-        document.head.appendChild(temp.content.firstChild)
-    }
+    // if (!document.body.contains(document.getElementById('windowFixer'))) {
+    //     var w = window.innerWidth - 200;
+    //     var h = window.innerHeight - 200;
+    //     let html = `
+    //     <style id="windowFixer"> 
+    //         .content {
+    //             max-width: ` + w + `px;
+    //             max-height: ` + h + `px;
+    //         }
+    //     </style>`;
+    //     let temp = document.createElement('template');
+    //     html = html.trim();
+    //     temp.innerHTML = html;
+    //     document.head.appendChild(temp.content.firstChild)
+    // }
 }
 
 function closeWin(x) {
@@ -631,6 +631,17 @@ function createFolder(){
     localStorage.setItem('createFolder', '{}')
 }
 localStorage.setItem('createFolder', '{}')
+
+function createFile(){
+    var createFileData = JSON.parse(localStorage.getItem('createFile'));
+    console.log(createFileData.name)
+    console.log(createFileData.path)
+    document.querySelector('div.fileWin[data-file-name="'+createFileData.path+'"] .content').appendChild(
+        generateFileIcon(createFileData.name, createFileData.path + "/" + createFileData.name, "")
+    )
+    localStorage.setItem('createFile', '{}')
+}
+localStorage.setItem('createFile', '{}')
 
 updateBackground()
 
