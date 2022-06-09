@@ -623,7 +623,9 @@ function updateBackground(){
 
 function createFolder(){
     var createFolderData = JSON.parse(localStorage.getItem('createFolder'));
-    console.log(createFolderData.filename)
+    console.log(createFolderData.name)
+    console.log(createFolderData.path)
+    document.querySelector('div.fileWin[data-file-name="'+createFolderData.path+'"] .content').appendChild(generateFolderIcon(createFolderData.name, createFolderData.path, ""))
     localStorage.setItem('createFolder', '{}')
 }
 localStorage.setItem('createFolder', '{}')
