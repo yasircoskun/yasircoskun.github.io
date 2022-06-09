@@ -5,10 +5,12 @@
   - [ ] RSS Viewer
   - [ ] Matrix
   - [x] Abulafia parola ipucu değiştirme
-  - [ ] Web Editor
+  - [x] Web Editor
     - [x] update file 
-    - [ ] create file (add filename in ls file)
-    - [ ] create folder (call create file and create `ls` file in folder)
+    - [x] create file (add filename in ls file)
+    - [x] create folder (call create file and create `ls` file in folder)
+    - [ ] create new file editor as app
+    - [ ] add virtual folder for visitors
   - [ ] add encrypted app with blob iframe
   - [x] pdf reader with css image filter(dark) & transparent
     - [ ] add open with pdf reader to context menu
