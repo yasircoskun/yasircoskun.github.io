@@ -128,8 +128,13 @@ input[type="file"] {
 </div>
 
 <script>
-let PDFFILE =
-  "https://cdn.jsdelivr.net/gh/dealfonso/pdfjs-viewer/examples/test.pdf";
+if(new URL(location.href).hash != ""){
+  var params = JSON.parse(decodeURIComponent(new URL(location.href).hash.substring(1)))
+  var PDFFILE = params.filePath;
+}else{
+  var PDFFILE = "https://cdn.jsdelivr.net/gh/dealfonso/pdfjs-viewer/examples/test.pdf";
+}
+
 function dataURItoBinArray(data) {
   // taken from: https://stackoverflow.com/a/11954337/14699733
   var binary = atob(data);

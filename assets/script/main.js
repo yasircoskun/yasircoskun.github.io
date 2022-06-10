@@ -163,7 +163,11 @@ function openWin(element) {
             element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
             openWin(element);
             return 0;
-        } else {
+        } else if (ext == 'lnk') {
+            winElement.getElementsByClassName('content')[0].firstElementChild.innerHTML = "<iframe src='/apps/NoJSBrowser/#{\"url\":\"" + element.lastElementChild.innerText + "\"}'></iframe>";
+            winElement.isapp = 1;
+            
+        }else {
             winElement.getElementsByTagName('pre')[0].innerHTML = (name != 'New') ? DOMPurify.sanitize(escapeHtml(httpGet(name))) : "\n\n\n";
         }
         document.body.appendChild(winElement);
