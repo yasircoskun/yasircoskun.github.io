@@ -6,6 +6,17 @@ function httpGet(theUrl) {
     return xmlHttp.responseText;
 }
 
+var setInnerHTML = function(elm, html) {
+  elm.innerHTML = html;
+  Array.from(elm.querySelectorAll("script")).forEach( oldScript => {
+    const newScript = document.createElement("script");
+    Array.from(oldScript.attributes)
+      .forEach( attr => newScript.setAttribute(attr.name, attr.value) );
+    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+}
+
 function getForm(form){
     let theUrl = new URL(form.action).pathname;
     if(theUrl[0] == "/"){
@@ -62,8 +73,14 @@ const init = (e) => {
 
     window.parent.postMessage({url: url}, '*');
 
-    document.head.innerHTML += '<base href="'+ new URL(url).origin +'/" target="_self">'
-    document.querySelector('body').innerHTML = JSON.parse(httpGet("https://api.allorigins.win/get?url=" + encodeURIComponent(url))).contents;
+    if(typeof document.head.getElementsByTagName('base')[0] != "undefined"){
+        document.head.getElementsByTagName('base')[0].href = new URL(url).origin + '/'
+    }else{
+        document.head.innerHTML += '<base href="'+ new URL(url).origin +'/" target="_self">'
+    }
+
+    setInnerHTML(document.querySelector('body'), JSON.parse(httpGet("https://api.allorigins.win/get?url=" + encodeURIComponent(url))).contents)
+
     
     /**
     * Change all href to data-href
@@ -100,6 +117,41 @@ const init = (e) => {
                 location.hash = JSON.stringify({url: new_url})
             }
         })
+    if(typeof document.head.getElementsByClassName('.beta_style')[0] == "undefined"){
+        document.head.innerHTML += `
+<style class="beta_style">
+body {
+    //filter: invert(1) !important;
+    background-color: transparent !important;
+}
+body * {
+  color: purple !important;
+  border-color: purple !important;
+  background-color: transparent !important;
+}
+body {
+  overflow: auto;
+  padding: 0;
+  margin: 0;
+  background-color: transparent !important;
+}
+.a-href {
+  cursor: pointer;
+}
+* {
+  color: purple !important;
+  border-color: purple !important;
+  background-color: transparent !important;
+}
+img, video, picture, svg, iframe,
+*[style~="background-image"], *[style~="background"], *[style~="image"], *[class~="image"],
+*[style*="background-image"], *[style*="background"], *[style*="image"], *[class*="image"],
+*[style^="background-image"], *[style^="background"], *[style^="image"], *[class^="image"] {
+  filter: invert(1) !important;
+}
+<style>
+`
+    }
     },1337)
 
 

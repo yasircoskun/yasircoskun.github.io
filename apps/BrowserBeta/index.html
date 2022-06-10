@@ -55,6 +55,7 @@ iframe {
 #search .btn, #search input{
   color: white;
 }
+
 </style>
 <body>
   <div id="search" class="m-1 row">
@@ -69,7 +70,9 @@ iframe {
     <script>
     let hash = new URL(location.href).hash
     if(hash != ""){
-        document.querySelector('iframe').src += hash
+      document.querySelector('iframe').src += hash
+    }else{
+      document.querySelector('iframe').src += "#" + JSON.stringify({url: "https://nitter.net/yasir_dev"})
     }
     var last_url = ";"
     window.addEventListener('message', function (e) {

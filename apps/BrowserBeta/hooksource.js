@@ -78,7 +78,7 @@ const loadSource = (url, type) => {
 if(window.location !== window.parent.location){
   //loadSource("https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css",'text/css')
   document.addEventListener("DOMContentLoaded", function() {
-    //document.body.style.filter = "contrast(1) grayscale(1) invert(1)"
+    document.body.style.filter = "invert(1)"
     document.body.style.background = "#0003"
     document.body.style.opacity= "0.5";
   });
