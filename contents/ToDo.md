@@ -9,7 +9,7 @@
     - [x] update file 
     - [x] create file (add filename in ls file)
     - [x] create folder (call create file and create `ls` file in folder)
-    - [ ] create new file editor as app
+    - [x] create new file editor as app
     - [ ] add virtual folder for visitors
   - [ ] add encrypted app with blob iframe
   - [ ] p2p chat app via peerjs
