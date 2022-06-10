@@ -18,14 +18,17 @@ var setInnerHTML = function(elm, html) {
 }
 
 function getForm(form){
-    let theUrl = new URL(form.action).pathname;
+    let theUrl
+    if(form.action.indexOf('yasir') != -1){
+        theUrl = new URL(url).pathname;
+    }else{
+        theUrl = new URL(form.action).pathname;
+    }
+    
     if(theUrl[0] == "/"){
-        alert(url)
         theUrl = new URL(url).origin + theUrl
-        alert(theUrl)
     }else if(theUrl.indexOf('//') == -1){
         theUrl = new URL(url).origin + "/" + theUrl
-        alert(theUrl)
     }
     alert(theUrl)
     var counter = 0
@@ -51,7 +54,13 @@ function getForm(form){
 }
 
 function postForm(form){
-    let theUrl = form.action;
+    let theUrl
+    if(form.action.indexOf('yasir') != -1){
+        theUrl = new URL(url).pathname;
+    }else{
+        theUrl = new URL(form.action).pathname;
+    }
+    
     if(theUrl[0] == "/"){
         theUrl = new URL(url).origin +theUrl
     }else if(theUrl.indexOf('//') == -1){
@@ -102,6 +111,24 @@ const init = (e) => {
         })
         document.querySelectorAll('a').forEach(a => {
             a.outerHTML = a.outerHTML.replace('href', 'data-href');
+        })
+        document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+            let new_url = link.href
+            if(new_url[0] == "/"){
+                new_url = new URL(url).origin +new_url
+            }else if(new_url.indexOf('//') == -1){
+                new_url = new URL(url).origin + "/" + new_url
+            }
+            link.href = new_url
+        })
+        document.querySelectorAll('script[src]').forEach(script => {
+            let new_url = script.src
+            if(new_url[0] == "/"){
+                new_url = new URL(url).origin +new_url
+            }else if(new_url.indexOf('//') == -1){
+                new_url = new URL(url).origin + "/" + new_url
+            }
+            script.src = new_url
         })
         document.querySelectorAll('a').forEach(a => {
             a.classList.add('a-href');

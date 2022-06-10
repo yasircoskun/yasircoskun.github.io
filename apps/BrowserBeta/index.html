@@ -91,7 +91,7 @@ iframe {
       e.preventDefault();
       let url = document.querySelector('#search_text').value;
       if(url.indexOf('http') != 0){
-        url = "https://www.google.com/search?q=" + url
+        url = "https://wiby.me/?q=" + url
       }
       document.querySelector('iframe').src = "proxy.html#" + JSON.stringify({url: url})
       return false
