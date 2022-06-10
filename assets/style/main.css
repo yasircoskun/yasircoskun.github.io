@@ -157,8 +157,8 @@ summary::marker {
 
 .fileWin {
     position: fixed;
-    left: 15%;
-    top: 100px;
+    left: 5%;
+    top: 5%;
     border: 1px solid #ffffff47;
     z-index: 9999;
     padding: 2px;

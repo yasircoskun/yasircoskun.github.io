@@ -372,6 +372,7 @@ function windowFix() {
             .content {
                 max-width: ` + w + `px;
                 max-height: ` + h + `px;
+                height: 85vh;
             }
         </style>`;
         let temp = document.createElement('template');
