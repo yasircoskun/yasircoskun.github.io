@@ -94,7 +94,7 @@ document.querySelector('#my_peer_id').onclick = (e) => {
 
 function video_setStream(video_id, stream){
   let video = document.querySelector('video#'+video_id)
-  video.parentElement.style.display = "block";
+  video.parentElement.style.display = "flex";
   if ("srcObject" in video) {
       video.srcObject = stream;
   } else {
