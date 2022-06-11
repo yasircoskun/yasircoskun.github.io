@@ -4,7 +4,14 @@ var peer = new Peer({
     ]} 
 });
 
-var video = document.querySelector('video')
+function connected(){
+    document.querySelector('#connect_btn').id = "call_btn";
+    document.querySelector('#connect_btn').innerText = "Call";
+    document.querySelector('#connect_btn').onclick = (e) => {call()}
+    document.querySelector('#connection_status').innerText = "Connected with: "
+    document.querySelector('#my_peer_id').innerText = con.peer
+    document.querySelector('#my_peer_id').id = "connected_with"
+}
 
 function listen(con){
     connected_msg(con.peer)
@@ -18,6 +25,7 @@ function listen(con){
     con.on('close', function(){
         disconnected_msg(con.peer)
     })
+    connected()
 }
 
 function connected_msg(peer){
@@ -77,12 +85,6 @@ document.querySelector('#msg_send_form').onsubmit = (e) => {
 document.querySelector('#connect_btn').onclick = (e) => {
     var con = peer.connect(prompt('Connect To?'))
     listen(con)
-    e.target.id = "call_btn";
-    e.target.innerText = "Call";
-    e.target.onclick = (e) => {call()}
-    document.querySelector('#connection_status').innerText = "Connected with: "
-    document.querySelector('#my_peer_id').innerText = con.peer
-    document.querySelector('#my_peer_id').id = "connected_with"
 }
 
 document.querySelector('#my_peer_id').onclick = (e) => {
