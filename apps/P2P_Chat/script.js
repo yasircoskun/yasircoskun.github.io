@@ -5,9 +5,9 @@ var peer = new Peer({
 });
 
 function connected(){
-    document.querySelector('#connect_btn').id = "call_btn";
     document.querySelector('#connect_btn').innerText = "Call";
     document.querySelector('#connect_btn').onclick = (e) => {call()}
+    document.querySelector('#connect_btn').id = "call_btn";
     document.querySelector('#connection_status').innerText = "Connected with: "
     document.querySelector('#my_peer_id').innerText = con.peer
     document.querySelector('#my_peer_id').id = "connected_with"
