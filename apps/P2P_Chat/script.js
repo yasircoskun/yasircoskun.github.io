@@ -4,6 +4,8 @@ var peer = new Peer({
     ]} 
 });
 
+var video = document.querySelector('video')
+
 function listen(con){
     connected_msg(con.peer)
     con.on('data', function(data){
@@ -46,6 +48,19 @@ peer.on('close', function(){
     document.querySelector('#messages').innerHTML += "<hr><b>System</b>: " + peer.id + " disConnected";
 })
 
+peer.on('call', function(call){
+  alert('call')
+  navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function(stream) {
+    video_setStream('local_video', stream)
+    call.answer(stream);
+    call.on('stream', function(remoteStream) {
+      video_setStream('remote_video', remoteStream)
+    });
+  }).catch(function(err) {
+    console.log(err.name + ": " + err.message);
+  });
+})
+
 document.querySelector('#msg_send_form').onsubmit = (e) => {
     e.preventDefault();  
     console.log(peer.connections[Object.keys(peer.connections)[0]][0])
@@ -62,4 +77,40 @@ document.querySelector('#msg_send_form').onsubmit = (e) => {
 document.querySelector('#connect_btn').onclick = (e) => {
     var con = peer.connect(prompt('Connect To?'))
     listen(con)
+    e.target.id = "call_btn";
+    e.target.innerText = "Call";
+    e.target.onclick = (e) => {call()}
+    document.querySelector('#connection_status').innerText = "Connected with: "
+    document.querySelector('#my_peer_id').innerText = con.peer
+    document.querySelector('#my_peer_id').id = "connected_with"
+}
+
+document.querySelector('#my_peer_id').onclick = (e) => {
+  navigator.clipboard.writeText(e.target.innerText);
+  alert('peer id copied')
+}
+
+function video_setStream(video_id, stream){
+  let video = document.querySelector('video#'+video_id)
+  video.parentElement.style.display = "block";
+  if ("srcObject" in video) {
+      video.srcObject = stream;
+  } else {
+      video.src = window.URL.createObjectURL(stream);
+  }
+  video.onloadedmetadata = function(e) {
+      video.play();
+  };
+}
+
+function call(){
+  navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function(stream) {
+    video_setStream('local_video', stream)
+    var call = peer.call(peer.connections[Object.keys(peer.connections)[0]][0].peer, stream);
+    call.on('stream', function(remoteStream) {
+      video_setStream('remote_video', remoteStream)
+    });
+  }).catch(function(err) {
+    console.log(err.name + ": " + err.message);
+  });
 }
