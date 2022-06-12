@@ -62,8 +62,10 @@ peer.on('close', function () {
 
 peer.on('call', function (call) {
   alert('call')
-  navigator.mediaDevices.getUserMedia({ audio: false, video: false }).then(function (stream) {
+  navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function (stream) {
     my_stream = stream
+    my_stream.getAudioTracks()[0].enabled = 0
+    my_stream.getVideoTracks()[0].enabled = 0
     video_setStream('local_video', my_stream)
     call.answer(my_stream);
     call.on('stream', function (remoteStream) {
@@ -163,8 +165,10 @@ function video_setStream(video_id, stream) {
 }
 
 function call() {
-  navigator.mediaDevices.getUserMedia({ audio: false, video: false }).then(function (stream) {
+  navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function (stream) {
     my_stream = stream
+    my_stream.getAudioTracks()[0].enabled = 0
+    my_stream.getVideoTracks()[0].enabled = 0
     video_setStream('local_video', my_stream)
     var call = peer.call(peer.connections[Object.keys(peer.connections)[0]][0].peer, my_stream);
     call.on('stream', function (remoteStream) {
