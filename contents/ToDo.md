@@ -11,6 +11,7 @@
     - [x] create folder (call create file and create `ls` file in folder)
     - [x] create new file editor as app
     - [ ] add virtual folder for visitors
+  - [ ] add appManifest json parser for app icons, title etc.
   - [ ] add encrypted app with blob iframe
   - [ ] p2p chat app via peerjs
   - [x] pdf reader with css image filter(dark) & transparent
