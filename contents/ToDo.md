@@ -15,7 +15,7 @@
   - [ ] icon size user prefences
   - [ ] add encrypted app with blob iframe
   - [x] p2p chat app via peerjs
-    - [] opacity user prefences
+    - [ ] opacity user prefences
   - [x] pdf reader with css image filter(dark) & transparent
     - [ ] add open with pdf reader to context menu
 - [ ] ["Mamafih" Projesi](https://twitter.com/yasir_dev/status/1460063828524343298)
