@@ -1,0 +1,17 @@
+{
+  "name": "Youtube",
+  "description": "Youtube",
+  "icons": [
+    {
+      "src": "youtube-1.webp",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#fff",
+  "scope": "/apps/Youtube/"
+}

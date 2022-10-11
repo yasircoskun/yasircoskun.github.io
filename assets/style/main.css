@@ -1,0 +1,353 @@
+*:link {
+    color: rgb(128, 255, 0);
+}
+
+a {
+    color: rgb(128, 255, 0);
+}
+
+a:visited {
+    color: rgb(128, 255, 0);
+}
+
+body {
+    padding: 0.5rem;
+    background: url(https://yasircoskun.github.io/assets/images/wallpapers/desktop/Blade-Runner-2049.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover !important;
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
+    display: flex;
+    flex-wrap: wrap;
+    /* display: flex;
+    flex-direction: column;
+    height: fit-content;
+    overflow: hidden;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: fit-content;
+    margin: 0;
+    max-height: 100vh; */
+}
+
+.mobile {
+    background: url(https://yasircoskun.github.io/assets/images/wallpapers/mobile/blade-runner-2049.jpg) no-repeat center center fixed;
+    background-size: contain;
+}
+
+.file,
+.folder {
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    background-color: rgba(218, 205, 205, 0.2);
+    margin: 3px;
+    text-align: center;
+    height: fit-content;
+    width: 6em;
+
+}
+
+.file:hover,
+.folder:hover {
+    border: 1px solid white;
+    background-color: rgba(25, 25, 25, 0.75);
+    margin: 2px;
+}
+
+.hidden-content {
+    display: none;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    overflow-x: auto;
+    background: #000000d6;
+    color: #c5c8c6;
+    padding: 0.5em;
+    -webkit-user-select: text;  
+    -moz-user-select: text;    
+    -ms-user-select: text;      
+    user-select: text;
+}
+
+.HN_Icon {
+    cursor: pointer;
+    z-index: 4;
+}
+
+.HN_Icon[data-hnid="0"] {
+    display: none;
+}
+
+.HN_Comments {
+    position: relative;
+    height: 200px;
+}
+
+details {
+    margin-bottom: 1em;
+}
+
+details p,
+details+a+p {
+    margin-bottom: 1em !important;
+    cursor: pointer;
+}
+
+summary p {
+    margin: 0;
+}
+
+summary::marker {
+    color: rgb(128, 255, 0);
+}
+
+.spinner {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+}
+
+.spinner .path {
+    stroke: rgb(128, 255, 0);
+    stroke-linecap: round;
+    -webkit-animation: dash 1.5s ease-in-out infinite;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+.fileWin {
+    position: fixed;
+    left: 5%;
+    top: 5%;
+    border: 1px solid #ffffff47;
+    z-index: 9999;
+    padding: 2px;
+    background: #ffffff47;
+    border-radius: 15px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #292b2c;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    float: left;
+    margin: 0px;
+    display: none;
+}
+
+.content {
+    overflow: auto;
+    resize: both;
+}
+
+.closeIcon {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-weight: bolder;
+}
+
+.winTitle {
+    border-radius: 15px 15px 0px 0px;
+    text-align: center;
+    background-color: brown;
+    padding: 2px 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.winTitle>h4 {
+    font-weight: bolder;
+    font-size: larger;
+    margin: 8px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.winTitle h4 i {
+    display: inline-block;
+    float: right;
+}
+
+.file>img {
+    width: 100%;
+}
+
+video {
+    width: 100%;
+}
+
+pre {
+    line-height: 1.5;
+    max-height: 80vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.markdown pre {
+    line-height: normal;
+    max-height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+pre iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.content iframe {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+}
+
+.content img {
+    width: 100%;
+    height: auto;
+}
+
+label {
+    margin-top: -4;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gradienText {
+    background: linear-gradient(to bottom, #fff, #fff);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+.dock {
+    position: absolute;
+    left: 20%;
+    bottom: 0;
+    min-height: 4rem;
+    width: 60%;
+    padding: 0.5rem;
+    background: #2e323b;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.content {
+    border-radius: 0 0 15px 15px;
+    background: #000000d6;
+    padding: 15px 10px;
+    box-sizing: inherit;
+    width: 37vw;
+}
+
+.mobile .file,
+.mobile .folder {
+    width: 20%;
+}
+
+.mobile .content .file,
+.mobile .content .folder {
+    width: 20%;
+}
+
+.mobile label {
+    font-size: 0.8rem;
+}
+
+.mobile .fileWin {
+    left: 1vw;
+    right: 1vw;
+    top: 1vh;
+    bottom: 1vh;
+    width: none;
+    height: none;
+}
+
+.mobile pre {
+    font-size: 0.8rem;
+    width: unset;
+    height: unset;
+    max-height: 80vh;
+}
+
+.mobile .content {
+    font-size: 0.8rem;
+    width: unset;
+    height: unset;
+    /*max-height: 86vh;
+    max-width: 92vw;*/
+}
+
+.mobile iframe {
+    height: 80vh;
+}
+
+.mobile .fiv-cla {
+    width: 90% !important;
+}
+
+.fiv-cla {
+    font-size: 7rem;
+    margin: 0.3rem;
+}

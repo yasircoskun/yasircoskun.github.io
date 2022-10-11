@@ -1,0 +1,8 @@
+# bir süre için gizli kalmalı
+hidden
+yedek
+node_modules
+contents/Abulafia/*.md
+contents/Abulafia/*.zip
+contents/Abulafia/staj/*
+package-lock.json

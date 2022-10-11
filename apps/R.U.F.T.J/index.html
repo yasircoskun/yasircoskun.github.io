@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="hooksource.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+    <script src="lang.js"></script>
+    <title>R.U.F.T.J: Are You Fit This Job?</title>
+    <script>document.title = lang[userLang].page_title;</script>
+</head>
+
+<body>
+    <template id="questionTemplate">
+        <div class="row question">
+            <div class="col-md-8">
+                <label class="form-label"><b>--[RequirementNo]--.</b> --[RequirementText]--</label>
+            </div>
+            <div class="col-md-4">
+                <div class="form-check d-inline-block mx-2">
+                    <input type="radio" class="form-check-input" name="RequirementNum_--[RequirementNo]--" value="0.1" required>0
+                    <label class="form-check-label"></label>
+                </div>
+                <div class="form-check d-inline-block mx-2">
+                    <input type="radio" class="form-check-input" name="RequirementNum_--[RequirementNo]--" value="0.4" required>1
+                    <label class="form-check-label"></label>
+                </div>
+                <div class="form-check d-inline-block mx-2">
+                    <input type="radio" class="form-check-input" name="RequirementNum_--[RequirementNo]--" value="0.7" required>2
+                    <label class="form-check-label"></label>
+                </div>
+                <div class="form-check d-inline-block mx-2">
+                    <input type="radio" class="form-check-input" name="RequirementNum_--[RequirementNo]--" value="1.0" required>3
+                    <label class="form-check-label"></label>
+                </div>
+                <div class="form-check d-inline-block mx-2">
+                    <input type="radio" class="form-check-input" name="RequirementNum_--[RequirementNo]--" value="1.1" required>4
+                    <label class="form-check-label"></label>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <div class="container">
+  
+
+        <div class="d-flex justify-content-between mt-5 mb-2">
+
+            <div class="d-flex flex-column justify-content-center text-left">
+                <h2><script>document.write(lang[userLang].page_title);</script></h2>
+            </div>
+            <div class="d-flex flex-column justify-content-center" style="width: 150px;">
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" name="lang" id="lang_tr_btn" value="tr-TR">
+                    <label class="btn btn-outline-secondary" for="lang_tr_btn">Türkçe</label>
+
+                    <input type="radio" class="btn-check" name="lang" id="lang_en_btn" value="en-EN">
+                    <label class="btn btn-outline-secondary" for="lang_en_btn">English</label>
+
+                    <script>document.querySelector("input[type='radio'][name='lang'][value='"+userLang+"']").checked = 1</script>
+                </div>
+            </div>
+        </div>
+
+        <div class="card wellcome-card">
+            <div class="card-header"><script>document.write(lang[userLang].wellcome_card.header);</script></div>
+            <div class="card-body">
+                <p>
+                    <script>document.write(lang[userLang].wellcome_card.content);</script>
+                </p>
+                <div>
+                    <div class="float-end">
+                        <button id="dontShowAgain" type="button" class="btn btn-secondary my-2"><script>document.write(lang[userLang].wellcome_card.dontShowAgain);</script></button>
+                        <button id="letsStart" type="button" class="btn btn-success my-2"><script>document.write(lang[userLang].wellcome_card.button);</script></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card requirement-card d-none">
+            <div class="card-header"><script>document.write(lang[userLang].requirement_card.header);</script></div>
+            <div class="card-body">
+                <textarea class="form-control" rows="15" id="requirementText" placeholder="Job requirement list line by line (Generally you just have to paste it here)"></textarea>
+                <script>document.getElementById("requirementText").placeholder = lang[userLang].requirement_card.textarea.placeholder;</script>
+                <div>
+                    <div class="float-start">
+                        <button id="loadSample" type="button" class="btn btn-secondary my-2"><script>document.write(lang[userLang].requirement_card.load_sample.button);</script></button>
+                    </div>
+                    <div class="float-end">
+                        <button id="submitRequirements" type="button" class="btn btn-success my-2"><script>document.write(lang[userLang].requirement_card.button);</script></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card test-card d-none">
+            <div class="card-header"><script>document.write(lang[userLang].test_card.header);</script></div>
+            <div class="card-body">
+                <div id="questionWrapper">
+                </div>
+                <div class="text-end">
+                    <button id="showFitness" type="button" class="btn btn-success my-2"><script>document.write(lang[userLang].test_card.button);</script></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card step-3 result-card d-none">
+            <div class="card-header">
+                <span class="result-title"></span>
+                <div class="float-end badge bg-secondary">
+                    <script>document.write(lang[userLang].result_card.result_percent);</script>
+                    <span class="result-score"></span>
+                </div>
+            </div>
+            <div class="card-body">
+                <img class="img-fluid img-thumbnail rounded mx-auto d-block w-75 result-image" src="" />
+                <div class="result-content"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="script.js"></script>
+
+</html>

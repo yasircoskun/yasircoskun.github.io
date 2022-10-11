@@ -1,0 +1,44 @@
+Windows Kayıt Defretinden Açık-Metin(PlainText) Parola Aşırmak :))
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Powershell start ftp connection (old stored connection)                                                                                                                                                  |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+$ftp = "ftp://"+[uri]::EscapeDataString((reg query HKCU\SOFTWARE\Microsoft\FTP\Accounts\).replace('HKEY_CURRENT_USER\SOFTWARE\Microsoft\FTP\Accounts\','')).toString().replace('%20',''); explorer $ftp;
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Powershell start ftp connection (old stored connection) (END)                                                                                                                                            |
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Bu web sayfasını yayımlarken ftp protokolünden faydalanıyorum.
+Ancak Filezilla gibi bir araç kullanmak istemediğim için bir süre
+komut satırındaki ftp istemcisini kullandım.
+
+Sonra grafiksel arayüz arayışına girdim hafif bir ftp istemcisi arayışına girdim.
+Explorer.exe yani windows gezgini (Win+E yapınca açılan pencere) zaten fto bağlantısı kurmayı destekliyormuş.
+Onu denemek istedim. Ancak bağlantı sırasında parolayı kayıt etme gibi bir seçenek dikkatimi çekti.
+Windows parolamı nereye kaydedecekti. Merak ettim ve kaydettirdim.
+Sonra aradım taradım. Kayıt defterinde ftp profillerini kayıt ettiği bir alan buldum.
+Ancak parola bir çeşit şifreleme algoritması ile şifrelenmişti. Ancak hangi şifreleme olduğunu bulamadım.
+Herneyse parolaları bir yere kayıt ediyordu ancak şifreli olduğu için ona ulaşamıyordum.
+Ftp ile sftp arasında bir fark var. http ile https arasındaki farka benziyor.
+Ftp hiçbir şekilde şifreleme kullanmaz. Parola yanlızca oturum yönetiminde kullanılır.
+Yani ağ üzerindeki paketleri koklarken windows'u bu kayıtlı oturumu kullanmaya yönlendirebilirsem.
+O zaman ftp parolasına açık metin(plaintext) halinde ulaşabilirim.
+
+Hemen bir takım arayışlara girdim. Powershell ile kayıtlı ftp oturumunu uyandıran basit ama etkilği bir betik yazdım.
+betik  dedimse teksatır bir komut.
+
+$ftp = "ftp://"+[uri]::EscapeDataString((reg query HKCU\SOFTWARE\Microsoft\FTP\Accounts\).replace('HKEY_CURRENT_USER\SOFTWARE\Microsoft\FTP\Accounts\','')).toString().replace('%20',''); explorer $ftp;
+
+sonrada paket analizi yapmak için araştırma yapmaya başladım. Pythonda scapy kütüphanesi ile paket koklama işlemi yapılabiliyormuş.
+internette araştırınca FTP paketleri içinde parolayı ayıklayan bir script buldum. Bu scripti ağ arayüzünüzü parametre 
+olarak vererek çalıştırınca paketleri koklamaya başlıyordu. Ftp bağlantısı kurup çalıştığını doğruladım.
+Koklamaya başlayınca aşağıdaki satır çalışacak şekilde değiştirdim.
+
+os.system('''powershell "$ftp = \\"ftp://\\"+[uri]::EscapeDataString((reg query HKCU\\SOFTWARE\\Microsoft\\FTP\\Accounts\\).replace('HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\FTP\\Accounts\\','')).toString().replace('%20',''); explorer $ftp;"''')
+
+Geriye sadece bir problem kaldı. Ağ arayüzünün adını bulmak. Onun içinde bir powershell komutu yazdım.
+$1 = Get-NetAdapter -physical | where status -eq 'up' | Select-Object -ExpandProperty InterfaceDescription; powershell "python FTP_Stealer.py '$1'"
+Bu komut ile doğrudan bağlantı kurulan ağ arayüzü üzerinden paket koklayacak şekilde FTP_Stealer.py'ı tetikleyebiliyorum.
+Windows şifreleyip kaydettiği parolanın şifresini çözüp açık metin halinde bana teslim ediyor.
+
+Bitti.

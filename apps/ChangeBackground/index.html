@@ -1,0 +1,25 @@
+<div style="text-align: left; color: white;">
+    Background URL: <input id="backround_link" type="text" placeholder="arkaplan resim bağlantısı" />
+    <button onclick="changeBackground(document.getElementById('backround_link').value)">Değiştir</button>
+    <button onclick="setDefaultWallpaper()">Varsayılan</button>
+</div>
+<style>
+#lastWallpapers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+#lastWallpapers img {
+  height: 20vh;
+  margin: 1px;
+  filter: opacity(.3)
+}
+
+#lastWallpapers img:hover {
+    filter: opacity(1)
+}
+</style>
+<div id="lastWallpapers">
+    
+</div>
+<script src="script.js"></script>

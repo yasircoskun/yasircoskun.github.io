@@ -1,0 +1,162 @@
+.HackerNewsComments .replies {
+    padding-left: 10px;
+}
+
+.HackerNewsComments .card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-width: 0 0 0 0px;
+    border-radius: 0;
+    padding: 6px 12px;
+    position: relative;
+}
+
+.HackerNewsComments .card .dot {
+    position: absolute;
+    left: 3px;
+    width: 7px;
+    height: 7px;
+    background: rgba(214, 214, 214, 0.777);
+    border-radius: 3px;
+    top: 11px;
+}
+
+.HackerNewsComments .card .card .dot2 {
+    position: absolute;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background: rgba(214, 214, 214, 0.777);
+    transform: translate(-19px, 0px);
+    border-radius: 4px;
+    top: 0;
+}
+
+.HackerNewsComments .card .card .bridge {
+    position: absolute;
+    left: 0;
+    width: 19px;
+    height: 16px;
+    transform: translate(-16px, -2px);
+    top: 0;
+    border-width: 0 0 1px 1px;
+    border-bottom-left-radius: 9px;
+    border-color: rgba(214, 214, 214, 0.777);
+    border-style: solid;
+}
+
+.HackerNewsComments .line {
+    position: absolute;
+    left: 6px;
+    width: 1px;
+    background: rgba(214, 214, 214, 0.777);
+    top: 18px;
+}
+
+.HackerNewsComments .card .header {
+    position: relative;
+    padding-left: 4px;
+}
+
+.spinner {
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -25px 0 0 -25px;
+    width: 50px;
+    height: 50px;
+}
+
+.spinner .path {
+    stroke: rgb(128, 255, 0);
+    stroke-linecap: round;
+    -webkit-animation: dash 1.5s ease-in-out infinite;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+
+/* Themes */
+
+
+/* Matrix Theme Begin */
+
+.matrix .card .dot {
+    background: #008000;
+}
+
+.matrix .card .card .dot2 {
+    background: #008000;
+}
+
+.matrix .card .line {
+    background: #006000;
+}
+
+.matrix .card .card .bridge {
+    border-color: #006000;
+}
+
+.matrix .card a {
+    color: #00c000;
+}
+
+.matrix .card a:hover {
+    color: #00ff00;
+}
+
+.matrix {
+    background-color: #000;
+    color: #008000;
+}
+
+
+/* Matrix Theme End */
