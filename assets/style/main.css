@@ -21,8 +21,8 @@ body {
     -moz-user-select: none;    
     -ms-user-select: none;      
     user-select: none;
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
     /* display: flex;
     flex-direction: column;
     height: fit-content;
@@ -48,7 +48,7 @@ body {
     text-align: center;
     height: fit-content;
     width: 6em;
-
+    float: left;
 }
 
 .file:hover,
@@ -63,8 +63,8 @@ body {
 }
 
 .content {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex;
+    flex-wrap: wrap; */
     position: relative;
     overflow-x: auto;
     background: #000000d6;
