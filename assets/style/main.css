@@ -206,7 +206,7 @@ summary::marker {
 .winTitle {
     border-radius: 15px 15px 0px 0px;
     text-align: center;
-    background-color: brown;
+    background-color: black;
     padding: 2px 16px;
     color: white;
     cursor: pointer;
