@@ -214,7 +214,7 @@ function openWin(element) {
             winElement.getElementsByClassName('content')[0].firstElementChild.style.position = "relative";
             //winElement.getElementsByClassName('content')[0].firstElementChild.firstElementChild.style.position = "absolute";
             winElement.getElementsByClassName('content')[0].firstElementChild.style.height = 'inherit';
-            winElement.getElementsByClassName('content')[0].firstElementChild.style.width = 'inherit';
+            winElement.getElementsByClassName('content')[0].firstElementChild.style.width = '100%';
             winElement.getElementsByClassName('content')[0].firstElementChild.firstElementChild.style.height = 'inherit';
             winElement.getElementsByClassName('content')[0].firstElementChild.firstElementChild.style.width = 'inherit';
         }
