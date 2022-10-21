@@ -103,16 +103,16 @@ Bilinmesi faydalı olabilecek bazı HTTP Durum Kodları aşağıdaki tabloda yer
   <summary>2xx : Başarılı</summary>
   <p>
 
-  - 200 OK
-  - 201 Created
-  - 202 Accepted
-  - 203 Non-Authoritative Information
-  - 204 No Content
-  - 205 Reset Content
-  - 206 Partial Content
-  - 207 Multi-Status
-  - 208 Already Reported
-  - 226 IM Used
+  - 200 OK (İstek başarılı)
+  - 201 Created (Kaynak oluşturuldu)
+  - 202 Accepted (İstek kabul edildi)
+  - 203 Non-Authoritative Information (Yetkisiz bilgi)
+  - 204 No Content (İçerik yok)
+  - 205 Reset Content (İçeriği sıfırla)
+  - 206 Partial Content (Kısmi içerik)
+  - 207 Multi-Status (Çoklu durum)
+  - 208 Already Reported (Zaten bildirildi)
+  - 226 IM Used (IM kullanıldı)
   </p>
 </details>
 
@@ -120,15 +120,15 @@ Bilinmesi faydalı olabilecek bazı HTTP Durum Kodları aşağıdaki tabloda yer
   <summary>3xx : Yönlendirme</summary>
   <p>
 
-  - 300 Multiple Choices
-  - 301 Moved Permanently
-  - 302 Found
-  - 303 See Other
-  - 304 Not Modified
-  - 305 Use Proxy
-  - 306 Switch Proxy
-  - 307 Temporary Redirect
-  - 308 Permanent Redirect
+  - 300 Multiple Choices (Çoklu seçenek)
+  - 301 Moved Permanently (Kalıcı olarak taşındı)
+  - 302 Found (Bulundu)
+  - 303 See Other (Diğerine bak)
+  - 304 Not Modified (Değiştirilmedi)
+  - 305 Use Proxy (Vekil kullan)
+  - 306 Switch Proxy (Vekil değiştir)
+  - 307 Temporary Redirect (Geçici yönlendirme)
+  - 308 Permanent Redirect (Kalıcı yönlendirme)
   </p>
 </details>
 
@@ -136,34 +136,34 @@ Bilinmesi faydalı olabilecek bazı HTTP Durum Kodları aşağıdaki tabloda yer
   <summary>4xx : İstemci Hatası</summary>
   <p>
   
-  - 400 Bad Request
-  - 401 Unauthorized
-  - 402 Payment Required
-  - 403 Forbidden
-  - 404 Not Found
-  - 405 Method Not Allowed
-  - 406 Not Acceptable
-  - 407 Proxy Authentication Required
-  - 408 Request Timeout
-  - 409 Conflict
-  - 410 Gone
-  - 411 Length Required
-  - 412 Precondition Failed
-  - 413 Payload Too Large
-  - 414 URI Too Long
-  - 415 Unsupported Media Type
-  - 416 Range Not Satisfiable
-  - 417 Expectation Failed
-  - 418 I'm a teapot
-  - 421 Misdirected Request
-  - 422 Unprocessable Entity
-  - 423 Locked
-  - 424 Failed Dependency
-  - 426 Upgrade Required
-  - 428 Precondition Required
-  - 429 Too Many Requests
-  - 431 Request Header Fields Too Large
-  - 451 Unavailable For Legal Reasons
+  - 400 Bad Request (Hatalı istek)
+  - 401 Unauthorized (Yetkisiz)
+  - 402 Payment Required (Ödeme gerekiyor)
+  - 403 Forbidden (Yasak)
+  - 404 Not Found (Bulunamadı)
+  - 405 Method Not Allowed (Metod izin verilmedi)
+  - 406 Not Acceptable (Kabul edilemez)
+  - 407 Proxy Authentication Required (Vekil kimlik doğrulaması gerekiyor)
+  - 408 Request Timeout (İstek zaman aşımına uğradı)
+  - 409 Conflict (Çakışma)
+  - 410 Gone (Gitti)
+  - 411 Length Required (Uzunluk gerekiyor)
+  - 412 Precondition Failed (Önkoşul başarısız)
+  - 413 Payload Too Large (İstek çok büyük)
+  - 414 URI Too Long (URI çok uzun)
+  - 415 Unsupported Media Type (Desteklenmeyen medya türü)
+  - 416 Range Not Satisfiable (Aralık karşılanamadı)
+  - 417 Expectation Failed (Beklenti başarısız)
+  - 418 I'm a teapot (Ben bir çaydanlığım - [RFC 2324](https://www.rfc-editor.org/rfc/rfc2324#page-5) [Wiki](https://en.wikipedia.org/wiki/Hyper_Text_Coffee_Pot_Control_Protocol))
+  - 421 Misdirected Request (Yanlış yönlendirilmiş istek)
+  - 422 Unprocessable Entity (İşlenemeyen varlık)
+  - 423 Locked (Kilitli)
+  - 424 Failed Dependency (Bağımlılık başarısız)
+  - 426 Upgrade Required (Yükseltme gerekiyor)
+  - 428 Precondition Required (Önkoşul gerekiyor)
+  - 429 Too Many Requests (Çok fazla istek)
+  - 431 Request Header Fields Too Large (İstek başlık alanı çok büyük)
+  - 451 Unavailable For Legal Reasons (Yasal nedenlerden dolayı kullanılamaz)
   </p>
 </details>
 
@@ -171,17 +171,17 @@ Bilinmesi faydalı olabilecek bazı HTTP Durum Kodları aşağıdaki tabloda yer
   <summary>5xx : Sunucu Hatası</summary>
   <p>
 
-  - 500 Internal Server Error
-  - 501 Not Implemented
-  - 502 Bad Gateway
-  - 503 Service Unavailable
-  - 504 Gateway Timeout
-  - 505 HTTP Version Not Supported
-  - 506 Variant Also Negotiates
-  - 507 Insufficient Storage
-  - 508 Loop Detected
-  - 510 Not Extended
-  - 511 Network Authentication Required
+  - 500 Internal Server Error (Dahili sunucu hatası)
+  - 501 Not Implemented (Uygulanmadı)
+  - 502 Bad Gateway (Hatalı ağ geçidi)
+  - 503 Service Unavailable (Servis kullanılamıyor)
+  - 504 Gateway Timeout (Ağ geçidi zaman aşımına uğradı)
+  - 505 HTTP Version Not Supported (HTTP sürümü desteklenmiyor)
+  - 506 Variant Also Negotiates (Değişken aynı zamanda görüşür)
+  - 507 Insufficient Storage (Yetersiz depolama)
+  - 508 Loop Detected (Döngü tespit edildi)
+  - 510 Not Extended (Genişletilmedi)
+  - 511 Network Authentication Required (Ağ kimlik doğrulaması gerekiyor)
   </p>
 </details>
 
@@ -217,7 +217,6 @@ Yapılabilecek diğer şeyler:
 - API'ların bir dökümantasyonu olmalıdır. Bu sayede API'ların nasıl kullanılacağı hakkında bilgi edinilebilir. Örneğin, [Swagger](https://swagger.io/) gibi.
 - API'ların bir test ortamı olmalıdır. Bu sayede API'ların nasıl kullanılacağı hakkında bilgi edinilebilir. Örneğin, [Postman](https://www.postman.com/) gibi.
 - Veri alışverişinde JSON kullanılmalıdır. JSON, XML gibi diğer veri formatlarına göre daha az veri kullanır ve daha hızlıdır. Pek yaygın bir uygulama olmasada YAML gibi diğer veri formatları da kullanılabilir. Burada tercih parse edilme hızı ve veri boyutu gibi faktörlerden yana olmalıdır.
-- API'ların bir güvenlik duvarı olmalıdır. Bu sayede API'ların kimlik doğrulaması ve yetkilendirilmesi sağlanabilir. Örneğin, [JWT](https://jwt.io/) gibi.
 - API'ların bir hata yönetimi olmalıdır. Bu sayede API'ların hatalarını yakalayıp kullanıcıya bildirebilir. Örneğin, [Sentry](https://sentry.io/welcome/) gibi.
 - API'ların bir performans yönetimi olmalıdır. Bu sayede API'ların performansı ölçülebilir ve gerekli durumlarda optimize edilebilir. Örneğin, [New Relic](https://newrelic.com/) gibi.
 - API'ların bir güvenlik yönetimi olmalıdır. Bu sayede API'ların güvenliği ölçülebilir ve gerekli durumlarda optimize edilebilir. Örneğin, [SonarQube](https://www.sonarqube.org/) gibi.
