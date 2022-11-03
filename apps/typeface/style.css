@@ -1,0 +1,65 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  font-size: 5rem;
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  /* block text select */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                        supported by Chrome and Opera */
+}
+
+body select#fontSelector {
+  display: none;
+}
+
+body span#fontInfo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+body span#fontInfo a {
+  color: #fff;
+  text-decoration: none;
+}
+
+body span#fontInfo a:hover {
+  text-decoration: underline;
+}
+
+body div#controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
+body div#controls span {
+  margin-right: 1rem;
+}
+
+body span#previewText {
+  max-width: 80vw;
+  text-align: center;
+}
