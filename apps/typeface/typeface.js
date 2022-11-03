@@ -197,7 +197,7 @@ $(document).ready(function() {
           // copy the canvas to the clipboard
           canvas.toBlob(function(blob) {
             if(navigator.clipboard){
-              clipboard.write([
+              navigator.clipboard.write([
                 new ClipboardItem({
                   ["image/png"]: blob
                 })
@@ -217,6 +217,9 @@ $(document).ready(function() {
         });
       });
 
+      $('#controls #settings').click(function() {
+        $('#settingsModal').show();
+      });
 
       $('#controls #random').click(function() {
         // random select a font from #fontSelector
