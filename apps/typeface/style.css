@@ -59,8 +59,16 @@ body div#controls span {
   margin-right: 1rem;
 }
 
-body span#previewText {
+body span.previewText {
   max-width: 80vw;
   text-align: center;
   font-size: calc(5vw);
+}
+
+body div#hidden {
+  display: none;
+}
+
+.context-menu-list {
+  font-size: 1.3rem !important;
 }

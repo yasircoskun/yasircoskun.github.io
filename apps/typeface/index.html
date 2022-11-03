@@ -4,11 +4,14 @@
     <meta name="description" content="typeface">
     <!-- Google Web Fonts -->
     <link id="font" href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css" />
+    <!-- jQuery Context Menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css" />
   </head>
   <body>
-    <span id="previewText" contentEditable> Most inventors and engineers I've met are like me. They're shy and they live in their heads. The very best of them are artists. And artists work best alone. 
-    - Steve Wozniak </span>
+    <span class="previewText" contentEditable>typeface</span>
     <select id="fontSelector"></select>
     <span id="fontInfo"></span>
     <div id="controls">
@@ -16,12 +19,18 @@
       <span id="copyCapture">[Copy Capture]</span>
       <span id="random">[Random]</span>
       <span id="RandomQuote">[Random Quote]</span>
-      <span id="SettingsBtn">[Settings]</span>
+      <span id="backgroundImageBtn">[Upload Background]</span>
+      <span id="backgroundColorBtn">[Background Color]</span>
+      <span id="foregroundColorBtn">[Foreground Color]</span>
     </div>
   </body>
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- jQuery ui -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <!-- html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- jQuery Context Menu -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
   <script src="typeface.js"></script>
 </html>
