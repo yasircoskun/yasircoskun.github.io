@@ -295,7 +295,7 @@ $(document).ready(function() {
             'font-size': '1.5rem'
           });
         }
-        $('.previewText').draggable({
+        $(this).draggable({
           containment: 'parent',
           // dragIcon for the text
           handle: '#dragIcon',
@@ -319,11 +319,15 @@ $(document).ready(function() {
           switch(key) {
             case 'addText':
               // add a text with events
+              if($('.previewText:first')[0].classList.contains('ui-draggable')) {
+                $('.previewText:first').draggable('destroy');
+                $('.previewText:first').find('#dragIcon').remove();
+              }
+
               var clone = $('.previewText:first').clone(true);
-              clone.find('#dragIcon').remove();
-              clone.find('span').remove();
-              clone.find('p').remove();
-              clone.text('Double click to edit');
+              
+              clone.text('typeface');
+
               $('body').append(clone);
               break;
             case 'saveCapture':
