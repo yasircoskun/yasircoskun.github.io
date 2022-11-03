@@ -187,6 +187,37 @@ $(document).ready(function() {
         });
       });
 
+      $('#controls #copyCapture').click(function() {
+        // hide the controls
+        $('#controls').hide();
+        if(window.location !== window.parent.location){
+          document.body.style.background = "#000"
+        }
+        html2canvas(document.body).then(function(canvas) {
+          // copy the canvas to the clipboard
+          canvas.toBlob(function(blob) {
+            if(navigator.clipboard){
+              clipboard.write([
+                new ClipboardItem({
+                  ["image/png"]: blob
+                })
+              ]);
+            } else {
+              var a = document.createElement('a');
+              a.href = canvas.toDataURL();
+              a.target = '_blank';
+              a.click();
+            }
+          });
+          // show the controls
+          $('#controls').show();
+          if(window.location !== window.parent.location){
+            document.body.style.background = "#0007"
+          }
+        });
+      });
+
+
       $('#controls #random').click(function() {
         // random select a font from #fontSelector
         var options = $('#fontSelector option');
