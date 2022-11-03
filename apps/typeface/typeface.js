@@ -7,7 +7,7 @@
 var google_api_key = "AIzaSyBWKzENDmHXWYxjUX9fwekH0OR334TKZCk"
 $(document).ready(function() {
   function next() {
-    $('#previewText').fadeOut(100, function() {
+    $('.previewText').fadeOut(100, function() {
       // change the font
       if($('#fontSelector option:selected').next()){
         $('#fontSelector').val($('#fontSelector option:selected').next().val());
@@ -17,13 +17,13 @@ $(document).ready(function() {
       $('#fontSelector').change();
       // slow fade in the preview text
       setTimeout(function() {
-        $('#previewText').fadeIn(100);
+        $('.previewText').fadeIn(100);
       }, 100);
     });
   }
 
   function prev() {
-    $('#previewText').fadeOut(100, function() {
+    $('.previewText').fadeOut(100, function() {
       // change the font
       if($('#fontSelector option:selected').prev()){
         $('#fontSelector').val($('#fontSelector option:selected').prev().val());
@@ -33,17 +33,17 @@ $(document).ready(function() {
       $('#fontSelector').change();
       // slow fade in the preview text
       setTimeout(function() {
-        $('#previewText').fadeIn(100);
+        $('.previewText').fadeIn(100);
       }, 100);
     });
   }
 
   function zoomOut() {
-    $('#previewText').css('font-size', parseInt($('#previewText').css('font-size')) - 1);
+    $('.previewText').css('font-size', parseInt($('.previewText').css('font-size')) - 1);
   }
 
   function zoomIn() {
-    $('#previewText').css('font-size', parseInt($('#previewText').css('font-size')) + 1);
+    $('.previewText').css('font-size', parseInt($('.previewText').css('font-size')) + 1);
   }
 
   function showControlOnMove(e) {
@@ -73,7 +73,7 @@ $(document).ready(function() {
         // “ -> &#8220;
         // ” -> &#8221;
         // — -> &#8212;
-        $('#previewText').html(`&#8220${quote.quote}&#8221<br><span style="text-align: right; width: 100%; display: block;">&#8211 ${quote.author}</span>`);
+        $('.previewText').html(`&#8220${quote.quote}&#8221<br><span style="text-align: right; width: 100%; display: block;">&#8211 ${quote.author}</span>`);
       }
     })
   }
@@ -100,7 +100,7 @@ $(document).ready(function() {
         // add the font to the head of the page
         $('head #font').attr('href', 'https://fonts.googleapis.com/css?family=' + $(this).val());
         var font = $(this).val();
-        $('#previewText').css('font-family', font);
+        $('.previewText').css('font-family', font);
         $('#fontInfo').html(`<a href="https://fonts.google.com/specimen/${font}" target="_blank">
           Font: ${font} (${mixed.find(item => item.family == font).category})
         </a>`);
@@ -198,12 +198,16 @@ $(document).ready(function() {
           canvas.toBlob(function(blob) {
             if(navigator.clipboard){
               // check if ClipboardItem is supported
-              if (ClipboardItem) {
-                let item = new ClipboardItem({ "image/png": blob });
+              if (typeof ClipboardItem === 'function') {
+                var item = new ClipboardItem({ "image/png": blob });
               } else {
-                let item = new Blob([blob], { type: "image/png" });
+                var item = new Blob([blob], { type: "image/png" });
               }
-              navigator.clipboard.write([item])
+              if(typeof navigator.clipboard.write === 'function'){
+                navigator.clipboard.write([item])
+              } else {
+                navigator.clipboard.writeText(canvas.toDataURL());
+              }
             } else {
               var a = document.createElement('a');
               a.href = canvas.toDataURL();
@@ -219,8 +223,45 @@ $(document).ready(function() {
         });
       });
 
-      $('#controls #settings').click(function() {
-        $('#settingsModal').show();
+      $('#controls #backgroundImageBtn').click(function() {
+        // file input
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.click();
+        fileInput.addEventListener('change', function() {
+          var file = fileInput.files[0];
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            // ass cover all the screen
+            document.body.style.backgroundImage = `url(${e.target.result})`;
+            document.body.style.backgroundSize = 'cover';
+            document.body.style.backgroundPosition = 'center';
+            document.body.style.backgroundRepeat = 'no-repeat';
+          }
+          reader.readAsDataURL(file);
+        });
+      });
+
+      $('#controls #backgroundColorBtn').click(function() {
+        // color input
+        var colorInput = document.createElement('input');
+        colorInput.type = 'color';
+        colorInput.click();
+        colorInput.addEventListener('change', function() {
+          document.body.style.backgroundImage = 'none';
+          document.body.style.backgroundColor = colorInput.value;
+        });
+      });
+
+      $('#controls #foregroundColorBtn').click(function() {
+        // color input
+        var colorInput = document.createElement('input');
+        colorInput.type = 'color';
+        colorInput.click();
+        colorInput.addEventListener('change', function() {
+          $('.previewText').css('color', colorInput.value);
+        });
       });
 
       $('#controls #random').click(function() {
@@ -235,6 +276,101 @@ $(document).ready(function() {
       $('#controls #RandomQuote').click(function() {
         getQuote();
       });
+
+      $('.previewText').on('mouseover', function(e) {
+        e.preventDefault();
+        if($(this).find('#dragIcon').length == 0) {
+          $(this).append(`<span id="dragIcon">
+            <i class="fa fa-arrows rotate-45"></i>
+          </span>`);
+
+          $(this).find('#dragIcon').css({
+            'position': 'absolute',
+            'top': '0',
+            'left': '0',
+            'color': '#fff',
+            'opacity': '1',
+            'z-index': '9999',
+            'padding': '5px',
+            'font-size': '1.5rem'
+          });
+        }
+        $('.previewText').draggable({
+          containment: 'parent',
+          // dragIcon for the text
+          handle: '#dragIcon',
+        });
+      });
+
+      $('.previewText').on('mouseout', function(e) {
+        e.preventDefault();
+        $(this).find('#dragIcon').remove();
+      });
+
+
+
+      // jquery.contextMenu.min.js
+      // create a context menu for body
+      // custom width and height
+      $.contextMenu({
+        selector: 'body',
+        width: '200px',
+        callback: function(key, options) {
+          switch(key) {
+            case 'addText':
+              // add a text with events
+              var clone = $('.previewText:first').clone(true);
+              clone.text('Double click to edit');
+              $('body').append(clone);
+              break;
+            case 'saveCapture':
+              $('#controls #saveCapture').click();
+              break;
+            case 'copyCapture':
+              $('#controls #copyCapture').click();
+              break;
+            case 'backgroundImageBtn':
+              $('#controls #backgroundImageBtn').click();
+              break;
+            case 'backgroundColorBtn':
+              $('#controls #backgroundColorBtn').click();
+              break;
+            case 'foregroundColorBtn':
+              $('#controls #foregroundColorBtn').click();
+              break;
+            case 'random':
+              $('#controls #random').click();
+              break;
+            case 'RandomQuote':
+              $('#controls #RandomQuote').click();
+              break;
+          }
+        },
+        items: {
+          "addText": {name: "Add Text", icon: "add"},
+          "sep1": "---------",
+          "saveCapture": {name: "Save Capture", icon: "fa-save"},
+          "copyCapture": {name: "Copy Capture", icon: "fa-copy"},
+          "sep2": "---------",
+          "backgroundImageBtn": {name: "Background Image", icon: "fa-image"},
+          "backgroundColorBtn": {name: "Background Color", icon: "fa-paint-brush"},
+          "foregroundColorBtn": {name: "Foreground Color", icon: "fa-paint-brush"},
+          "sep3": "---------",
+          "random": {name: "Random Font", icon: "fa-random"},
+          "RandomQuote": {name: "Random Quote", icon: "fa-quote-right"},
+        },
+        events: {
+          show: function(options) {
+            // hide the controls
+            $('#controls').hide();
+          },
+          hide: function(options) {
+            // show the controls
+            $('#controls').show();
+          }
+        }
+      });
+
     }
   });
 });
