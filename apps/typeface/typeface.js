@@ -197,11 +197,13 @@ $(document).ready(function() {
           // copy the canvas to the clipboard
           canvas.toBlob(function(blob) {
             if(navigator.clipboard){
-              navigator.clipboard.write([
-                new ClipboardItem({
-                  ["image/png"]: blob
-                })
-              ]);
+              // check if ClipboardItem is supported
+              if (ClipboardItem) {
+                let item = new ClipboardItem({ "image/png": blob });
+              } else {
+                let item = new Blob([blob], { type: "image/png" });
+              }
+              navigator.clipboard.write([item])
             } else {
               var a = document.createElement('a');
               a.href = canvas.toDataURL();
