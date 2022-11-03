@@ -171,6 +171,9 @@ $(document).ready(function() {
       $('#controls #saveCapture').click(function() {
         // hide the controls
         $('#controls').hide();
+        if(window.location !== window.parent.location){
+          document.body.style.background = "#000"
+        }
         html2canvas(document.body).then(function(canvas) {
           var a = document.createElement('a');
           a.href = canvas.toDataURL();
@@ -178,6 +181,9 @@ $(document).ready(function() {
           a.click();
           // show the controls
           $('#controls').show();
+          if(window.location !== window.parent.location){
+            document.body.style.background = "#0007"
+          }
         });
       });
 
@@ -198,3 +204,9 @@ $(document).ready(function() {
 });
 
 }( jQuery ));
+
+if(window.location !== window.parent.location){
+  document.addEventListener("DOMContentLoaded", function() {
+    document.body.style.background = "#0007"
+  });
+}
