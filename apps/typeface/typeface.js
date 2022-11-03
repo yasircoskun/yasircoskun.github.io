@@ -320,6 +320,9 @@ $(document).ready(function() {
             case 'addText':
               // add a text with events
               var clone = $('.previewText:first').clone(true);
+              clone.find('#dragIcon').remove();
+              clone.find('span').remove();
+              clone.find('p').remove();
               clone.text('Double click to edit');
               $('body').append(clone);
               break;
