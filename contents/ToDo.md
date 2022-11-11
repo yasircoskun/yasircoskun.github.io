@@ -1,3 +1,3 @@
 #### Yapılacaklar
 
-Yapılacak bir şey yok
+- [ ] Karikatür Çizmeyi Öğren 
