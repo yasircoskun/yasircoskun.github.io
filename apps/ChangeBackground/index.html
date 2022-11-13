@@ -1,25 +1,398 @@
-<div style="text-align: left; color: white;">
-    Background URL: <input id="backround_link" type="text" placeholder="arkaplan resim bağlantısı" />
-    <button onclick="changeBackground(document.getElementById('backround_link').value)">Değiştir</button>
-    <button onclick="setDefaultWallpaper()">Varsayılan</button>
-</div>
 <style>
-#lastWallpapers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-#lastWallpapers img {
-  height: 20vh;
-  margin: 1px;
-  filter: opacity(.3)
+body {
+  background: rgba(0, 0, 0, 0.7);
 }
 
-#lastWallpapers img:hover {
+.wallpapers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.wallpapers img {
+    height: 20vh;
+    margin: 1px;
+    filter: opacity(.7)
+}
+
+.wallpapers img:hover {
     filter: opacity(1)
 }
+
+#search_area {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+#search_input {
+  position: relative;
+  width: 100%;
+}
+
+#search_input input {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px 2.5rem;
+  background-color: #000;
+  color: white;
+}
+
+#search_input #search_type {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 30px;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+#search_input #sort {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 30px;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+}
+
+.menu_btn {
+  height: 18px;
+  width: 18px;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.menu_btn .menu_btn_line {
+  width: 100%;
+  height: 2px;
+  background-color: #333;
+  margin: 2px 0;
+} 
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+  display: none;
+}
+
+.menu.menu_active {
+  display: block;
+}
+
+.menu .menu_item {
+  margin: 5px 0;
+  cursor: pointer;
+}
+
+.menu .menu_item:hover {
+  color: #333;
+}
+
+#play {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
+  background-color: #000;
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+  display: none;
+  text-align: center;
+}
+
+#play img {
+  height: 100vh;
+  width: auto;
+  margin: 0 auto;
+}
+
+#play.play_active {
+  display: flex;
+}
+
+.menu .menu_close {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 18px;
+  background-color: #000;
+  border: 0;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.menu .menu_close:hover {
+  color: #333;
+}
+
+.menu .menu_fullscreen {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 18px;
+  background-color: #000;
+  border: 0;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+}
 </style>
-<div id="lastWallpapers">
-    
+
+<div id="search_area">
+  <!-- <input list="results_list" id="search" type="text" placeholder="subreddit search" onkeyup="search(event)" /> -->
+  <!-- input results_list with a prefix selector '/r' or '/u' -->
+  <div id="search_input">
+    <select id="search_type" onchange="document.getElementById('search').placeholder = this.value == 'subreddits' ? 'subreddit search' : 'user search'">
+      <option value="subreddits">/r</option>
+      <option value="users">/u</option>
+      <option value="search">/</option>
+    </select>
+    <input list="results_list" id="search" type="text" placeholder="subreddit search" onkeyup="search(event)" />
+    <datalist id="results_list">
+    </datalist>
+    <select id="sort" onchange="searchByName(document.getElementById('search').value)">
+      <option value="hot">Hot</option>
+      <option value="new">New</option>
+      <option value="top">Top</option>
+      <option value="rising">Rising</option>
+    </select>
+  </div>
+  <!-- settings menu -->
+  <div class="menu_btn" onclick="toggleMenu()">
+    <div class="menu_btn_line"></div>
+    <div class="menu_btn_line"></div>
+    <div class="menu_btn_line"></div>
+  </div>
 </div>
-<script src="script.js"></script>
+
+<div class="menu">
+  <div class="menu_item" onclick="togglePlay()">SlideShow</div>
+  <div class="menu_item" onclick="toggleMenu()">Close</div>
+</div>
+
+<div class="menu" id="play">
+  <img src=""/>
+  <div class="menu_close" onclick="togglePlay()">x</div>
+  <div class="menu_fullscreen" onclick="toggleFullScreen()">Full Screen</div>
+  <!-- <div class="menu_fullscreen" onclick="togglePip()">Pip</div> -->
+</div>
+
+<div class="wallpapers"></div>
+
+<script>
+document.querySelectorAll('input[name="sort"]').forEach((sort) => {
+    sort.addEventListener('change', () => {
+        searchByName(document.getElementById('search').value)
+    });
+});
+
+search = (event) => {
+
+  if (event.keyCode != 38 && event.keyCode != 40 && event.keyCode != 13) {
+    let value = event.target.value;
+    let search_type = document.getElementById('search_type').value;
+    let results_list = document.getElementById('results_list');
+    results_list.innerHTML = '';
+    if (value.length > 0) {
+      fetch('https://www.reddit.com/'+search_type+'/search.json?q=' + value)
+        .then(res => res.json())
+        .then(data => {
+          data.data.children.forEach(result => {
+            let option = document.createElement('option');
+            if (search_type == 'subreddits') {
+              option.value = result.data.display_name;
+            } else {
+              option.value = result.data.name;
+            }
+            results_list.appendChild(option);
+          });
+        });
+    }
+  }else if(event.keyCode == 13){
+    searchByName(event.target.value);
+    document.getElementById('results_list').innerHTML = '';
+  }
+}
+
+addWallpaper = (url) => {
+  if(url.includes('thumbs.redditmedia.com')) return false;
+  let img = document.createElement('img');
+  img.src = url;
+  img.onclick = () => {
+    changeBackground(url);
+  }
+  img.onloadend = () => {
+    if (img.naturalWidth == 0) {
+      img.remove();
+    }
+  }
+  document.querySelector('.wallpapers').appendChild(img);
+}
+
+searchByName = (name, after) => {
+  if (typeof after == 'undefined') {
+    after = "";
+  }
+  document.querySelector('.wallpapers').focus();
+  let sort = document.getElementById('sort').value;
+  let search_type = document.getElementById('search_type').value;
+  let url = ""
+  if(search_type == 'subreddits'){
+    prefix = '/r/';
+    url = 'https://www.reddit.com'+prefix+name+'/'+sort+'.json?limit=10&after='+after;
+  }else if(search_type == 'users'){
+    prefix = '/user/';
+    url = 'https://www.reddit.com'+prefix+name+'/submitted.json?limit=100&after='+after;
+  }else if(search_type == 'search'){
+    prefix = '/search.json?q=';
+    url = 'https://www.reddit.com'+prefix+name+'&sort='+sort+'&limit=100&after='+after;
+  }
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      let wallpapers = document.querySelector('.wallpapers');
+      if (after == "") {
+        wallpapers.innerHTML = '';
+      }
+      data.data.children.forEach(post => {
+        console.log(post);
+        if (post.data.media_metadata) {
+          let metas = Object.values(post.data.media_metadata);
+          metas.forEach(meta => {
+            let url = meta.s.u;
+            url = url.replaceAll('&amp;', '&');
+            url = url.replaceAll('://preview.redd.it', '://i.redd.it');
+            addWallpaper(url);
+          });
+        }
+        if (post.data.url.includes('.jpg') || post.data.url.includes('.png') || post.data.url.includes('.jpeg') || post.data.url.includes('.gif') || post.data.url.includes('.gifv') || post.data.url.includes('.webp')) {
+          let url = post.data.url;
+          if (url.includes('.gifv')) {
+            url = url.replace('.gifv', '.gif');
+          }
+          addWallpaper(url);
+        }
+        if (post.data.thumbnail.includes('.jpg') || post.data.thumbnail.includes('.png') || post.data.thumbnail.includes('.jpeg') || post.data.thumbnail.includes('.gif') || post.data.thumbnail.includes('.gifv') || post.data.thumbnail.includes('.webp')) {
+          let url = post.data.thumbnail;
+          if (url.includes('.gifv')) {
+            url = url.replace('.gifv', '.gif');
+          }
+          addWallpaper(url);
+        }
+        after = post.data.name;
+      });
+        window.onscroll = () => {
+          if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            searchByName(name, after);
+          }
+        }
+    });
+}
+
+toggleMenu = () => {
+  document.querySelector('.menu').classList.toggle('menu_active');
+}
+
+var interval;
+
+togglePlay = () => {
+  document.getElementById('play').classList.toggle('play_active');
+  if(interval){
+    clearInterval(interval);
+    interval = null;
+  }else{
+    interval = setInterval(() => {
+      let wallpapers = document.querySelectorAll('.wallpapers img');
+      let random = Math.floor(Math.random() * wallpapers.length);
+      let play_img = document.querySelector('#play img');
+      play_img.src = wallpapers[random].src;
+    }, 5000);
+  }
+}
+
+toggleFullScreen = () => {
+  let elem = document.querySelector('#play img');
+  if (!document.fullscreenElement) {
+    elem.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+}
+
+togglePip = () => {
+  let img = document.createElement('img');
+  img.src = "https://api.allorigins.win/raw?url=" + document.querySelector('#play img').src;
+  img.onload = () => {
+    let canvas = document.createElement('canvas');
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    let ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    let stream = canvas.captureStream();
+    let video = document.createElement('video');
+    video.srcObject = stream;
+    video.onloadedmetadata = () => {
+      video.play();
+      video.requestPictureInPicture();
+    }
+    document.querySelector('#play').appendChild(video);
+  }
+}
+
+
+function changeBackground(value) {
+    localStorage.setItem('backgroundUrl', value)
+}
+
+function setDefaultWallpaper() {
+     localStorage.setItem('backgroundUrl', '')
+}
+
+let play_img = document.querySelector('#play img');
+play_img.onclick = (e) => {
+  changeBackground(e.target.src);
+}
+</script>
