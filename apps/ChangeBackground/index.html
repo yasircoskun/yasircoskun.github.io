@@ -82,19 +82,21 @@ body {
 }
 
 #search_input input {
-  width: 100%;
+  position: absolute;
+  left: .5vw;
+  right: .5vw;
   height: 30px;
   border: 1px solid #333;
   border-radius: 5px;
-  padding: 5px 2.5rem;
+  padding: 5px 4vw;
   background-color: #000;
   color: white;
 }
 
 #search_input #search_type {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0.4em;
+  left: 1vw;
   height: 30px;
   background-color: #000;
   border: 1px solid #333;
@@ -106,8 +108,8 @@ body {
 
 #search_input #sort {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0.4em;
+  right: 1vw;
   height: 30px;
   background-color: #000;
   border: 1px solid #333;
@@ -267,7 +269,7 @@ fit the image to the screen
       max-height: 100vh;
     }
 
-    #search_input {
+    /* #search_input {
       position: relative;
       width: 100%;
       height: 2em;
@@ -290,13 +292,13 @@ fit the image to the screen
     #search_input #search {
       padding: 0 2.5rem;
       width: 16rem;
-    }
+    } */
 
+
+}
     .menu_btn {
       display: none;
     }
-}
-
 </style>
 
 </head>
@@ -305,14 +307,14 @@ fit the image to the screen
     <!-- <input list="results_list" id="search" type="text" placeholder="subreddit search" onkeyup="search(event)" /> -->
     <!-- input results_list with a prefix selector '/r' or '/u' -->
     <div id="search_input">
+      <input list="results_list" id="search" type="text" placeholder="subreddit search" onkeyup="search(event)" />
+      <datalist id="results_list">
+      </datalist>
       <select id="search_type" onchange="document.getElementById('search').placeholder = this.value == 'subreddits' ? 'subreddit search' : 'user search'">
         <option value="subreddits">/r</option>
         <option value="users">/u</option>
         <option value="search">/</option>
       </select>
-      <input list="results_list" id="search" type="text" placeholder="subreddit search" onkeyup="search(event)" />
-      <datalist id="results_list">
-      </datalist>
       <select id="sort" onchange="searchByName(document.getElementById('search').value)">
         <option value="hot">Hot</option>
         <option value="new">New</option>
