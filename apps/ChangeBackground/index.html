@@ -52,6 +52,8 @@ body {
   font-weight: bold;
   cursor: pointer;
   padding: .1em 0;
+  display: block;
+  width: min-content;
 }
 .wallpapers img {
   height: fit-content;
@@ -468,7 +470,7 @@ addWallpaper = (url, post) => {
   let img_title = document.createElement('div');
   img_title.classList.add('img_title');
 
-  let subreddit = document.createElement('div');
+  let subreddit = document.createElement('span');
   subreddit.classList.add('subreddit');
   subreddit.innerHTML = 'r/' + post.data.subreddit;
   subreddit.onclick = () => {
@@ -483,9 +485,10 @@ addWallpaper = (url, post) => {
     //   search: post.data.subreddit
     // }, '', '?search_type=subreddits&search=' + post.data.subreddit);
   }
+  subreddit.ontouchstart = subreddit.click;
   img_title.appendChild(subreddit);
 
-  let img_author = document.createElement('div');
+  let img_author = document.createElement('span');
   img_author.classList.add('img_author');
   img_author.innerText = "u/" + post.data.author;
   img_author.onclick = () => {
@@ -500,6 +503,8 @@ addWallpaper = (url, post) => {
     //   search: post.data.author
     // }, '', '?search_type=users&search=' + post.data.author);
   }
+  img_author.ontouchstart = img_author.click;
+
   img_title.appendChild(img_author);
 
   // img_title.appendChild(document.createElement('br'));
