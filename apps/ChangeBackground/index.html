@@ -6,7 +6,7 @@ body {
 .wallpapers {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .wallpapers img {
@@ -14,6 +14,81 @@ body {
     margin: 1px;
     filter: opacity(.7)
 }
+
+.img_container .img_title {
+  display: none;
+}
+
+/**
+in mobile media query
+fit the image to the screen
+*/
+
+@media screen and (max-width: 600px) {
+    .wallpapers {
+        justify-content: start;
+    }
+    .wallpapers .img_container {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-bottom: .1em solid black;
+      position: relative;
+    }
+    .img_container .img_title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: white;
+      display: block;
+    }
+    .img_container .img_title .img_author,
+    .img_container .img_title .subreddit {
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .wallpapers img {
+      width: 100%;
+      height: fit-content;
+      max-height: 100vh;
+    }
+}
+
+    .wallpapers {
+        justify-content: start;
+    }
+    .wallpapers .img_container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-bottom: .1em solid black;
+      position: relative;
+    }
+    .img_container .img_title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      color: white;
+      display: block;
+    }
+    .img_container .img_title .img_author,
+    .img_container .img_title .subreddit {
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .wallpapers img {
+      height: fit-content;
+      max-height: 100vh;
+    }
+
 
 .wallpapers img:hover {
     filter: opacity(1)
@@ -23,6 +98,11 @@ body {
     display: flex;
     justify-content: space-between;
     margin: 10px;
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  top: 1rem;
+  z-index: 999;
 }
 
 #search_input {
@@ -215,7 +295,7 @@ select {
   <img src=""/>
   <div class="menu_close" onclick="togglePlay()">x</div>
   <div class="menu_fullscreen" onclick="toggleFullScreen()">Full Screen</div>
-  <!-- <div class="menu_fullscreen" onclick="togglePip()">Pip</div> -->
+  <div class="menu_fullscreen" onclick="togglePip()">Pip</div>
 </div>
 
 <div class="wallpapers"></div>
@@ -235,6 +315,7 @@ search = (event) => {
     let results_list = document.getElementById('results_list');
     results_list.innerHTML = '';
     if (value.length > 0) {
+      // 'https://corsproxy.io/?'+
       fetch('https://www.reddit.com/'+search_type+'/search.json?q=' + value)
         .then(res => res.json())
         .then(data => {
@@ -255,8 +336,9 @@ search = (event) => {
   }
 }
 
-addWallpaper = (url) => {
+addWallpaper = (url, post) => {
   if(url.includes('thumbs.redditmedia.com')) return false;
+  if(document.querySelector('img[src="'+url+'"]')) return false;
   let img = document.createElement('img');
   img.src = url;
   img.onclick = () => {
@@ -267,7 +349,117 @@ addWallpaper = (url) => {
       img.remove();
     }
   }
-  document.querySelector('.wallpapers').appendChild(img);
+  let img_container = document.createElement('div');
+  img_container.classList.add('img_container');
+  img_container.appendChild(img);
+
+  // screen size < 600 px
+  
+    img_container.addEventListener('wheel', (e) => {
+      // scroll direction is down
+      if (e.deltaY > 0) {
+        // scroll to next wallpaper
+        let next = img_container.nextElementSibling;
+        if (next) {
+          next.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+          });
+        }
+      }
+      // scroll direction is up
+      if (e.deltaY < 0) {
+        // scroll to previous wallpaper
+        let prev = img_container.previousElementSibling;
+        if (prev) {
+          prev.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+          });
+        }
+      }
+    });
+    img_container.addEventListener('touchstart', (e) => {
+      img_container.touchstart = e.changedTouches[0].clientY;
+    });
+    img_container.addEventListener('touchend', (e) => {
+      img_container.touchend = e.changedTouches[0].clientY;
+      // min distance 50px
+      let distance = img_container.touchend - img_container.touchstart;
+      distance = distance < 0 ? distance * -1 : distance;
+      if (distance < 50) {
+        return false;
+      }
+      if (img_container.touchstart > img_container.touchend) {
+        // scroll to next wallpaper
+        let next = img_container.nextElementSibling;
+        if (next) {
+          next.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+          });
+        }
+      } else {
+        // scroll to previous wallpaper
+        let prev = img_container.previousElementSibling;
+        if (prev) {
+          prev.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+            inline: 'center'
+          });
+        }
+      }
+    });
+
+  
+  let img_title = document.createElement('div');
+  img_title.classList.add('img_title');
+
+  let subreddit = document.createElement('div');
+  subreddit.classList.add('subreddit');
+  subreddit.innerHTML = 'r/' + post.data.subreddit;
+  subreddit.onclick = () => {
+    document.body.scrollTop = 0; // scroll to top
+    document.getElementsByClassName('wallpapers')[0].innerHTML = ''; // clear wallpapers
+    document.getElementById('search_type').value = 'subreddits';
+    document.getElementById('search').value = post.data.subreddit;
+    searchByName(post.data.subreddit);
+    // window history for back button
+    // window.history.pushState({
+    //   search_type: 'subreddits',
+    //   search: post.data.subreddit
+    // }, '', '?search_type=subreddits&search=' + post.data.subreddit);
+  }
+  img_title.appendChild(subreddit);
+
+  let img_author = document.createElement('div');
+  img_author.classList.add('img_author');
+  img_author.innerText = "u/" + post.data.author;
+  img_author.onclick = () => {
+    document.body.scrollTop = 0; // scroll to top
+    document.getElementsByClassName('wallpapers')[0].innerHTML = ''; // clear wallpapers
+    document.getElementById('search_type').value = 'users';
+    document.getElementById('search').value = post.data.author;
+    searchByName(post.data.author);
+    // window history for back button
+    // window.history.pushState({
+    //   search_type: 'users',
+    //   search: post.data.author
+    // }, '', '?search_type=users&search=' + post.data.author);
+  }
+  img_title.appendChild(img_author);
+
+  img_title.appendChild(document.createElement('br'));
+  let title = document.createElement('p')
+  title.innerText = post.data.title;
+  img_title.appendChild(title);
+
+  img_container.appendChild(img_title);
+  document.querySelector('.wallpapers').appendChild(img_container);
 }
 
 searchByName = (name, after) => {
@@ -288,6 +480,7 @@ searchByName = (name, after) => {
     prefix = '/search.json?q=';
     url = 'https://www.reddit.com'+prefix+name+'&sort='+sort+'&limit=100&after='+after;
   }
+  // 'https://corsproxy.io/?'+
   fetch(url)
     .then(res => res.json())
     .then(data => {
@@ -303,7 +496,7 @@ searchByName = (name, after) => {
             let url = meta.s.u;
             url = url.replaceAll('&amp;', '&');
             url = url.replaceAll('://preview.redd.it', '://i.redd.it');
-            addWallpaper(url);
+            addWallpaper(url, post);
           });
         }
         if (post.data.url.includes('.jpg') || post.data.url.includes('.png') || post.data.url.includes('.jpeg') || post.data.url.includes('.gif') || post.data.url.includes('.gifv') || post.data.url.includes('.webp')) {
@@ -311,23 +504,29 @@ searchByName = (name, after) => {
           if (url.includes('.gifv')) {
             url = url.replace('.gifv', '.gif');
           }
-          addWallpaper(url);
+          addWallpaper(url, post);
         }
         if (post.data.thumbnail.includes('.jpg') || post.data.thumbnail.includes('.png') || post.data.thumbnail.includes('.jpeg') || post.data.thumbnail.includes('.gif') || post.data.thumbnail.includes('.gifv') || post.data.thumbnail.includes('.webp')) {
           let url = post.data.thumbnail;
           if (url.includes('.gifv')) {
             url = url.replace('.gifv', '.gif');
           }
-          addWallpaper(url);
+          addWallpaper(url, post);
         }
         after = post.data.name;
       });
-        window.onscroll = () => {
-          if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-            searchByName(name, after);
-          }
+      window.onscroll = () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+          searchByName(name, after);
         }
+      }
     });
+
+  // window history for back button
+  window.history.pushState({
+    search_type: search_type,
+    search: name
+  }, '', '?search_type=' + search_type + '&search=' + name);
 }
 
 toggleMenu = () => {
@@ -347,6 +546,9 @@ togglePlay = () => {
       let random = Math.floor(Math.random() * wallpapers.length);
       let play_img = document.querySelector('#play img');
       play_img.src = wallpapers[random].src;
+      if(window.pip_enabled){
+        pip_tick();
+      }
     }, 5000);
   }
 }
@@ -362,23 +564,68 @@ toggleFullScreen = () => {
   }
 }
 
+window.pip_enabled = false;
+
 togglePip = () => {
+  window.pip_enabled = !window.pip_enabled;
+  if(window.pip_enabled){
+
+      let video = document.createElement('video');
+      let canvas = document.createElement('canvas');
+      video.id = "pip_video";
+      canvas.id = "pip_canvas";
+      video.style = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%;';
+      canvas.style = 'display: none;';
+      canvas.width = 1920;
+      canvas.height = 1080;
+      document.querySelector('#play').appendChild(video);
+      document.querySelector('#play').appendChild(canvas);
+      // let stream = canvas.captureStream();
+      // video.srcObject = stream;
+      video.onloadedmetadata = () => {
+        video.play();
+        video.requestPictureInPicture();
+      }
+
+  }else{
+    document.querySelector('#pip_video').remove();
+    document.querySelector('#pip_canvas').remove();
+  }
+}
+
+pip_tick = () => {
   let img = document.createElement('img');
-  img.src = "https://api.allorigins.win/raw?url=" + document.querySelector('#play img').src;
+  // fix for CORS
+  img.crossOrigin = "Anonymous";
+  img.src = document.querySelector('#play img').src;
+  // with cors Proxy
+  // img.src = 'https://cors-anywhere.herokuapp.com/'+document.querySelector('#play img').src;
+  // img.src = 'https://images.weserv.nl/?url='+document.querySelector('#play img').src;
+  // img.src = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&url='+document.querySelector('#play img').src;
+  // img.src = 'https://cors.bridged.cc/'+document.querySelector('#play img').src;
+  // img.src = 'https://cors.isomorphicgoat.com/'+document.querySelector('#play img').src;
+  // img.src = 'https://cors.io/?'+document.querySelector('#play img').src;
+  // img.src = 'https://cors.now.sh/'+document.querySelector('#play img').src;
+  // img.src = 'https://
+  img.src = 'https://corsproxy.io/?'+document.querySelector('#play img').src;
   img.onload = () => {
-    let canvas = document.createElement('canvas');
+    let canvas = document.querySelector('#pip_canvas');
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     let ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    let stream = canvas.captureStream();
-    let video = document.createElement('video');
-    video.srcObject = stream;
-    video.onloadedmetadata = () => {
-      video.play();
-      video.requestPictureInPicture();
+    let video = document.querySelector('#pip_video');
+    video.width = img.naturalWidth;
+    video.height = img.naturalHeight;
+    if (video.srcObject === null) {
+      let stream = canvas.captureStream();
+      video.srcObject = stream;
+      video.onloadedmetadata = () => {
+        video.play();
+        video.requestPictureInPicture();
+      }
     }
-    document.querySelector('#play').appendChild(video);
+    // video.srcObject = canvas.captureStream();
   }
 }
 
@@ -395,4 +642,33 @@ let play_img = document.querySelector('#play img');
 play_img.onclick = (e) => {
   changeBackground(e.target.src);
 }
+
+window.onload = () => {
+  let url_params = new URLSearchParams(window.location.search);
+  let search_type = url_params.get('search_type');
+  let search = url_params.get('search');
+  document.querySelector('#search_type').value = search_type;
+  document.querySelector('#search').value = search;
+  if (search_type && search) {
+    searchByName(search, null, search_type);
+  }
+}
+
+window.onpopstate = () => {
+  // get previous state and search
+  let url_params = new URLSearchParams(window.location.search);
+  let search_type = url_params.get('search_type');
+  let search = url_params.get('search');
+  document.querySelector('#search_type').value = search_type;
+  document.querySelector('#search').value = search;
+  if (search_type && search) {
+    searchByName(search, null, search_type);
+  }
+}
+
+// if not an iframe
+if (window.self === window.top) {
+  document.querySelector('body').style.background = 'black';
+}
+
 </script>
