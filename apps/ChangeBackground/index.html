@@ -647,9 +647,9 @@ window.onload = () => {
   let url_params = new URLSearchParams(window.location.search);
   let search_type = url_params.get('search_type');
   let search = url_params.get('search');
-  document.querySelector('#search_type').value = search_type;
-  document.querySelector('#search').value = search;
   if (search_type && search) {
+    document.querySelector('#search_type').value = search_type;
+    document.querySelector('#search').value = search;
     searchByName(search, null, search_type);
   }
 }
