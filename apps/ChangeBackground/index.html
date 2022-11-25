@@ -91,6 +91,7 @@ body {
   padding: 5px 4vw;
   background-color: #000;
   color: white;
+  width: -moz-available;
 }
 
 #search_input #search_type {
@@ -352,6 +353,12 @@ document.querySelectorAll('input[name="sort"]').forEach((sort) => {
         searchByName(document.getElementById('search').value)
     });
 });
+
+document.querySelector('#search').addEventListener("input", function(event){
+    if(event.inputType == "insertReplacementText" || event.inputType == null) {
+        searchByName(document.getElementById('search').value)
+    }
+})
 
 search = (event) => {
 
