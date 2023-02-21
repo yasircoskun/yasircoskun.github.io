@@ -184,7 +184,12 @@ function openWin(element) {
             let password = prompt(hint);
             fileContents.forEach((line, index) => {
                 fileContents[index] = decrypt(line, password)
+                if(fileContents[index] != ""){
+                    fileContents[index] += "\n"
+                }
             });
+            fileContent = fileContents.join("")
+            element.lastElementChild.innerHTML = fileContent
             // element.lastElementChild.innerHTML = decrypt(fileContent, password)
             element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
             openWin(element);
