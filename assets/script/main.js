@@ -177,12 +177,15 @@ function openWin(element) {
         } else if (ext == 'enc') {
             let hint = 'Parolayı biliyor musun?'
             let fileContent = element.lastElementChild.innerHTML
-            if(fileContent.split("\n").length == 2){
+            if(fileContent.split("\n").length > 1){
                 hint = fileContent.split("\n")[0]
-                fileContent = fileContent.split("\n")[1]
+                fileContents = fileContent.split("\n").slice(1)
             }
             let password = prompt(hint);
-            element.lastElementChild.innerHTML = decrypt(fileContent, password)
+            fileContents.forEach((line, index) => {
+                fileContents[index] = decrypt(line, password)
+            });
+            // element.lastElementChild.innerHTML = decrypt(fileContent, password)
             element.dataset.name = element.dataset.name.replace(".enc", '').replace("~", ".");
             openWin(element);
             return 0;
