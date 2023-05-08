@@ -5,7 +5,7 @@ Bu bölüm kategorize edilmiş kısayol tuşları ve komutları kısayoldan aç�
 - **VSCode**
   - **Komutlar:**
     - `code .` Dizini VS Code ile açar.
-    - `code --diff <file1> <file2>` iki dosyayı karşılaştırır.
+    - `code --diff file1 file2` iki dosyayı karşılaştırır.
     - `code --add .` bulunulan dizini son aktif vs code penceresine ekler.
   - **Kullanışlı Eklentiler:**
     - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph): Git dallarını ve commitleri görselleştirir.
