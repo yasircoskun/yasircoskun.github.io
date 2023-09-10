@@ -1,3 +1,3 @@
 #### Yapılacaklar
 
-Yapacak bir şey yok!
+Yapacak bir şey yok!!
